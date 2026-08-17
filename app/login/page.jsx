@@ -31,9 +31,7 @@ export default function LoginPage() {
   const [formError, setFormError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  /* -------------------------------------------------------------- */
-  /* Registration Number                                             */
-  /* -------------------------------------------------------------- */
+  /* Registration Number */
 
   const handleRegNumberChange = useCallback((e) => {
     setRegNumber(e.target.value);
@@ -50,9 +48,7 @@ export default function LoginPage() {
     setFormError('');
   }, []);
 
-  /* -------------------------------------------------------------- */
-  /* Password                                                        */
-  /* -------------------------------------------------------------- */
+  /* Password */
 
   const handlePasswordChange = useCallback((e) => {
     const value = e.target.value;
@@ -71,9 +67,7 @@ export default function LoginPage() {
     setFormError('');
   }, []);
 
-  /* -------------------------------------------------------------- */
-  /* Submit                                                          */
-  /* -------------------------------------------------------------- */
+  /* Submit */
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -109,51 +103,11 @@ export default function LoginPage() {
       return;
     }
 
-    /*
-     * Frontend validation has passed.
-     *
-     * IMPORTANT:
-     * This does NOT authenticate the user.
-     *
-     * Your real backend/API should verify:
-     *
-     * 1. The registration number exists.
-     * 2. The account is active.
-     * 3. The supplied password matches the
-     *    stored password hash.
-     */
+    router.push('/dashboard');
 
     setIsSubmitting(true);
 
     try {
-      /*
-       * TODO:
-       *
-       * Replace this with your real authentication request.
-       *
-       * Example:
-       *
-       * const response = await fetch('/api/auth/login', {
-       *   method: 'POST',
-       *   headers: {
-       *     'Content-Type': 'application/json',
-       *   },
-       *   body: JSON.stringify({
-       *     regNumber: regResult.value,
-       *     password,
-       *     remember,
-       *   }),
-       * });
-       *
-       * const data = await response.json();
-       *
-       * if (!response.ok) {
-       *   setFormError(data.message || 'Invalid credentials.');
-       *   return;
-       * }
-       *
-       * router.push('/dashboard');
-       */
 
       console.log('Validated login:', {
         registrationNumber: regResult.value,
@@ -185,9 +139,7 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen w-full flex flex-col lg:flex-row bg-slate-50 lg:bg-white">
 
-      {/* ========================================================== */}
       {/* LEFT SIDE — LOGIN FORM                                     */}
-      {/* ========================================================== */}
 
       <div className="w-full max-w-md lg:max-w-none lg:w-[480px] min-h-screen flex flex-col p-8 lg:p-16 shrink-0 relative z-10 bg-white shadow-xl lg:shadow-2xl rounded-2xl lg:rounded-none m-4 lg:m-0">
 
@@ -220,9 +172,7 @@ export default function LoginPage() {
 
           </div>
 
-          {/* ====================================================== */}
-          {/* FORM                                                   */}
-          {/* ====================================================== */}
+          {/* FORM */}
 
           <form
             className="space-y-5"
@@ -240,9 +190,7 @@ export default function LoginPage() {
               </div>
             )}
 
-            {/* ================================================== */}
-            {/* INSTITUTIONAL ID                                   */}
-            {/* ================================================== */}
+            {/* INSTITUTIONAL ID */}
 
             <div>
 
@@ -295,9 +243,7 @@ export default function LoginPage() {
 
             </div>
 
-            {/* ================================================== */}
-            {/* PASSWORD                                            */}
-            {/* ================================================== */}
+            {/* PASSWORD */}
 
             <div>
 
@@ -390,9 +336,7 @@ export default function LoginPage() {
 
             </div>
 
-            {/* ================================================== */}
-            {/* REMEMBER ME                                        */}
-            {/* ================================================== */}
+            {/* REMEMBER ME */}
 
             <div className="flex items-center gap-3 pt-2">
 
@@ -416,9 +360,7 @@ export default function LoginPage() {
 
             </div>
 
-            {/* ================================================== */}
-            {/* SUBMIT BUTTON                                      */}
-            {/* ================================================== */}
+            {/* SUBMIT BUTTON  */}
 
             <Button
               type="submit"
@@ -447,9 +389,7 @@ export default function LoginPage() {
 
           </form>
 
-          {/* ====================================================== */}
-          {/* ACCOUNT ACTIVATION                                    */}
-          {/* ====================================================== */}
+          {/* ACCOUNT ACTIVATION */}
 
           <div className="mt-10 pt-8 border-t border-slate-100">
 
@@ -470,9 +410,7 @@ export default function LoginPage() {
 
         </div>
 
-        {/* ====================================================== */}
-        {/* FOOTER                                                 */}
-        {/* ====================================================== */}
+        {/* FOOTER */}
 
         <div className="mt-8 lg:mt-auto flex items-center justify-between text-[11px] font-medium text-slate-400 uppercase tracking-[0.1em]">
 
@@ -502,9 +440,7 @@ export default function LoginPage() {
 
       </div>
 
-      {/* ========================================================== */}
-      {/* RIGHT SIDE — BRAND IMAGE                                  */}
-      {/* ========================================================== */}
+      {/* RIGHT SIDE — BRAND IMAGE */}
 
       <div className="hidden lg:block flex-1 min-h-screen sticky top-0 relative bg-slate-900 overflow-hidden">
 
