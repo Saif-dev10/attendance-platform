@@ -62,7 +62,7 @@ export default function Nav() {
         </ul>
 
         <div className="hidden items-center gap-3 md:flex">
-          <Button href="/how-it-works" variant="ghost" className="px-2 py-2">
+          <Button href="/login" variant="ghost" className="px-2 py-2">
             See it work
           </Button>
           <Button href="/platform" variant="primary">
