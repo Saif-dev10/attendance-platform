@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import {
   PiGraduationCapFill,
   PiIdentificationCard,
@@ -190,9 +191,10 @@ export default function LoginPage() {
 
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
-          <img
+          <Image
             src="https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_e42b8ed18d_3606c98ef15b48ce.png"
             alt="Modern university campus architecture with glass buildings and library"
+            fill
             className="w-full h-full object-cover opacity-40 mix-blend-luminosity"
           />
         </div>
