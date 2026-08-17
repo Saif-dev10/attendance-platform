@@ -55,7 +55,7 @@ export default function SidebarPage() {
   const pathname = usePathname();
 
   return (
-    <aside className="w-[280px] bg-white border-r border-slate-200 flex-shrink-0 flex flex-col h-screen relative z-20">
+    <aside className="fixed left-0 top-0 w-[280px] bg-white border-r border-slate-200 flex-shrink-0 flex flex-col h-screen z-20">
       {/* Logo */}
       <div className="h-[72px] px-6 flex items-center gap-2.5 border-b border-slate-100 shrink-0">
         <div className="w-8 h-8 rounded-lg bg-[#1a365d] flex items-center justify-center text-white shadow-lg shadow-[#0c426e]/20">
