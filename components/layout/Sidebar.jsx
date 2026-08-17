@@ -29,7 +29,7 @@ const campusLinks = [
   { label: "Documents", href: "/documents", icon: Files },
 ];
 
-const settingsLinks = [{ label: "Settings", href: "/settings", icon: SettingsIcon }];
+// const settingsLinks = [{ label: "Settings", href: "/settings", icon: SettingsIcon }];
 
 function NavLink({ href, icon: Icon, label, active }) {
   return (
@@ -107,7 +107,7 @@ export default function SidebarPage() {
         </div>
 
         {/* Settings */}
-        <div>
+        {/* <div>
           <ul className="space-y-1">
             {settingsLinks.map((link) => (
               <li key={link.href}>
@@ -115,12 +115,14 @@ export default function SidebarPage() {
               </li>
             ))}
           </ul>
-        </div>
+        </div> */}
       </div>
 
       {/* User profile */}
       <div className="p-4 border-t border-slate-100 bg-slate-50/50">
-        <div className="flex items-center gap-3 p-2 rounded-xl bg-white border border-slate-200 shadow-sm">
+
+        <div className="flex items-center gap-3 p-2 rounded-xl bg-white border border-slate-200 shadow-sm cursor-pointer hover:bg-slate-50 transition-colors">
+
           <Image
             src="/avatar-placeholder.jpg"
             alt="User"
@@ -128,10 +130,13 @@ export default function SidebarPage() {
             height={40}
             className="rounded-lg object-cover ring-2 ring-slate-100"
           />
+
           <div className="flex-1 min-w-0">
+
             <p className="text-[13px] font-bold text-[#0c426e] truncate">
               Your Name
             </p>
+
             <p className="text-[11px] font-semibold text-[#0274c7] truncate uppercase tracking-wider">
               Student • 300L
             </p>
