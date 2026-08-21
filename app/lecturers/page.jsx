@@ -204,7 +204,7 @@ export default function Lecturer() {
             {/* Today's Schedule */}
             <Card className="lg:col-span-1 min-w-0 rounded-2xl border border-slate-200 bg-white flex flex-col p-0">
               <div className="px-6 py-5 border-b border-slate-100">
-                <h3 className="font-bold text-[#0c426e]">Today's Schedule</h3>
+                <h3 className="font-bold text-[#0c426e]">Today&apos;s Schedule</h3>
               </div>
 
               <div className="p-5 space-y-4 flex-1">
