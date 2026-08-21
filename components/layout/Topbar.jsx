@@ -19,7 +19,7 @@ export default function Topbar({
         justify-between
         px-8
         shrink-0
-        z-10
+        z-50
         ${className}
       `}
     >

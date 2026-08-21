@@ -4,7 +4,7 @@ import Sidebar from "@/components/layout/Sidebar";
 import Topbar from "@/components/layout/Topbar";
 import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
-import { Search, Bell } from "lucide-react";
+import { Search, Bell, Bus, Navigation } from "lucide-react";
 import {
   GraduationCap,
   CheckCircle2,
@@ -44,6 +44,27 @@ const statCards = [
   },
 ];
 
+const todaysLectures = [
+  {
+    time: "10:00",
+    period: "AM",
+    course: "CSC301: Advanced Algorithms",
+    meta: "Dr. Yusuf Muhammad • Hall B-04",
+    status: "IN 15 MINS",
+    statusStyle: "bg-blue-50 text-blue-600",
+    completed: false,
+  },
+  {
+    time: "08:00",
+    period: "AM",
+    course: "MAT311: Linear Algebra II",
+    meta: "Prof. Hauwa Bello • LT-02",
+    status: "Completed",
+    statusStyle: "bg-slate-100 text-slate-500 uppercase tracking-widest",
+    completed: true,
+  },
+];
+
 export default function DashboardPage() {
   return (
     <>
@@ -55,23 +76,12 @@ export default function DashboardPage() {
             size={16}
             className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
           />
-
           <input
             type="text"
             placeholder="Search courses, materials..."
             className="
-              w-full
-              pl-9
-              pr-4
-              py-2
-              bg-slate-50
-              border
-              border-slate-200
-              rounded-lg
-              text-xs
-              outline-none
-              focus:ring-2
-              focus:ring-[#0e91e9]/20
+              w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200
+              rounded-lg text-xs outline-none focus:ring-2 focus:ring-[#0e91e9]/20
             "
           />
         </div>
@@ -79,31 +89,12 @@ export default function DashboardPage() {
         <button
           type="button"
           className="
-            w-10
-            h-10
-            flex
-            items-center
-            justify-center
-            rounded-xl
-            text-slate-600
-            hover:bg-slate-50
-            transition-colors
-            relative
+            w-10 h-10 flex items-center justify-center rounded-xl
+            text-slate-600 hover:bg-slate-50 transition-colors relative
           "
         >
           <Bell size={20} />
-
-          <span className="
-            absolute
-            top-2.5
-            right-2.5
-            w-2
-            h-2
-            bg-red-500
-            rounded-full
-            border-2
-            border-white
-          "/>
+          <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white" />
         </button>
       </Topbar>
 
@@ -116,24 +107,14 @@ export default function DashboardPage() {
             {/* WELCOME CARD */}
             <Card
               className="
-                md:col-span-2
-                min-w-0
-                rounded-2xl
-                bg-[#1a365d]
-                p-7
-                text-white
-                relative
-                overflow-hidden
-                flex
-                items-center
-                justify-between
+                md:col-span-2 min-w-0 rounded-2xl bg-[#1a365d] p-7 text-white
+                relative overflow-hidden flex items-center justify-between
               "
             >
               <div className="relative z-10 min-w-0 pr-6">
                 <h2 className="text-2xl lg:text-3xl font-bold mb-2">
                   Hello, Saifullah! 👋
                 </h2>
-
                 <p className="text-blue-100 text-base lg:text-lg opacity-90 max-w-2xl">
                   You have 2 assignments due this week and your next class is
                   CSC301 at 10:00 AM.
@@ -149,7 +130,6 @@ export default function DashboardPage() {
                   >
                     View Timetable
                   </Button>
-
                   <Button
                     className="
                       px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20
@@ -176,16 +156,8 @@ export default function DashboardPage() {
             {/* CGPA CARD */}
             <Card
               className="
-                md:col-span-1
-                min-w-0
-                rounded-2xl
-                border
-                border-slate-200
-                bg-white
-                p-6
-                flex
-                flex-col
-                justify-between
+                md:col-span-1 min-w-0 rounded-2xl border border-slate-200
+                bg-white p-6 flex flex-col justify-between
               "
             >
               <div className="flex items-center justify-between gap-3 mb-4">
@@ -216,7 +188,6 @@ export default function DashboardPage() {
                 </div>
               </div>
             </Card>
-
           </div>
 
           {/* STAT CARDS */}
@@ -229,18 +200,82 @@ export default function DashboardPage() {
                 <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">
                   {label}
                 </p>
-
                 <div className="flex items-center justify-between gap-2">
                   <span className="text-2xl font-bold text-[#0c426e] truncate">
                     {value}
                   </span>
-
                   <div className={`w-10 h-10 rounded-full ${iconBg} flex items-center justify-center ${iconColor} shrink-0`}>
                     <Icon size={20} strokeWidth={2} />
                   </div>
                 </div>
               </Card>
             ))}
+          </div>
+
+          {/* Today's Lectures + Campus Ride */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 min-w-0">
+
+            {/* Today's Lectures */}
+            <Card className="lg:col-span-2 min-w-0 rounded-2xl border border-slate-200 bg-white flex flex-col p-0">
+              <div className="px-6 py-5 border-b border-slate-100 flex items-center justify-between">
+                <h3 className="font-bold text-[#0c426e]">Today&apos;s Lectures</h3>
+                <button className="text-xs font-bold text-[#0274c7] hover:underline">
+                  Full Schedule
+                </button>
+              </div>
+
+              <div className="p-4 space-y-3">
+                {todaysLectures.map(({ time, period, course, meta, status, statusStyle, completed }) => (
+                  <div
+                    key={course}
+                    className={`p-4 rounded-xl border border-slate-100 flex items-center gap-4 group hover:border-[#7cc2ef] transition-all ${
+                      completed ? "bg-white opacity-60" : "bg-slate-50/50"
+                    }`}
+                  >
+                    <div className="w-12 h-12 rounded-lg bg-white border border-slate-200 flex flex-col items-center justify-center shrink-0">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase">
+                        {time}
+                      </span>
+                      <span className="text-sm font-black text-[#0c426e] uppercase">
+                        {period}
+                      </span>
+                    </div>
+
+                    <div className="flex-1 min-w-0">
+                      <h4 className="font-bold text-[#0c426e] truncate">{course}</h4>
+                      <p className="text-xs text-slate-600 truncate">{meta}</p>
+                    </div>
+
+                    <span className={`px-3 py-1 rounded-full text-[10px] font-bold shrink-0 ${statusStyle}`}>
+                      {status}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </Card>
+
+            {/* Campus Ride Status */}
+            <Card className="lg:col-span-1 min-w-0 rounded-2xl border border-slate-200 bg-white flex flex-col p-0">
+              <div className="px-6 py-5 border-b border-slate-100 flex items-center justify-between">
+                <h3 className="font-bold text-[#0c426e]">Campus Ride</h3>
+                <button className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center text-slate-600">
+                  <Bus size={16} />
+                </button>
+              </div>
+
+              <div className="p-6 flex-1 flex flex-col items-center justify-center text-center">
+                <div className="w-16 h-16 rounded-2xl bg-[#e8f4fd] flex items-center justify-center text-[#0274c7] mb-4 shadow-inner shadow-[#0274c7]/10">
+                  <Navigation size={28} />
+                </div>
+                <h4 className="font-bold text-[#0c426e] mb-1">Gate A Shuttle arriving</h4>
+                <p className="text-sm text-slate-600 mb-6">
+                  Approx. 4 mins to Library bus stop
+                </p>
+                <Button className="w-full py-3 rounded-xl bg-[#1a365d] text-white font-bold text-sm hover:bg-[#0c426e] transition-all ">
+                  Book Ride
+                </Button>
+              </div>
+            </Card>
           </div>
 
         </div>
