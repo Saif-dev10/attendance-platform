@@ -4,6 +4,7 @@ import Sidebar from "@/components/layout/Sidebar";
 import Topbar from "@/components/layout/Topbar";
 import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
+import { Search, Bell } from "lucide-react";
 import {
   GraduationCap,
   CheckCircle2,
@@ -47,7 +48,64 @@ export default function DashboardPage() {
   return (
     <>
       <Sidebar />
-      <Topbar />
+
+      <Topbar title="Student Dashboard">
+        <div className="relative w-64 mr-4">
+          <Search
+            size={16}
+            className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+          />
+
+          <input
+            type="text"
+            placeholder="Search courses, materials..."
+            className="
+              w-full
+              pl-9
+              pr-4
+              py-2
+              bg-slate-50
+              border
+              border-slate-200
+              rounded-lg
+              text-xs
+              outline-none
+              focus:ring-2
+              focus:ring-[#0e91e9]/20
+            "
+          />
+        </div>
+
+        <button
+          type="button"
+          className="
+            w-10
+            h-10
+            flex
+            items-center
+            justify-center
+            rounded-xl
+            text-slate-600
+            hover:bg-slate-50
+            transition-colors
+            relative
+          "
+        >
+          <Bell size={20} />
+
+          <span className="
+            absolute
+            top-2.5
+            right-2.5
+            w-2
+            h-2
+            bg-red-500
+            rounded-full
+            border-2
+            border-white
+          "/>
+        </button>
+      </Topbar>
 
       <main className="ml-[280px] pt-[72px] h-screen overflow-y-auto">
         <div className="max-w-[1250px] mx-auto space-y-6 px-6 py-7">
