@@ -1,4 +1,4 @@
-import Sidebar from "@/components/layout/Sidebar";
+import Sidebar, { lecturerSections } from "@/components/layout/Sidebar";
 import Topbar from "@/components/layout/Topbar";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
@@ -100,7 +100,14 @@ const pendingGradings = [
 export default function Lecturer() {
   return (
     <>
-      <Sidebar />
+      <Sidebar
+        sections={lecturerSections}
+        user={{
+          name: "Dr. Ibrahim",
+          role: "Lecturer",
+          avatar: "/avatar-placeholder.jpg",
+        }}
+      />
       <Topbar title="Lecturer Console">
         <Button
           type="button"

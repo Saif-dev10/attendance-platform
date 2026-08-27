@@ -1,6 +1,6 @@
 "use client";
 
-import Sidebar from "@/components/layout/Sidebar";
+import Sidebar, { studentSections } from "@/components/layout/Sidebar";
 import Topbar from "@/components/layout/Topbar";
 import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
@@ -68,7 +68,14 @@ const todaysLectures = [
 export default function DashboardPage() {
   return (
     <>
-      <Sidebar />
+      <Sidebar
+        sections={studentSections}
+        user={{
+          name: "Saifullah",
+          role: "Student • 300L",
+          avatar: "/avatar-placeholder.jpg",
+        }}
+      />
 
       <Topbar title="Student Dashboard">
         <div className="relative w-64 mr-4">

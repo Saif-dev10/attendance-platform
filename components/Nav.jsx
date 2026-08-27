@@ -62,8 +62,8 @@ export default function Nav() {
         </ul>
 
         <div className="hidden items-center gap-3 md:flex">
-          <Button href="/login" variant="ghost" className="px-2 py-2">
-            See it work
+          <Button href="/login" variant="ghost" className="px-10 py-2 bg-yellow-300 cursor-ponter active:opacity-75">
+            Log in
           </Button>
           <Button href="/platform" variant="primary">
             Explore the platform
@@ -111,8 +111,8 @@ export default function Nav() {
             ))}
           </ul>
           <div className="mt-8 flex flex-col gap-3">
-            <Button href="/how-it-works" variant="secondary" onClick={() => setOpen(false)}>
-              See it work
+            <Button href="/how-it-works" variant="secondary" className="bg-yellow-300" onClick={() => setOpen(false)}>
+              Log in
             </Button>
             <Button href="/platform" variant="primary" onClick={() => setOpen(false)}>
               Explore the platform
