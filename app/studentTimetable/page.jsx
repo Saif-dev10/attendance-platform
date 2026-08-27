@@ -25,173 +25,296 @@ const timeSlots = [
 
 export default function StudentTimetable() {
   return (
-    <main className="bg-[#f8fafc] text-ink min-h-screen">
+    <main className="min-h-screen bg-[#f8fafc] text-ink overflow-x-hidden">
       <Sidebar />
 
       <Topbar title="Academic Timetable">
-        <div className="flex items-center gap-3">
-          <div className="bg-slate-50 p-1 rounded-xl border border-slate-200 flex">
-            <button className="px-4 py-1.5 rounded-lg bg-white shadow-sm text-xs font-bold text-navy-900 transition-all cursor-pointer">
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* Weekly / Daily */}
+          <div className="flex rounded-xl border border-slate-200 bg-slate-50 p-1">
+            <button className="rounded-lg bg-white px-3 sm:px-4 py-1.5 text-xs font-bold text-[#0f172a] shadow-sm transition-all">
               Weekly
             </button>
-            <button className="px-4 py-1.5 rounded-lg text-xs font-bold text-ink-faint hover:text-ink-muted transition-all cursor-pointer">
+
+            <button className="rounded-lg px-3 sm:px-4 py-1.5 text-xs font-bold text-[#94a3b8] transition-all hover:text-[#64748b]">
               Daily
             </button>
           </div>
 
-          <div className="h-8 w-px bg-slate-200 mx-2"></div>
+          {/* Divider */}
+          <div className="mx-1 h-7 w-px bg-slate-200 sm:mx-2" />
 
-          <button className="w-10 h-10 flex items-center justify-center rounded-xl border border-slate-200 text-ink-muted hover:bg-slate-50">
-            <PrinterIcon className="cursor-pointer" size={18} />
+          {/* Print */}
+          <button
+            type="button"
+            aria-label="Print timetable"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-slate-200 text-[#64748b] transition-colors hover:bg-slate-50"
+          >
+            <PrinterIcon size={16} />
           </button>
 
-          <button className="w-10 h-10 flex items-center justify-center rounded-xl border border-slate-200 text-ink-muted hover:bg-slate-50">
-            <DownloadIcon className="cursor-pointer" size={18} />
+          {/* Download */}
+          <button
+            type="button"
+            aria-label="Download timetable"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-slate-200 text-[#64748b] transition-colors hover:bg-slate-50"
+          >
+            <DownloadIcon size={16} />
           </button>
         </div>
       </Topbar>
 
-      {/* Content: offset for fixed Sidebar (280px) + fixed Topbar (72px) */}
-      <div className="ml-[280px] mt-[72px] px-8 py-7 bg-white min-h-[calc(100vh-72px)]">
-        <div className="max-w-[1400px] mx-auto border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
-          {/* Calendar Header (Days) */}
-          <div className="grid grid-cols-[80px_repeat(5,1fr)] bg-slate-50/80 border-b border-slate-200 sticky top-[72px] z-20 backdrop-blur-sm">
-            <div className="px-4 py-4 border-r border-slate-200"></div>
-            {days.map((day) => (
-              <div
-                key={day.label}
-                className={`px-4 py-4 border-r border-slate-200 text-center last:border-r-0 ${
-                  day.active ? "bg-brand-50/30" : ""
-                }`}
-              >
-                <p
-                  className={`text-[10px] font-bold uppercase tracking-widest mb-1 ${
-                    day.active ? "text-brand-600" : "text-ink-faint"
-                  }`}
-                >
-                  {day.label}
-                </p>
-                <p
-                  className={`text-lg font-black ${
-                    day.active ? "text-brand-700" : "text-navy-900"
-                  }`}
-                >
-                  {day.date}
-                </p>
-              </div>
-            ))}
-          </div>
+      {/* =====================================================
+          PAGE CONTENT
+      ===================================================== */}
 
-          {/* Calendar Content */}
-          <div className="grid grid-cols-[80px_repeat(5,1fr)] relative">
-            {/* Time Labels */}
-            <div className="border-r border-slate-200 bg-slate-50/20">
-              {timeSlots.map((time) => (
+      <section className="ml-[280px] min-h-screen pt-[72px]">
+        <div className="w-full px-4 py-5 sm:px-6 sm:py-6 lg:px-8 lg:py-7">
+
+          {/* Timetable container */}
+          <div className="mx-auto w-full max-w-[1500px] overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+
+            {/* =================================================
+                DAYS HEADER
+            ================================================= */}
+
+            <div className="grid grid-cols-[64px_repeat(5,minmax(0,1fr))] border-b border-slate-200 bg-slate-50/80">
+
+              {/* Empty time column */}
+              <div className="border-r border-slate-200" />
+
+              {days.map((day, index) => (
                 <div
-                  key={time}
-                  className="h-[100px] border-b border-slate-100 px-2 py-4 text-right"
+                  key={day.label}
+                  className={`min-w-0 border-r border-slate-200 px-2 py-3 text-center sm:px-3 sm:py-4 ${
+                    index === days.length - 1 ? "border-r-0" : ""
+                  } ${day.active ? "bg-brand-50/30" : ""}`}
                 >
-                  <span className="text-[10px] font-bold text-ink-faint uppercase">
-                    {time}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            {/* Mon */}
-            <div className="border-r border-slate-200 relative">
-              {timeSlots.map((_, i) => (
-                <div key={i} className="h-[100px] border-b border-slate-100"></div>
-              ))}
-              <div className="absolute top-0 left-0 right-0 p-1.5 h-[200px]">
-                <div className="w-full h-full bg-navy-600 rounded-xl p-3 text-white border border-white/10 shadow-lg shadow-navy-900/10 hover:scale-[1.02] transition-transform cursor-pointer">
-                  <p className="text-[9px] font-bold uppercase opacity-70 mb-1">
-                    MAT311 • LT-02
+                  <p
+                    className={`mb-1 text-[9px] font-bold uppercase tracking-widest sm:text-[10px] ${
+                      day.active
+                        ? "text-brand-600"
+                        : "text-[#94a3b8]"
+                    }`}
+                  >
+                    {day.label}
                   </p>
-                  <h4 className="text-xs font-black mb-1">Linear Algebra II</h4>
-                  <p className="text-[9px] font-medium opacity-60">Prof. Hauwa Bello</p>
+
+                  <p
+                    className={`text-base font-black sm:text-lg ${
+                      day.active
+                        ? "text-brand-700"
+                        : "text-[#0f172a]"
+                    }`}
+                  >
+                    {day.date}
+                  </p>
                 </div>
-              </div>
+              ))}
             </div>
 
-            {/* Tue (Current Day) */}
-            <div className="border-r border-slate-200 bg-brand-50/10 relative">
-              {timeSlots.map((_, i) => (
-                <div key={i} className="h-[100px] border-b border-slate-100"></div>
-              ))}
+            {/* =================================================
+                CALENDAR BODY
+            ================================================= */}
 
-              {/* Current Time Marker */}
-              <div className="absolute top-[220px] left-0 right-0 z-10 flex items-center">
-                <div className="w-2 h-2 rounded-full bg-red-500 absolute -left-1"></div>
-                <div className="h-px w-full bg-red-500/50"></div>
-              </div>
+            <div className="grid grid-cols-[64px_repeat(5,minmax(0,1fr))]">
 
-              <div className="absolute top-[200px] left-0 right-0 p-1.5 h-[200px]">
-                <div className="w-full h-full bg-brand-600 rounded-xl p-3 text-white border border-white/10 shadow-lg shadow-brand-900/20 hover:scale-[1.02] transition-transform cursor-pointer">
-                  <div className="flex justify-between items-start mb-1">
-                    <p className="text-[9px] font-bold uppercase opacity-70">
-                      CSC301 • Hall B-04
-                    </p>
-                    <span className="px-1.5 py-0.5 rounded bg-white/20 text-[8px] font-bold">
-                      NOW
+              {/* =================================================
+                  TIME COLUMN
+              ================================================= */}
+
+              <div className="border-r border-slate-200 bg-slate-50/30">
+
+                {timeSlots.map((time) => (
+                  <div
+                    key={time}
+                    className="flex h-[88px] items-start justify-end border-b border-slate-100 px-2 pt-3 sm:h-[100px]"
+                  >
+                    <span className="whitespace-nowrap text-[9px] font-bold uppercase text-[#94a3b8] sm:text-[10px]">
+                      {time}
                     </span>
                   </div>
-                  <h4 className="text-xs font-black mb-1">Advanced Algorithms</h4>
-                  <p className="text-[9px] font-medium opacity-60">Dr. Yusuf Muhammad</p>
-                </div>
-              </div>
-            </div>
+                ))}
 
-            {/* Wed */}
-            <div className="border-r border-slate-200 relative">
-              {timeSlots.map((_, i) => (
-                <div key={i} className="h-[100px] border-b border-slate-100"></div>
-              ))}
-              <div className="absolute top-[100px] left-0 right-0 p-1.5 h-[100px]">
-                <div className="w-full h-full bg-slate-100 rounded-xl p-3 text-navy-900 border border-slate-200 shadow-sm hover:scale-[1.02] transition-transform cursor-pointer">
-                  <p className="text-[9px] font-bold text-ink-faint uppercase mb-1">
-                    GST301 • LT-01
-                  </p>
-                  <h4 className="text-xs font-black mb-1">Entrepreneurship</h4>
-                  <p className="text-[9px] font-medium text-ink-muted">Dr. Ibrahim Musa</p>
-                </div>
               </div>
-            </div>
 
-            {/* Thu */}
-            <div className="border-r border-slate-200 relative">
-              {timeSlots.map((_, i) => (
-                <div key={i} className="h-[100px] border-b border-slate-100"></div>
-              ))}
-              <div className="absolute top-[300px] left-0 right-0 p-1.5 h-[200px]">
-                <div className="w-full h-full bg-navy-600 rounded-xl p-3 text-white border border-white/10 shadow-lg shadow-navy-900/10 hover:scale-[1.02] transition-transform cursor-pointer">
-                  <p className="text-[9px] font-bold uppercase opacity-70 mb-1">
-                    CSC305 • LT-04
-                  </p>
-                  <h4 className="text-xs font-black mb-1">Operating Systems</h4>
-                  <p className="text-[9px] font-medium opacity-60">Prof. Hauwa Bello</p>
-                </div>
-              </div>
-            </div>
+              {/* =================================================
+                  MONDAY
+              ================================================= */}
 
-            {/* Fri */}
-            <div className="relative">
-              {timeSlots.map((_, i) => (
-                <div key={i} className="h-[100px] border-b border-slate-100"></div>
-              ))}
-              <div className="absolute top-0 left-0 right-0 p-1.5 h-[200px]">
-                <div className="w-full h-full bg-orange-600 rounded-xl p-3 text-white border border-white/10 shadow-lg shadow-orange-900/10 hover:scale-[1.02] transition-transform cursor-pointer">
-                  <p className="text-[9px] font-bold uppercase opacity-70 mb-1">
-                    CSC307 • Hall C-01
-                  </p>
-                  <h4 className="text-xs font-black mb-1">Software Engineering</h4>
-                  <p className="text-[9px] font-medium opacity-60">Dr. Emeka Nwosu</p>
+              <div className="relative min-w-0 border-r border-slate-200">
+
+                {timeSlots.map((_, i) => (
+                  <div
+                    key={i}
+                    className="h-[88px] border-b border-slate-100 sm:h-[100px]"
+                  />
+                ))}
+
+                <div className="absolute left-0 right-0 top-0 h-[200px] p-1 sm:p-1.5">
+                  <div className="h-full w-full overflow-hidden rounded-xl bg-[#0c426e] p-2.5 text-white shadow-lg shadow-navy-900/10 transition-transform hover:scale-[1.01] sm:p-3">
+
+                    <p className="mb-1 truncate text-[8px] font-bold uppercase opacity-70 sm:text-[9px]">
+                      MAT311 • LT-02
+                    </p>
+
+                    <h4 className="truncate text-[10px] font-black sm:text-xs">
+                      Linear Algebra II
+                    </h4>
+
+                    <p className="mt-1 truncate text-[8px] font-medium opacity-60 sm:text-[9px]">
+                      Prof. Hauwa Bello
+                    </p>
+
+                  </div>
                 </div>
               </div>
+
+              {/* =================================================
+                  TUESDAY
+              ================================================= */}
+
+              <div className="relative min-w-0 border-r border-slate-200 bg-brand-50/10">
+
+                {timeSlots.map((_, i) => (
+                  <div
+                    key={i}
+                    className="h-[88px] border-b border-slate-100 sm:h-[100px]"
+                  />
+                ))}
+
+                {/* Current time */}
+                <div className="absolute left-0 right-0 top-[220px] z-10 flex items-center">
+                  <div className="absolute -left-1 h-2 w-2 rounded-full bg-red-500" />
+                  <div className="h-px w-full bg-red-500/50" />
+                </div>
+
+                {/* Class */}
+                <div className="absolute left-0 right-0 top-[200px] h-[200px] p-1 sm:p-1.5">
+                  <div className="h-full w-full overflow-hidden rounded-xl bg-[#0274c7] p-2.5 text-white shadow-lg shadow-brand-900/20 transition-transform hover:scale-[1.01] sm:p-3">
+
+                    <div className="mb-1 flex min-w-0 items-start justify-between gap-1">
+                      <p className="truncate text-[8px] font-bold uppercase opacity-70 sm:text-[9px]">
+                        CSC301 • Hall B-04
+                      </p>
+
+                      <span className="shrink-0 rounded bg-white/20 px-1 py-0.5 text-[7px] font-bold sm:px-1.5 sm:text-[8px]">
+                        NOW
+                      </span>
+                    </div>
+
+                    <h4 className="truncate text-[10px] font-black sm:text-xs">
+                      Advanced Algorithms
+                    </h4>
+
+                    <p className="mt-1 truncate text-[8px] font-medium opacity-60 sm:text-[9px]">
+                      Dr. Yusuf Muhammad
+                    </p>
+
+                  </div>
+                </div>
+              </div>
+
+              {/* =================================================
+                  WEDNESDAY
+              ================================================= */}
+
+              <div className="relative min-w-0 border-r border-slate-200">
+
+                {timeSlots.map((_, i) => (
+                  <div
+                    key={i}
+                    className="h-[88px] border-b border-slate-100 sm:h-[100px]"
+                  />
+                ))}
+
+                <div className="absolute left-0 right-0 top-[100px] h-[100px] p-1 sm:p-1.5">
+                  <div className="h-full w-full overflow-hidden rounded-xl border border-slate-200 bg-slate-100 p-2.5 text-[#0f172a] shadow-sm transition-transform hover:scale-[1.01] sm:p-3">
+
+                    <p className="mb-1 truncate text-[8px] font-bold uppercase text-[#94a3b8] sm:text-[9px]">
+                      GST301 • LT-01
+                    </p>
+
+                    <h4 className="truncate text-[10px] font-black sm:text-xs">
+                      Entrepreneurship
+                    </h4>
+
+                    <p className="mt-1 truncate text-[8px] font-medium text-[#64748b] sm:text-[9px]">
+                      Dr. Ibrahim Musa
+                    </p>
+
+                  </div>
+                </div>
+              </div>
+
+              {/* =================================================
+                  THURSDAY
+              ================================================= */}
+
+              <div className="relative min-w-0 border-r border-slate-200">
+
+                {timeSlots.map((_, i) => (
+                  <div
+                    key={i}
+                    className="h-[88px] border-b border-slate-100 sm:h-[100px]"
+                  />
+                ))}
+
+                <div className="absolute left-0 right-0 top-[300px] h-[200px] p-1 sm:p-1.5">
+                  <div className="h-full w-full overflow-hidden rounded-xl bg-[#0c426e] p-2.5 text-white shadow-lg shadow-navy-900/10 transition-transform hover:scale-[1.01] sm:p-3">
+
+                    <p className="mb-1 truncate text-[8px] font-bold uppercase opacity-70 sm:text-[9px]">
+                      CSC305 • LT-04
+                    </p>
+
+                    <h4 className="truncate text-[10px] font-black sm:text-xs">
+                      Operating Systems
+                    </h4>
+
+                    <p className="mt-1 truncate text-[8px] font-medium opacity-60 sm:text-[9px]">
+                      Prof. Hauwa Bello
+                    </p>
+
+                  </div>
+                </div>
+              </div>
+
+              {/* =================================================
+                  FRIDAY
+              ================================================= */}
+
+              <div className="relative min-w-0">
+
+                {timeSlots.map((_, i) => (
+                  <div
+                    key={i}
+                    className="h-[88px] border-b border-slate-100 sm:h-[100px]"
+                  />
+                ))}
+
+                <div className="absolute left-0 right-0 top-0 h-[200px] p-1 sm:p-1.5">
+                  <div className="h-full w-full overflow-hidden rounded-xl bg-orange-600 p-2.5 text-white shadow-lg shadow-orange-900/10 transition-transform hover:scale-[1.01] sm:p-3">
+
+                    <p className="mb-1 truncate text-[8px] font-bold uppercase opacity-70 sm:text-[9px]">
+                      CSC307 • Hall C-01
+                    </p>
+
+                    <h4 className="truncate text-[10px] font-black sm:text-xs">
+                      Software Engineering
+                    </h4>
+
+                    <p className="mt-1 truncate text-[8px] font-medium opacity-60 sm:text-[9px]">
+                      Dr. Emeka Nwosu
+                    </p>
+
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </main>
   );
 }

@@ -23,7 +23,7 @@ export const studentSections = [
     links: [
       {
         label: "Timetable",
-        href: "/timetable",
+        href: "/studentTimetable",
         icon: CalendarClock,
       },
       {
