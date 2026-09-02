@@ -154,7 +154,7 @@ export default function Sidebar({
   const pathname = usePathname();
 
   return (
-    <aside className="fixed left-0 top-0 w-[280px] bg-white border-r border-slate-200 flex-shrink-0 flex flex-col h-screen z-20">
+    <aside className="hidden md:fixed md:left-0 md:top-0 md:w-[280px] md:bg-white md:border-r md:border-slate-200 md:flex-shrink-0 md:flex md:flex-col md:h-screen md:z-20">
       
       {/* LOGO */}
 

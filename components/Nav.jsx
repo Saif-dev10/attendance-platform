@@ -111,7 +111,7 @@ export default function Nav() {
             ))}
           </ul>
           <div className="mt-8 flex flex-col gap-3">
-            <Button href="/how-it-works" variant="secondary" className="bg-yellow-300" onClick={() => setOpen(false)}>
+            <Button href="/login" variant="secondary" className="bg-yellow-300" onClick={() => setOpen(false)}>
               Log in
             </Button>
             <Button href="/platform" variant="primary" onClick={() => setOpen(false)}>

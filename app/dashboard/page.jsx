@@ -105,7 +105,7 @@ export default function DashboardPage() {
         </button>
       </Topbar>
 
-      <main className="ml-[280px] pt-[72px] h-screen overflow-y-auto">
+      <main className="ml-0 pt-0 h-screen overflow-y-auto pt-[72px] md:ml-[280px]">
         <div className="max-w-[1250px] mx-auto space-y-6 px-6 py-7">
 
           {/* Dashboard Grid */}

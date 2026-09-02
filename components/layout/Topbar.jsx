@@ -7,7 +7,6 @@ export default function Topbar({
     <header
       className={`
         fixed
-        left-[280px]
         top-0
         right-0
         h-[72px]
@@ -19,12 +18,13 @@ export default function Topbar({
         justify-between
         px-8
         shrink-0
+        md:left-[280px]
         z-50
         ${className}
       `}
     >
       {/* Title */}
-      <h1 className="text-xl font-bold text-[#0c426e]">
+      <h1 className="text-md font-bold text-[#0c426e] md:text-xl">
         {title}
       </h1>
 
