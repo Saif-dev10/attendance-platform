@@ -19,9 +19,10 @@ export const metadata = {
 export default function PlatformPage() {
   return (
     <>
+      {/* Each section speaks to one role so the platform story stays grounded in daily work. */}
       <Nav />
       <main id="main">
-        {/* INTRO */}
+        {/* Intro: frame the platform around its three user roles. */}
         <section className="border-b border-line">
           <div className="mx-auto max-w-4xl px-6 py-20 text-center lg:px-10 lg:py-28">
             <Reveal>
@@ -42,7 +43,7 @@ export default function PlatformPage() {
           </div>
         </section>
 
-        {/* LECTURERS */}
+        {/* Lecturer view: opening sessions and tracking attendance in the room. */}
         <section id="lecturers" className="scroll-mt-24 border-b border-line bg-paper">
           <div className="mx-auto grid max-w-7xl items-center gap-14 px-6 py-20 lg:grid-cols-2 lg:px-10 lg:py-28">
             <Reveal>
@@ -74,7 +75,7 @@ export default function PlatformPage() {
           </div>
         </section>
 
-        {/* STUDENTS */}
+        {/* Student view: checking in and keeping a personal attendance record. */}
         <section id="students" className="scroll-mt-24 border-b border-line">
           <div className="mx-auto grid max-w-7xl items-center gap-14 px-6 py-20 lg:grid-cols-2 lg:px-10 lg:py-28">
             <Reveal className="relative order-2 aspect-[4/5] overflow-hidden rounded-2xl border border-line-strong lg:order-1">
@@ -113,7 +114,7 @@ export default function PlatformPage() {
           </div>
         </section>
 
-        {/* ADMINISTRATORS */}
+        {/* Administrator view: reviewing records across courses and departments. */}
         <section id="administrators" className="scroll-mt-24 border-b border-line bg-paper">
           <div className="mx-auto grid max-w-7xl items-center gap-14 px-6 py-20 lg:grid-cols-2 lg:px-10 lg:py-28">
             <Reveal>
@@ -145,7 +146,7 @@ export default function PlatformPage() {
           </div>
         </section>
 
-        {/* CTA */}
+        {/* Closing call to action. */}
         <section className="bg-charcoal text-cream">
           <div className="mx-auto max-w-4xl px-6 py-24 text-center lg:px-10">
             <Reveal>

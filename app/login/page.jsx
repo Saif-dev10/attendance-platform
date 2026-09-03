@@ -31,8 +31,6 @@ export default function LoginPage() {
   const [formError, setFormError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  /* Registration Number */
-
   const handleRegNumberChange = useCallback((e) => {
     setRegNumber(e.target.value);
 
@@ -47,8 +45,6 @@ export default function LoginPage() {
 
     setFormError('');
   }, []);
-
-  /* Password */
 
   const handlePasswordChange = useCallback((e) => {
     const value = e.target.value;
@@ -67,23 +63,20 @@ export default function LoginPage() {
     setFormError('');
   }, []);
 
-  /* Submit */
-
   async function handleSubmit(e) {
     e.preventDefault();
 
     if (isSubmitting) return;
 
+    // Validate both fields before starting the simulated sign-in request.
     setErrors({});
     setFormError('');
 
-    /* Validate registration number */
     const regResult = validateRegistrationNumber(
       regNumber,
       'BUK_STUDENT'
     );
 
-    /* Validate password strength */
     const passwordResult = validatePasswordStrength(password);
 
     const nextErrors = {};
@@ -98,7 +91,6 @@ export default function LoginPage() {
 
     setErrors(nextErrors);
 
-    /* Stop submission if validation failed */
     if (Object.keys(nextErrors).length > 0) {
       return;
     }
@@ -115,10 +107,6 @@ export default function LoginPage() {
         remember,
       });
 
-      /*
-       * Temporary delay so the loading state can be seen.
-       * Remove this when the real API is connected.
-       */
       await new Promise((resolve) =>
         setTimeout(resolve, 700)
       );
@@ -139,13 +127,11 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen w-full flex flex-col lg:flex-row bg-slate-50 lg:bg-white">
 
-      {/* LEFT SIDE — LOGIN FORM                                     */}
-
+      {/* The form stays compact on large screens while the campus panel carries the visual weight. */}
       <div className="w-full max-w-md lg:max-w-none lg:w-[480px] min-h-screen flex flex-col p-8 lg:p-16 shrink-0 relative z-10 bg-white shadow-xl lg:shadow-2xl rounded-2xl lg:rounded-none m-4 lg:m-0">
 
         <div className="mb-auto">
 
-          {/* Logo */}
           <div className="flex items-center gap-2.5 mb-12">
 
             <div className="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center text-white shadow-lg shadow-slate-900/20">
@@ -158,7 +144,6 @@ export default function LoginPage() {
 
           </div>
 
-          {/* Heading */}
           <div className="mb-10">
 
             <h1 className="text-3xl font-bold text-slate-900 mb-2">
@@ -172,15 +157,13 @@ export default function LoginPage() {
 
           </div>
 
-          {/* FORM */}
-
+          {/* Sign-in form: institutional ID, password, device memory, and submission. */}
           <form
             className="space-y-5"
             onSubmit={handleSubmit}
             noValidate
           >
 
-            {/* Form-level Error */}
             {formError && (
               <div
                 role="alert"
@@ -190,8 +173,7 @@ export default function LoginPage() {
               </div>
             )}
 
-            {/* INSTITUTIONAL ID */}
-
+            {/* Institutional ID field and inline validation message. */}
             <div>
 
               <label
@@ -230,7 +212,6 @@ export default function LoginPage() {
 
               </div>
 
-              {/* Registration Error */}
               {errors.regNumber && (
                 <p
                   id="regNumber-error"
@@ -243,8 +224,7 @@ export default function LoginPage() {
 
             </div>
 
-            {/* PASSWORD */}
-
+            {/* Password field, visibility toggle, and strength requirements. */}
             <div>
 
               <div className="flex items-center justify-between mb-2">
@@ -292,7 +272,6 @@ export default function LoginPage() {
                   }`}
                 />
 
-                {/* Show / Hide Password */}
                 <button
                   type="button"
                   onClick={() =>
@@ -314,7 +293,6 @@ export default function LoginPage() {
 
               </div>
 
-              {/* Password Requirements */}
               {errors.password && (
                 <div
                   id="password-error"
@@ -336,8 +314,7 @@ export default function LoginPage() {
 
             </div>
 
-            {/* REMEMBER ME */}
-
+            {/* Keep the device signed in for the next visit. */}
             <div className="flex items-center gap-3 pt-2">
 
               <input
@@ -360,8 +337,7 @@ export default function LoginPage() {
 
             </div>
 
-            {/* SUBMIT BUTTON  */}
-
+            {/* Submit action reflects the simulated request state. */}
             <Button
               type="submit"
               disabled={isSubmitting}
@@ -389,8 +365,6 @@ export default function LoginPage() {
 
           </form>
 
-          {/* ACCOUNT ACTIVATION */}
-
           <div className="mt-10 pt-8 border-t border-slate-100">
 
             <p className="text-[13px] text-slate-500 text-center">
@@ -409,8 +383,6 @@ export default function LoginPage() {
           </div>
 
         </div>
-
-        {/* FOOTER */}
 
         <div className="mt-8 lg:mt-auto flex items-center justify-between text-[11px] font-medium text-slate-400 uppercase tracking-[0.1em]">
 
@@ -440,11 +412,8 @@ export default function LoginPage() {
 
       </div>
 
-      {/* RIGHT SIDE — BRAND IMAGE */}
-
       <div className="hidden lg:block flex-1 min-h-screen sticky top-0 relative bg-slate-900 overflow-hidden">
 
-        {/* Background Image */}
         <div className="absolute inset-0 z-0">
 
           <Image
@@ -458,10 +427,8 @@ export default function LoginPage() {
 
         </div>
 
-        {/* Gradient */}
         <div className="absolute inset-0 bg-gradient-to-tr from-slate-900 via-slate-900/60 to-blue-900/40 z-10" />
 
-        {/* Grid */}
         <svg
           className="absolute inset-0 w-full h-full opacity-[0.15] z-[15]"
           xmlns="http://www.w3.org/2000/svg"
@@ -495,12 +462,10 @@ export default function LoginPage() {
 
         </svg>
 
-        {/* Right Side Content */}
         <div className="absolute inset-0 z-20 flex flex-col justify-center p-20 text-white">
 
           <div className="max-w-xl">
 
-            {/* Badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-bold uppercase tracking-widest mb-6">
 
               <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
@@ -509,18 +474,15 @@ export default function LoginPage() {
 
             </div>
 
-            {/* Heading */}
             <h2 className="text-5xl font-bold leading-tight mb-6">
               The complete engine for the modern university.
             </h2>
 
-            {/* Description */}
             <p className="text-xl text-white/70 leading-relaxed">
               Experience a unified platform for academic
               excellence, administration, and campus mobility.
             </p>
 
-            {/* Stats */}
             <div className="grid grid-cols-2 gap-10 mt-16">
 
               <div>

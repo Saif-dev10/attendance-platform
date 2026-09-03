@@ -15,8 +15,6 @@ import {
   GraduationCap,
 } from "lucide-react";
 
-// DEFAULT STUDENT SIDEBAR
-
 export const studentSections = [
   {
     title: "My Academic",
@@ -65,8 +63,6 @@ export const studentSections = [
     ],
   },
 ];
-
-// LECTURER SIDEBAR
 
 export const lecturerSections = [
   {
@@ -122,8 +118,6 @@ export const lecturerSections = [
   },
 ];
 
-// NAVIGATION LINK COMPONENT
-
 function NavLink({ href, icon: Icon, label, active }) {
   return (
     <Link
@@ -145,8 +139,6 @@ function NavLink({ href, icon: Icon, label, active }) {
   );
 }
 
-// REUSABLE SIDEBAR
-
 export default function Sidebar({
   sections = studentSections,
   dashboardHref = "/dashboard",
@@ -162,8 +154,6 @@ export default function Sidebar({
   return (
     <aside className="hidden md:fixed md:left-0 md:top-0 md:w-[280px] md:bg-paper md:border-r md:border-line md:flex-shrink-0 md:flex md:flex-col md:h-screen md:z-20">
       
-      {/* LOGO */}
-
       <div className="h-[72px] px-6 flex items-center gap-2.5 border-b border-line shrink-0">
         <div className="w-8 h-8 rounded-lg bg-charcoal flex items-center justify-center text-cream shadow-lg shadow-charcoal/20">
           <GraduationCap size={18} />
@@ -174,12 +164,7 @@ export default function Sidebar({
         </span>
       </div>
 
-      {/* SCROLLABLE NAVIGATION */}
-
       <div className="flex-1 overflow-y-auto py-6 px-4 space-y-8">
-
-        {/* Dashboard */}
-
         <div>
           <NavLink
             href={dashboardHref}
@@ -191,8 +176,6 @@ export default function Sidebar({
             }
           />
         </div>
-
-        {/* Dynamic Sections */}
 
         {sections.map((section) => (
           <div key={section.title}>
@@ -218,8 +201,6 @@ export default function Sidebar({
           </div>
         ))}
       </div>
-
-      {/* USER PROFILE */}
 
       <div className="p-4 border-t border-line bg-cream">
 

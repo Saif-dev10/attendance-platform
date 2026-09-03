@@ -87,9 +87,10 @@ const additionalFeatures = [
 export default function FeaturesPage() {
   return (
     <>
+      {/* This page groups the product capabilities around the moments users care about. */}
       <Nav />
       <main id="main">
-        {/* INTRO */}
+        {/* Intro: a quick orientation before the feature groups begin. */}
         <section className="border-b border-line">
           <div className="mx-auto max-w-4xl px-6 py-20 text-center lg:px-10 lg:py-28">
             <Reveal>
@@ -110,7 +111,7 @@ export default function FeaturesPage() {
           </div>
         </section>
 
-        {/* FEATURE GROUPS */}
+        {/* Feature groups: each group follows one part of the attendance workflow. */}
         {groups.map((group, gi) => (
           <section
             key={group.label}
@@ -134,7 +135,7 @@ export default function FeaturesPage() {
           </section>
         ))}
 
-        {/* LIVE ACTIVITY HIGHLIGHT */}
+        {/* Live activity: attendance visibility while a class is in progress. */}
         <section className="border-b border-line">
           <div className="mx-auto grid max-w-7xl items-center gap-14 px-6 py-20 lg:grid-cols-2 lg:px-10 lg:py-28">
             <Reveal>
@@ -154,7 +155,7 @@ export default function FeaturesPage() {
           </div>
         </section>
 
-        {/* RECORDS HIGHLIGHT */}
+        {/* Records: organized history for review and export. */}
         <section className="border-b border-line bg-paper">
           <div className="mx-auto grid max-w-7xl items-center gap-14 px-6 py-20 lg:grid-cols-2 lg:px-10 lg:py-28">
             <Reveal delay={140} className="order-2 lg:order-1">
@@ -177,7 +178,7 @@ export default function FeaturesPage() {
           </div>
         </section>
 
-        {/* ADDITIONAL */}
+        {/* Additional tools that support the wider campus workflow. */}
         <section className="border-b border-line">
           <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-24">
             <Reveal className="max-w-xl">
@@ -196,7 +197,7 @@ export default function FeaturesPage() {
           </div>
         </section>
 
-        {/* CTA */}
+        {/* Closing call to action. */}
         <section className="bg-charcoal text-cream">
           <div className="mx-auto max-w-4xl px-6 py-24 text-center lg:px-10">
             <Reveal>

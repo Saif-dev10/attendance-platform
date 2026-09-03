@@ -26,7 +26,6 @@ export default function Topbar({
         ${className}
       `}
     >
-      {/* Title */}
       <div className="flex min-w-0 items-center gap-3">
         {leading}
         <div className="min-w-0">
@@ -41,7 +40,6 @@ export default function Topbar({
         </div>
       </div>
 
-      {/* Page-specific content */}
       <div className="flex shrink-0 items-center gap-2 md:gap-3">
         {children}
       </div>

@@ -10,7 +10,6 @@ const checkIns = [
 export default function SessionMockup() {
   return (
     <div className="relative mx-auto w-full max-w-md">
-      {/* ambient depth shadow, no gradients */}
       <div
         className="absolute -inset-4 -z-10 rounded-[2rem] bg-charcoal/5 blur-2xl"
         aria-hidden="true"

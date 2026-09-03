@@ -132,10 +132,11 @@ export default function Lecturer() {
         </Button>
       </Topbar>
 
+  {/* Summary cards lead into courses, today's schedule, and work waiting for review. */}
       <main className="ml-0 md:ml-[280px] pt-[72px] h-screen overflow-y-auto bg-paper">
         <div className="max-w-[1250px] mx-auto space-y-6 px-4 sm:px-6 py-5 sm:py-7">
 
-          {/* Stats Overview */}
+          {/* Lecturer metrics: students, courses, pending work, and attendance. */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 min-w-0">
             {statCards.map(({ label, value, delta, icon: Icon, iconBg, iconColor }) => (
               <Card
@@ -143,6 +144,7 @@ export default function Lecturer() {
                 className="min-w-0 rounded-2xl border border-line bg-white p-6"
               >
                 <div className="flex items-center gap-3 mb-4">
+                  {/* Metric icon. */}
                   <div className={`w-10 h-10 rounded-xl ${iconBg} flex items-center justify-center ${iconColor} shrink-0`}>
                     <Icon size={20} />
                   </div>
@@ -165,10 +167,10 @@ export default function Lecturer() {
             ))}
           </div>
 
-          {/* Courses + Schedule */}
+          {/* Course overview beside the lecturer&apos;s schedule. */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 min-w-0">
 
-            {/* Current Courses */}
+            {/* Active courses and their average grades. */}
             <Card className="lg:col-span-2 min-w-0 rounded-2xl border border-line bg-white flex flex-col overflow-hidden p-0">
               <div className="px-6 py-5 border-b border-line flex items-center justify-between">
                 <h3 className="font-bold text-charcoal">Current Courses</h3>
@@ -209,7 +211,7 @@ export default function Lecturer() {
               </div>
             </Card>
 
-            {/* Today's Schedule */}
+            {/* Schedule for today, including the live session. */}
             <Card className="lg:col-span-1 min-w-0 rounded-2xl border border-line bg-white flex flex-col p-0">
               <div className="px-6 py-5 border-b border-line">
                 <h3 className="font-bold text-charcoal">Today&apos;s Schedule</h3>
@@ -244,7 +246,7 @@ export default function Lecturer() {
             </Card>
           </div>
 
-          {/* Pending Gradings */}
+          {/* Submissions waiting for grading. */}
           <Card className="min-w-0 rounded-2xl border border-line bg-white overflow-hidden p-0">
             <div className="px-6 py-5 border-b border-line flex items-center justify-between">
               <h3 className="font-bold text-charcoal">Pending Gradings</h3>
@@ -253,6 +255,7 @@ export default function Lecturer() {
               </span>
             </div>
 
+            {/* Grading table. */}
             <div className="overflow-x-auto">
               <table className="w-full text-left min-w-[600px]">
                 <thead>

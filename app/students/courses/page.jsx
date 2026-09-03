@@ -53,8 +53,9 @@ export default function CourseDetailsPage() {
       </Topbar>
 
       <main className="min-h-screen overflow-y-auto bg-paper pt-[72px] md:ml-[280px]">
+        {/* The selected tab controls which course view is rendered below. */}
         <div className="border-b border-line bg-paper px-3 sm:px-6">
-          <div className="flex gap-2 overflow-x-auto sm:gap-8">
+          <div className="flex gap-2 overflow-x-auto sm:gap-8" role="tablist" aria-label="Course sections">
             {tabs.map((tab) => {
               const isActive = activeTab === tab;
 
@@ -63,6 +64,9 @@ export default function CourseDetailsPage() {
                   key={tab}
                   type="button"
                   onClick={() => setActiveTab(tab)}
+                  role="tab"
+                  aria-selected={isActive}
+                  aria-controls="course-tab-panel"
                   className={`relative rounded-none !bg-transparent px-2 py-4 text-sm font-bold !shadow-none transition-all hover:!bg-transparent ${
                     isActive
                       ? "!text-bronze-deep"
@@ -80,16 +84,11 @@ export default function CourseDetailsPage() {
           </div>
         </div>
 
-        {/* =======================================================
-            SCROLLABLE CONTENT
-        ======================================================= */}
-        <div className="flex-1 overflow-y-auto px-3 py-5 sm:px-6 sm:py-7">
+        <div id="course-tab-panel" role="tabpanel" className="flex-1 overflow-y-auto px-3 py-5 sm:px-6 sm:py-7" aria-label={`${activeTab} content`}>
+          {activeTab === "Overview" ? (
           <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-3">
-            {/* ===================================================
-                LEFT / MAIN COLUMN
-            =================================================== */}
             <div className="space-y-8 lg:col-span-2">
-              {/* About Course */}
+              {/* Course description, meeting details, and announcements. */}
               <section>
                 <h3 className="mb-4 text-sm font-bold uppercase tracking-widest text-charcoal">
                   About Course
@@ -104,7 +103,6 @@ export default function CourseDetailsPage() {
                     problems.
                   </p>
 
-                  {/* Course Details */}
                   <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div className="rounded-xl border border-line bg-cream p-4">
                       <div className="mb-2 flex items-center gap-2">
@@ -145,7 +143,6 @@ export default function CourseDetailsPage() {
                 </div>
               </section>
 
-              {/* Latest Announcements */}
               <section>
                 <h3 className="mb-4 text-sm font-bold uppercase tracking-widest text-charcoal">
                   Latest Announcements
@@ -153,7 +150,6 @@ export default function CourseDetailsPage() {
 
                 <div className="space-y-4">
                   <div className="flex gap-4 rounded-2xl border border-line bg-white p-5">
-                    {/* Icon */}
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-bronze-deep/10 text-bronze-deep">
                       <Megaphone size={20} strokeWidth={2} />
                     </div>
@@ -177,11 +173,8 @@ export default function CourseDetailsPage() {
               </section>
             </div>
 
-            {/* ===================================================
-                RIGHT / SIDEBAR COLUMN
-            =================================================== */}
             <div className="space-y-8">
-              {/* Instructor */}
+              {/* Instructor contact actions and the next submission deadline. */}
               <section>
                 <h3 className="mb-4 text-sm font-bold uppercase tracking-widest text-charcoal">
                   Instructor
@@ -224,14 +217,12 @@ export default function CourseDetailsPage() {
                 </div>
               </section>
 
-              {/* Next Deadline */}
               <section>
                 <h3 className="mb-4 text-sm font-bold uppercase tracking-widest text-charcoal">
                   Next Deadline
                 </h3>
 
                 <div className="relative overflow-hidden rounded-2xl bg-charcoal p-6 text-cream shadow-xl shadow-charcoal/20">
-                  {/* Decorative Icon */}
                   <Clock3
                     size={100}
                     strokeWidth={1}
@@ -268,6 +259,16 @@ export default function CourseDetailsPage() {
               </section>
             </div>
           </div>
+          ) : (
+            <div className="mx-auto flex min-h-[420px] max-w-[720px] items-center justify-center rounded-2xl border border-dashed border-line bg-white px-6 py-16 text-center">
+              <div>
+                <h2 className="mb-2 text-lg font-bold text-charcoal">{activeTab}</h2>
+                <p className="text-sm leading-relaxed text-graphite-soft">
+                  This section is ready for content. Materials, assignments, attendance, and grades will appear here.
+                </p>
+              </div>
+            </div>
+          )}
         </div>
       </main>
     </div>

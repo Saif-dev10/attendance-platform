@@ -23,9 +23,10 @@ export const metadata = {
 export default function HowItWorksPage() {
   return (
     <>
+      {/* The sequence mirrors a real class session, from opening attendance to reviewing records. */}
       <Nav />
       <main id="main">
-        {/* INTRO */}
+        {/* Intro: set expectations for the full attendance journey. */}
         <section className="border-b border-line">
           <div className="mx-auto max-w-4xl px-6 py-20 text-center lg:px-10 lg:py-28">
             <Reveal>
@@ -46,7 +47,7 @@ export default function HowItWorksPage() {
           </div>
         </section>
 
-        {/* PROCESS */}
+        {/* Process steps: the class session from setup through record keeping. */}
         <section className="border-b border-line bg-paper">
           <div className="mx-auto max-w-6xl px-6 py-6 lg:px-10">
             <Reveal>
@@ -148,7 +149,7 @@ export default function HowItWorksPage() {
           </div>
         </section>
 
-        {/* CTA */}
+        {/* Closing call to action. */}
         <section className="bg-charcoal text-cream">
           <div className="mx-auto max-w-4xl px-6 py-24 text-center lg:px-10">
             <Reveal>

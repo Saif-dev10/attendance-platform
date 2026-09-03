@@ -31,9 +31,9 @@ export default function StudentTimetable() {
     <main className="min-h-screen bg-paper text-charcoal overflow-x-hidden">
       <Sidebar />
 
+  {/* Weekly and daily views share the same timetable data and grid. */}
       <Topbar title="Academic Timetable">
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* Weekly / Daily */}
           <div className="flex rounded-xl border border-line bg-cream p-1">
             <button
               type="button"
@@ -62,10 +62,8 @@ export default function StudentTimetable() {
             </button>
           </div>
 
-          {/* Divider */}
           <div className="mx-1 h-7 w-px bg-line sm:mx-2" />
 
-          {/* Print */}
           <button
             type="button"
             aria-label="Print timetable"
@@ -74,7 +72,6 @@ export default function StudentTimetable() {
             <PrinterIcon size={16} />
           </button>
 
-          {/* Download */}
           <button
             type="button"
             aria-label="Download timetable"
@@ -85,20 +82,12 @@ export default function StudentTimetable() {
         </div>
       </Topbar>
 
-      {/* =====================================================
-          PAGE CONTENT
-      ===================================================== */}
-
       <section className="ml-0 md:ml-[280px] min-h-screen pt-[72px]">
         <div className="w-full px-3 py-4 sm:px-6 sm:py-6 lg:px-8 lg:py-7">
 
-          {/* Timetable container */}
+          {/* Calendar grid: day headers, time labels, and scheduled classes. */}
           <div className="mx-auto w-full max-w-[1500px] overflow-x-auto rounded-2xl border border-line bg-white shadow-sm">
             <div className="min-w-[720px] overflow-hidden">
-
-            {/* =================================================
-                DAYS HEADER
-            ================================================= */}
 
             <div className={`grid border-b border-line bg-cream/80 ${
               viewMode === "daily"
@@ -106,7 +95,6 @@ export default function StudentTimetable() {
                 : "grid-cols-[56px_repeat(5,minmax(0,1fr))] sm:grid-cols-[64px_repeat(5,minmax(0,1fr))]"
             }`}>
 
-              {/* Empty time column */}
               <div className="border-r border-line" />
 
               {days.map((day, index) => (
@@ -141,19 +129,11 @@ export default function StudentTimetable() {
               ))}
             </div>
 
-            {/* =================================================
-                CALENDAR BODY
-            ================================================= */}
-
             <div className={`grid ${
               viewMode === "daily"
                 ? "grid-cols-[56px_minmax(0,1fr)] sm:grid-cols-[64px_minmax(0,1fr)]"
                 : "grid-cols-[56px_repeat(5,minmax(0,1fr))] sm:grid-cols-[64px_repeat(5,minmax(0,1fr))]"
             }`}>
-
-              {/* =================================================
-                  TIME COLUMN
-              ================================================= */}
 
               <div className="border-r border-line bg-cream/30">
 
@@ -169,10 +149,6 @@ export default function StudentTimetable() {
                 ))}
 
               </div>
-
-              {/* =================================================
-                  MONDAY
-              ================================================= */}
 
               <div className={`relative min-w-0 border-r border-line ${viewMode === "daily" ? "hidden" : ""}`}>
 
@@ -202,10 +178,6 @@ export default function StudentTimetable() {
                 </div>
               </div>
 
-              {/* =================================================
-                  TUESDAY
-              ================================================= */}
-
               <div className="relative min-w-0 border-r border-line bg-bronze-deep/5">
 
                 {timeSlots.map((_, i) => (
@@ -215,13 +187,11 @@ export default function StudentTimetable() {
                   />
                 ))}
 
-                {/* Current time */}
                 <div className="absolute left-0 right-0 top-[220px] z-10 flex items-center">
                   <div className="absolute -left-1 h-2 w-2 rounded-full bg-red-500" />
                   <div className="h-px w-full bg-red-500/50" />
                 </div>
 
-                {/* Class */}
                 <div className="absolute left-0 right-0 top-[200px] h-[200px] p-1 sm:p-1.5">
                   <div className="h-full w-full overflow-hidden rounded-xl bg-bronze-deep p-2.5 text-cream shadow-lg shadow-bronze-deep/20 transition-transform hover:scale-[1.01] sm:p-3">
 
@@ -246,10 +216,6 @@ export default function StudentTimetable() {
                   </div>
                 </div>
               </div>
-
-              {/* =================================================
-                  WEDNESDAY
-              ================================================= */}
 
               <div className={`relative min-w-0 border-r border-line ${viewMode === "daily" ? "hidden" : ""}`}>
 
@@ -279,10 +245,6 @@ export default function StudentTimetable() {
                 </div>
               </div>
 
-              {/* =================================================
-                  THURSDAY
-              ================================================= */}
-
               <div className={`relative min-w-0 border-r border-line ${viewMode === "daily" ? "hidden" : ""}`}>
 
                 {timeSlots.map((_, i) => (
@@ -310,10 +272,6 @@ export default function StudentTimetable() {
                   </div>
                 </div>
               </div>
-
-              {/* =================================================
-                  FRIDAY
-              ================================================= */}
 
               <div className={`relative min-w-0 ${viewMode === "daily" ? "hidden" : ""}`}>
 

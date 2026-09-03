@@ -13,7 +13,6 @@ export default function MobileBottomNav({ active = "home" }) {
   const items = [
     { key: "home", label: "Home", icon: LayoutGrid, href: "/dashboard" },
     { key: "academic", label: "Academic", icon: BookOpen, href: "/students/courses" },
-    // "ride" is rendered separately as the elevated center action
     { key: "support", label: "Support", icon: MessageCircle, href: "/complaints" },
     { key: "profile", label: "Profile", icon: UserCircle, href: "/students" },
   ];
@@ -26,13 +25,10 @@ export default function MobileBottomNav({ active = "home" }) {
         px-2 z-50
       "
     >
-      {/* Home */}
       <NavItem item={items[0]} isActive={active === "home"} />
 
-      {/* Academic */}
       <NavItem item={items[1]} isActive={active === "academic"} />
 
-      {/* Center elevated Ride action */}
       
         <a href="/campus-ride"
         className="relative -mt-8 flex flex-col items-center"
@@ -52,10 +48,8 @@ export default function MobileBottomNav({ active = "home" }) {
         </span>
       </a>
 
-      {/* Support */}
       <NavItem item={items[2]} isActive={active === "support"} />
 
-      {/* Profile */}
       <NavItem item={items[3]} isActive={active === "profile"} />
     </nav>
   );

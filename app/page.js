@@ -88,14 +88,14 @@ const featurePreview = [
 export default function Home() {
   return (
     <>
+      {/* The landing page introduces the attendance workflow before visitors enter the app. */}
       <Nav />
       <main id="main">
-        {/* HERO */}
+        {/* Hero: the product promise and primary entry point. */}
         <section className="relative overflow-hidden border-b border-line">
           <div className="mx-auto grid max-w-7xl gap-16 px-6 pb-20 pt-16 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:px-10 lg:pb-28 lg:pt-24">
             <div>
               <Reveal>
-                {/* <Eyebrow>Attendance, reconsidered</Eyebrow> */}
               </Reveal>
               <Reveal delay={80}>
                 <h1 className="mt-6 font-display text-[2.75rem] leading-[1.08] tracking-tight text-charcoal sm:text-6xl">
@@ -151,7 +151,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* PROBLEM */}
+        {/* The attendance problem this platform is designed to remove. */}
         <section className="border-b border-line bg-paper">
           <div className="mx-auto grid max-w-7xl gap-14 px-6 py-20 lg:grid-cols-2 lg:px-10 lg:py-28">
             <Reveal>
@@ -179,7 +179,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* SOLUTION */}
+        {/* The core workflow, from opening a session to reviewing records. */}
         <section className="border-b border-line">
           <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
             <div className="grid gap-14 lg:grid-cols-2 lg:items-center">
@@ -209,7 +209,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* CORE BENEFITS */}
+        {/* Product benefits for everyday attendance work. */}
         <section className="border-b border-line bg-paper">
           <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
             <Reveal className="max-w-xl">
@@ -228,7 +228,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* HOW IT WORKS PREVIEW */}
+        {/* A short preview of the three-step check-in flow. */}
         <section className="border-b border-line">
           <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
             <div className="flex flex-wrap items-end justify-between gap-6">
@@ -262,7 +262,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* FEATURE PREVIEW */}
+        {/* Feature preview with the main tools users interact with. */}
         <section className="border-b border-line bg-paper">
           <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
             <Reveal className="max-w-xl">
@@ -289,7 +289,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* INSTITUTION-FOCUSED */}
+        {/* Institutional outcomes and administration-focused messaging. */}
         <section id="institutions" className="border-b border-line">
           <div className="mx-auto grid max-w-7xl items-center gap-14 px-6 py-20 lg:grid-cols-2 lg:px-10 lg:py-28">
             <Reveal className="relative order-2 aspect-[4/5] overflow-hidden rounded-2xl border border-line-strong lg:order-1">
@@ -333,7 +333,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* FINAL CTA */}
+        {/* Final call to action and contact path. */}
         <section id="contact" className="bg-charcoal text-cream">
           <div className="mx-auto max-w-4xl px-6 py-24 text-center lg:px-10">
             <Reveal>
