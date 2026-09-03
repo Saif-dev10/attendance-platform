@@ -23,12 +23,12 @@ export const studentSections = [
     links: [
       {
         label: "Timetable",
-        href: "/studentTimetable",
+        href: "/students/timetable",
         icon: CalendarClock,
       },
       {
         label: "My Courses",
-        href: "/courses",
+        href: "/students/courses",
         icon: BookOpen,
       },
       {
@@ -76,6 +76,11 @@ export const lecturerSections = [
         label: "My Classes",
         href: "/lecturer/classes",
         icon: BookOpen,
+      },
+      {
+        label: "Timetable",
+        href: "/lecturers/timetable",
+        icon: CalendarClock,
       },
       {
         label: "Attendance",
@@ -147,9 +152,9 @@ export default function Sidebar({
   dashboardHref = "/dashboard",
 
   user = {
-    name: "Your Name",
+    name: "David Okafor",
     role: "Student • 300L",
-    avatar: "/avatar-placeholder.jpg",
+    avatar: "/avatar-placeholder.svg",
   },
 }) {
   const pathname = usePathname();

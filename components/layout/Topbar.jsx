@@ -1,5 +1,7 @@
 export default function Topbar({
   title,
+  subtitle,
+  leading,
   children,
   className = "",
 }) {
@@ -25,9 +27,19 @@ export default function Topbar({
       `}
     >
       {/* Title */}
-      <h1 className="min-w-0 truncate text-sm font-bold text-charcoal md:text-xl">
-        {title}
-      </h1>
+      <div className="flex min-w-0 items-center gap-3">
+        {leading}
+        <div className="min-w-0">
+          <h1 className="truncate text-sm font-bold text-charcoal md:text-xl">
+            {title}
+          </h1>
+          {subtitle && (
+            <p className="truncate text-[10px] font-semibold uppercase tracking-wider text-graphite-soft md:text-xs">
+              {subtitle}
+            </p>
+          )}
+        </div>
+      </div>
 
       {/* Page-specific content */}
       <div className="flex shrink-0 items-center gap-2 md:gap-3">

@@ -12,10 +12,10 @@ import { LayoutGrid, BookOpen, Bus, MessageCircle, UserCircle } from "lucide-rea
 export default function MobileBottomNav({ active = "home" }) {
   const items = [
     { key: "home", label: "Home", icon: LayoutGrid, href: "/dashboard" },
-    { key: "academic", label: "Academic", icon: BookOpen, href: "/dashboard/academic" },
+    { key: "academic", label: "Academic", icon: BookOpen, href: "/students/courses" },
     // "ride" is rendered separately as the elevated center action
-    { key: "support", label: "Support", icon: MessageCircle, href: "/dashboard/support" },
-    { key: "profile", label: "Profile", icon: UserCircle, href: "/dashboard/profile" },
+    { key: "support", label: "Support", icon: MessageCircle, href: "/complaints" },
+    { key: "profile", label: "Profile", icon: UserCircle, href: "/students" },
   ];
 
   return (
@@ -34,7 +34,7 @@ export default function MobileBottomNav({ active = "home" }) {
 
       {/* Center elevated Ride action */}
       
-        <a href="/dashboard/ride"
+        <a href="/campus-ride"
         className="relative -mt-8 flex flex-col items-center"
         aria-label="Campus Ride"
       >

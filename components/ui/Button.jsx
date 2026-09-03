@@ -7,7 +7,7 @@ export default function Button({
   return (
     <button
       type={type}
-      className={`px-5 py-2.5 rounded-xl bg-brand-500 hover:bg-brand-400 text-white font-bold text-sm transition-all shadow-lg shadow-brand-600/20 cursor-pointer active:opacity-75 ${className}`}
+      className={`inline-flex cursor-pointer items-center justify-center rounded-xl bg-charcoal px-5 py-2.5 text-sm font-bold text-cream transition-colors hover:bg-bronze-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bronze disabled:cursor-not-allowed disabled:opacity-50 ${className}`}
       {...props}
     >
       {children}

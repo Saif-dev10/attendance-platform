@@ -84,7 +84,7 @@ export default function DashboardPage() {
       <Sidebar
         sections={studentSections}
         user={{
-          name: "Saifullah",
+          name: "David Okafor",
           role: "Student • 300L",
           avatar: "/avatar-placeholder.svg",
         }}
@@ -170,7 +170,7 @@ export default function DashboardPage() {
             >
               <div className="relative z-10 min-w-0 pr-0 sm:pr-6">
                 <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-2">
-                  Hello, Saifullah! 👋
+                  Hello, David Okafor! 👋
                 </h2>
                 <p className="text-cream/70 text-sm sm:text-base lg:text-lg max-w-2xl">
                   You have 2 assignments due this week and your next class is
@@ -179,7 +179,7 @@ export default function DashboardPage() {
 
                 <div className="mt-5 flex flex-col sm:flex-row flex-wrap gap-3">
                   <Button
-                    onClick={() => router.push("/studentTimetable")}
+                    onClick={() => router.push("/students/timetable")}
                     className="
                       w-full sm:w-auto px-5 py-2.5 rounded-xl bg-bronze-deep hover:bg-bronze-deep/90
                       text-cream font-bold text-sm transition-all shadow-lg
@@ -279,7 +279,7 @@ export default function DashboardPage() {
             <Card className="lg:col-span-2 min-w-0 rounded-2xl border border-line bg-white flex flex-col p-0">
               <div className="px-4 sm:px-6 py-4 sm:py-5 border-b border-line flex items-center justify-between gap-2">
                 <h3 className="font-bold text-charcoal">Today&apos;s Lectures</h3>
-                <Link href="/studentTimetable" className="text-xs font-bold text-bronze-deep hover:underline shrink-0">
+                <Link href="/students/timetable" className="text-xs font-bold text-bronze-deep hover:underline shrink-0">
                   Full Schedule
                 </Link>
               </div>
