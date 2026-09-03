@@ -125,13 +125,13 @@ function NavLink({ href, icon: Icon, label, active }) {
       href={href}
       className={`flex items-center gap-3 px-3 py-2 rounded-lg text-[13.5px] transition-colors ${
         active
-          ? "bg-slate-100 text-[#0c426e] font-semibold"
-          : "text-slate-600 hover:bg-slate-50"
+          ? "bg-bronze-deep/10 text-charcoal font-semibold"
+          : "text-graphite hover:bg-paper"
       }`}
     >
       <Icon
         size={18}
-        className={active ? "text-[#0c426e]" : "opacity-70"}
+        className={active ? "text-bronze-deep" : "text-graphite-soft"}
         strokeWidth={active ? 2.25 : 1.75}
       />
 
@@ -154,16 +154,16 @@ export default function Sidebar({
   const pathname = usePathname();
 
   return (
-    <aside className="hidden md:fixed md:left-0 md:top-0 md:w-[280px] md:bg-white md:border-r md:border-slate-200 md:flex-shrink-0 md:flex md:flex-col md:h-screen md:z-20">
+    <aside className="hidden md:fixed md:left-0 md:top-0 md:w-[280px] md:bg-paper md:border-r md:border-line md:flex-shrink-0 md:flex md:flex-col md:h-screen md:z-20">
       
       {/* LOGO */}
 
-      <div className="h-[72px] px-6 flex items-center gap-2.5 border-b border-slate-100 shrink-0">
-        <div className="w-8 h-8 rounded-lg bg-[#1a365d] flex items-center justify-center text-white shadow-lg shadow-[#0c426e]/20">
+      <div className="h-[72px] px-6 flex items-center gap-2.5 border-b border-line shrink-0">
+        <div className="w-8 h-8 rounded-lg bg-charcoal flex items-center justify-center text-cream shadow-lg shadow-charcoal/20">
           <GraduationCap size={18} />
         </div>
 
-        <span className="font-bold text-xl tracking-tight text-[#0c426e]">
+        <span className="font-bold text-xl tracking-tight text-charcoal">
           UniFlow
         </span>
       </div>
@@ -192,7 +192,7 @@ export default function Sidebar({
         {sections.map((section) => (
           <div key={section.title}>
 
-            <h3 className="px-3 text-[11px] font-bold text-slate-400 uppercase tracking-[0.05em] mb-3">
+            <h3 className="px-3 text-[11px] font-bold text-graphite-soft uppercase tracking-[0.05em] mb-3">
               {section.title}
             </h3>
 
@@ -216,25 +216,25 @@ export default function Sidebar({
 
       {/* USER PROFILE */}
 
-      <div className="p-4 border-t border-slate-100 bg-slate-50/50">
+      <div className="p-4 border-t border-line bg-cream">
 
-        <div className="flex items-center gap-3 p-2 rounded-xl bg-white border border-slate-200 shadow-sm cursor-pointer hover:bg-slate-50 transition-colors">
+        <div className="flex items-center gap-3 p-2 rounded-xl bg-paper border border-line shadow-sm cursor-pointer hover:bg-white transition-colors">
 
           <Image
             src={user.avatar}
             alt={user.name}
             width={40}
             height={40}
-            className="rounded-lg object-cover ring-2 ring-slate-100"
+            className="rounded-lg object-cover ring-2 ring-line"
           />
 
           <div className="flex-1 min-w-0">
 
-            <p className="text-[13px] font-bold text-[#0c426e] truncate">
+            <p className="text-[13px] font-bold text-charcoal truncate">
               {user.name}
             </p>
 
-            <p className="text-[11px] font-semibold text-[#0274c7] truncate uppercase tracking-wider">
+            <p className="text-[11px] font-semibold text-bronze-deep truncate uppercase tracking-wider">
               {user.role}
             </p>
 

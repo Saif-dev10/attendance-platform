@@ -11,9 +11,9 @@ export default function Topbar({
         left-0
         right-0
         h-[72px]
-        bg-white
+        bg-paper
         border-b
-        border-slate-200
+        border-line
         flex
         items-center
         justify-between
@@ -25,7 +25,7 @@ export default function Topbar({
       `}
     >
       {/* Title */}
-      <h1 className="text-md font-bold text-[#0c426e] md:text-xl">
+      <h1 className="text-md font-bold text-charcoal md:text-xl">
         {title}
       </h1>
 

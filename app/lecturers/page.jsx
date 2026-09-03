@@ -18,43 +18,43 @@ const statCards = [
     value: "1,240",
     delta: "+4.2%",
     icon: Users,
-    iconBg: "bg-[#e8f4fd]",
-    iconColor: "text-[#0274c7]",
+    iconBg: "bg-bronze-deep/10",
+    iconColor: "text-bronze-deep",
   },
   {
     label: "Active Courses",
     value: "4",
     icon: BookOpen,
-    iconBg: "bg-orange-50",
-    iconColor: "text-orange-600",
+    iconBg: "bg-paper",
+    iconColor: "text-graphite",
   },
   {
     label: "Pending Tasks",
     value: "12",
     icon: ClipboardList,
-    iconBg: "bg-blue-50",
-    iconColor: "text-blue-600",
+    iconBg: "bg-bronze-soft/40",
+    iconColor: "text-bronze-deep",
   },
   {
     label: "Attendance Rate",
     value: "88.5%",
     icon: CheckSquare,
-    iconBg: "bg-purple-50",
-    iconColor: "text-purple-600",
+    iconBg: "bg-moss-soft",
+    iconColor: "text-moss",
   },
 ];
 
 const courses = [
   {
     code: "CSC301",
-    tagBg: "bg-[#0274c7]",
+    tagBg: "bg-charcoal",
     name: "Advanced Algorithms",
     meta: "320 Students • 2 Sessions/week",
     grade: "B+ (74%)",
   },
   {
     code: "CSC305",
-    tagBg: "bg-[#0e91e9]",
+    tagBg: "bg-bronze-deep",
     name: "Operating Systems",
     meta: "280 Students • 3 Sessions/week",
     grade: "A- (81%)",
@@ -85,13 +85,13 @@ const schedule = [
 const pendingGradings = [
   {
     student: "David Okafor",
-    avatar: "/avatar-placeholder.jpg",
+    avatar: "/avatar-placeholder.svg",
     course: "CSC301",
     assignment: "Lab 1: Sorting Algorithms",
   },
   {
     student: "Amina Bello",
-    avatar: "/avatar-placeholder.jpg",
+    avatar: "/avatar-placeholder.svg",
     course: "CSC305",
     assignment: "OS Shell Scripting",
   },
@@ -105,7 +105,7 @@ export default function Lecturer() {
         user={{
           name: "Dr. Ibrahim",
           role: "Lecturer",
-          avatar: "/avatar-placeholder.jpg",
+          avatar: "/avatar-placeholder.svg",
         }}
       />
       <Topbar title="Lecturer Console">
@@ -118,9 +118,9 @@ export default function Lecturer() {
             px-4
             py-2
             rounded-xl
-            bg-[#1a365d]
-            text-white
-            hover:bg-[#2c3e5d]
+            bg-charcoal
+            text-cream
+            hover:bg-bronze-deep
             transition-all
             shadow-md
             cursor-pointer
@@ -131,7 +131,7 @@ export default function Lecturer() {
         </Button>
       </Topbar>
 
-      <main className="ml-0 md:ml-[280px] pt-[72px] h-screen overflow-y-auto">
+      <main className="ml-0 md:ml-[280px] pt-[72px] h-screen overflow-y-auto bg-paper">
         <div className="max-w-[1250px] mx-auto space-y-6 px-4 sm:px-6 py-5 sm:py-7">
 
           {/* Stats Overview */}
@@ -139,23 +139,23 @@ export default function Lecturer() {
             {statCards.map(({ label, value, delta, icon: Icon, iconBg, iconColor }) => (
               <Card
                 key={label}
-                className="min-w-0 rounded-2xl border border-slate-200 bg-white p-6"
+                className="min-w-0 rounded-2xl border border-line bg-white p-6"
               >
                 <div className="flex items-center gap-3 mb-4">
                   <div className={`w-10 h-10 rounded-xl ${iconBg} flex items-center justify-center ${iconColor} shrink-0`}>
                     <Icon size={20} />
                   </div>
-                  <span className="text-sm font-bold text-slate-600 truncate">
+                  <span className="text-sm font-bold text-graphite truncate">
                     {label}
                   </span>
                 </div>
 
                 <div className="flex items-end gap-2">
-                  <span className="text-3xl font-black text-[#0c426e]">
+                  <span className="text-3xl font-black text-charcoal">
                     {value}
                   </span>
                   {delta && (
-                    <span className="text-emerald-600 text-xs font-bold mb-1">
+                    <span className="text-moss text-xs font-bold mb-1">
                       {delta}
                     </span>
                   )}
@@ -168,38 +168,38 @@ export default function Lecturer() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 min-w-0">
 
             {/* Current Courses */}
-            <Card className="lg:col-span-2 min-w-0 rounded-2xl border border-slate-200 bg-white flex flex-col overflow-hidden p-0">
-              <div className="px-6 py-5 border-b border-slate-100 flex items-center justify-between">
-                <h3 className="font-bold text-[#0c426e]">Current Courses</h3>
-                <button className="px-3 py-1 rounded-lg bg-slate-50 text-slate-600 text-xs font-bold hover:bg-slate-100 transition-all">
+            <Card className="lg:col-span-2 min-w-0 rounded-2xl border border-line bg-white flex flex-col overflow-hidden p-0">
+              <div className="px-6 py-5 border-b border-line flex items-center justify-between">
+                <h3 className="font-bold text-charcoal">Current Courses</h3>
+                <button className="px-3 py-1 rounded-lg bg-paper text-graphite text-xs font-bold hover:bg-cream transition-all">
                   Session 2023/24
                 </button>
               </div>
 
-              <div className="divide-y divide-slate-100">
+              <div className="divide-y divide-line">
                 {courses.map(({ code, tagBg, name, meta, grade }) => (
                   <div
                     key={code}
-                    className="p-6 flex items-center justify-between hover:bg-slate-50 transition-all group"
+                    className="p-6 flex items-center justify-between hover:bg-paper transition-all group"
                   >
                     <div className="flex items-center gap-4 min-w-0">
                       <div className={`w-12 h-12 rounded-xl ${tagBg} flex items-center justify-center text-white font-black text-xs shrink-0`}>
                         {code}
                       </div>
                       <div className="min-w-0">
-                        <h4 className="font-bold text-[#0c426e] truncate">{name}</h4>
-                        <p className="text-xs text-slate-600 truncate">{meta}</p>
+                        <h4 className="font-bold text-charcoal truncate">{name}</h4>
+                        <p className="text-xs text-graphite truncate">{meta}</p>
                       </div>
                     </div>
 
                     <div className="flex items-center gap-6 shrink-0">
                       <div className="text-right">
-                        <p className="text-[10px] font-bold text-slate-400 uppercase mb-1">
+                        <p className="text-[10px] font-bold text-graphite-soft uppercase mb-1">
                           Average Grade
                         </p>
-                        <p className="font-bold text-[#0c426e]">{grade}</p>
+                        <p className="font-bold text-charcoal">{grade}</p>
                       </div>
-                      <button className="w-8 h-8 rounded-lg border border-slate-200 flex items-center justify-center text-slate-400 group-hover:border-[#7cc2ef] group-hover:text-[#0274c7] transition-colors cursor-pointer">
+                      <button className="w-8 h-8 rounded-lg border border-line flex items-center justify-center text-graphite-soft group-hover:border-bronze group-hover:text-bronze-deep transition-colors cursor-pointer">
                         <ChevronRight size={16} />
                       </button>
                     </div>
@@ -209,9 +209,9 @@ export default function Lecturer() {
             </Card>
 
             {/* Today's Schedule */}
-            <Card className="lg:col-span-1 min-w-0 rounded-2xl border border-slate-200 bg-white flex flex-col p-0">
-              <div className="px-6 py-5 border-b border-slate-100">
-                <h3 className="font-bold text-[#0c426e]">Today&apos;s Schedule</h3>
+            <Card className="lg:col-span-1 min-w-0 rounded-2xl border border-line bg-white flex flex-col p-0">
+              <div className="px-6 py-5 border-b border-line">
+                <h3 className="font-bold text-charcoal">Today&apos;s Schedule</h3>
               </div>
 
               <div className="p-5 space-y-4 flex-1">
@@ -219,24 +219,24 @@ export default function Lecturer() {
                   <div
                     key={title}
                     className={`relative pl-6 border-l-2 py-1 ${
-                      active ? "border-[#0274c7]" : "border-slate-200"
+                      active ? "border-bronze-deep" : "border-line"
                     }`}
                   >
                     <p
                       className={`text-[10px] font-bold uppercase mb-0.5 ${
-                        active ? "text-[#0274c7]" : "text-slate-400"
+                        active ? "text-bronze-deep" : "text-graphite-soft"
                       }`}
                     >
                       {time}
                     </p>
-                    <h4 className="font-bold text-[#0c426e] text-sm">{title}</h4>
-                    <p className="text-xs text-slate-600">{meta}</p>
+                    <h4 className="font-bold text-charcoal text-sm">{title}</h4>
+                    <p className="text-xs text-graphite">{meta}</p>
                   </div>
                 ))}
               </div>
 
-              <div className="mt-auto p-5 border-t border-slate-100">
-                <button className="w-full py-3 rounded-xl border-2 border-[#1a365d] text-[#1a365d] font-bold text-sm hover:bg-[#eef3f8] transition-all cursor-pointer">
+              <div className="mt-auto p-5 border-t border-line">
+                <button className="w-full py-3 rounded-xl border-2 border-charcoal text-charcoal font-bold text-sm hover:bg-paper transition-all cursor-pointer">
                   Full Calendar
                 </button>
               </div>
@@ -244,10 +244,10 @@ export default function Lecturer() {
           </div>
 
           {/* Pending Gradings */}
-          <Card className="min-w-0 rounded-2xl border border-slate-200 bg-white overflow-hidden p-0">
-            <div className="px-6 py-5 border-b border-slate-100 flex items-center justify-between">
-              <h3 className="font-bold text-[#0c426e]">Pending Gradings</h3>
-              <span className="px-2 py-0.5 rounded-full bg-red-50 text-red-600 text-[10px] font-bold uppercase tracking-widest">
+          <Card className="min-w-0 rounded-2xl border border-line bg-white overflow-hidden p-0">
+            <div className="px-6 py-5 border-b border-line flex items-center justify-between">
+              <h3 className="font-bold text-charcoal">Pending Gradings</h3>
+              <span className="px-2 py-0.5 rounded-full bg-clay/10 text-clay text-[10px] font-bold uppercase tracking-widest">
                 {pendingGradings.length} NEW
               </span>
             </div>
@@ -255,16 +255,16 @@ export default function Lecturer() {
             <div className="overflow-x-auto">
               <table className="w-full text-left min-w-[600px]">
                 <thead>
-                  <tr className="text-[11px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-50">
+                  <tr className="text-[11px] font-bold text-graphite-soft uppercase tracking-wider border-b border-line">
                     <th className="px-6 py-4">Student</th>
                     <th className="px-6 py-4">Course</th>
                     <th className="px-6 py-4">Assignment</th>
                     <th className="px-6 py-4 text-right">Action</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-50 text-sm">
+                <tbody className="divide-y divide-line text-sm">
                   {pendingGradings.map(({ student, avatar, course, assignment }) => (
-                    <tr key={student} className="hover:bg-slate-50/50 transition-all">
+                    <tr key={student} className="hover:bg-paper transition-all">
                       <td className="px-6 py-4 flex items-center gap-3 font-medium">
                         <Image
                           src={avatar}
@@ -275,10 +275,10 @@ export default function Lecturer() {
                         />
                         <span>{student}</span>
                       </td>
-                      <td className="px-6 py-4 text-slate-600 font-medium">{course}</td>
-                      <td className="px-6 py-4 text-slate-600">{assignment}</td>
+                      <td className="px-6 py-4 text-graphite font-medium">{course}</td>
+                      <td className="px-6 py-4 text-graphite">{assignment}</td>
                       <td className="px-6 py-4 text-right">
-                        <button className="text-[#0274c7] font-bold hover:underline cursor-pointer">
+                        <button className="text-bronze-deep font-bold hover:underline cursor-pointer">
                           Grade Now
                         </button>
                       </td>
