@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Topbar from "@/components/layout/Topbar";
 import Sidebar from "@/components/layout/Sidebar";
 import { PrinterIcon, DownloadIcon } from "lucide-react";
@@ -24,31 +25,51 @@ const timeSlots = [
 ];
 
 export default function StudentTimetable() {
+  const [viewMode, setViewMode] = useState("weekly");
+
   return (
-    <main className="min-h-screen bg-[#f8fafc] text-ink overflow-x-hidden">
+    <main className="min-h-screen bg-paper text-charcoal overflow-x-hidden">
       <Sidebar />
 
       <Topbar title="Academic Timetable">
         <div className="flex items-center gap-2 sm:gap-3">
           {/* Weekly / Daily */}
-          <div className="flex rounded-xl border border-slate-200 bg-slate-50 p-1">
-            <button className="rounded-lg bg-white px-3 sm:px-4 py-1.5 text-xs font-bold text-[#0f172a] shadow-sm transition-all">
+          <div className="flex rounded-xl border border-line bg-cream p-1">
+            <button
+              type="button"
+              aria-pressed={viewMode === "weekly"}
+              onClick={() => setViewMode("weekly")}
+              className={`rounded-lg px-3 py-1.5 text-xs font-bold transition-all sm:px-4 ${
+                viewMode === "weekly"
+                  ? "bg-white text-charcoal shadow-sm"
+                  : "text-graphite-soft hover:text-charcoal"
+              }`}
+            >
               Weekly
             </button>
 
-            <button className="rounded-lg px-3 sm:px-4 py-1.5 text-xs font-bold text-[#94a3b8] transition-all hover:text-[#64748b]">
+            <button
+              type="button"
+              aria-pressed={viewMode === "daily"}
+              onClick={() => setViewMode("daily")}
+              className={`rounded-lg px-3 py-1.5 text-xs font-bold transition-all sm:px-4 ${
+                viewMode === "daily"
+                  ? "bg-white text-charcoal shadow-sm"
+                  : "text-graphite-soft hover:text-charcoal"
+              }`}
+            >
               Daily
             </button>
           </div>
 
           {/* Divider */}
-          <div className="mx-1 h-7 w-px bg-slate-200 sm:mx-2" />
+          <div className="mx-1 h-7 w-px bg-line sm:mx-2" />
 
           {/* Print */}
           <button
             type="button"
             aria-label="Print timetable"
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-slate-200 text-[#64748b] transition-colors hover:bg-slate-50"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-line text-graphite-soft transition-colors hover:bg-cream"
           >
             <PrinterIcon size={16} />
           </button>
@@ -57,7 +78,7 @@ export default function StudentTimetable() {
           <button
             type="button"
             aria-label="Download timetable"
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-slate-200 text-[#64748b] transition-colors hover:bg-slate-50"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-line text-graphite-soft transition-colors hover:bg-cream"
           >
             <DownloadIcon size={16} />
           </button>
@@ -68,33 +89,40 @@ export default function StudentTimetable() {
           PAGE CONTENT
       ===================================================== */}
 
-      <section className="ml-[280px] min-h-screen pt-[72px]">
-        <div className="w-full px-4 py-5 sm:px-6 sm:py-6 lg:px-8 lg:py-7">
+      <section className="ml-0 md:ml-[280px] min-h-screen pt-[72px]">
+        <div className="w-full px-3 py-4 sm:px-6 sm:py-6 lg:px-8 lg:py-7">
 
           {/* Timetable container */}
-          <div className="mx-auto w-full max-w-[1500px] overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+          <div className="mx-auto w-full max-w-[1500px] overflow-x-auto rounded-2xl border border-line bg-white shadow-sm">
+            <div className="min-w-[720px] overflow-hidden">
 
             {/* =================================================
                 DAYS HEADER
             ================================================= */}
 
-            <div className="grid grid-cols-[64px_repeat(5,minmax(0,1fr))] border-b border-slate-200 bg-slate-50/80">
+            <div className={`grid border-b border-line bg-cream/80 ${
+              viewMode === "daily"
+                ? "grid-cols-[56px_minmax(0,1fr)] sm:grid-cols-[64px_minmax(0,1fr)]"
+                : "grid-cols-[56px_repeat(5,minmax(0,1fr))] sm:grid-cols-[64px_repeat(5,minmax(0,1fr))]"
+            }`}>
 
               {/* Empty time column */}
-              <div className="border-r border-slate-200" />
+              <div className="border-r border-line" />
 
               {days.map((day, index) => (
                 <div
                   key={day.label}
-                  className={`min-w-0 border-r border-slate-200 px-2 py-3 text-center sm:px-3 sm:py-4 ${
+                  className={`min-w-0 border-r border-line px-2 py-3 text-center sm:px-3 sm:py-4 ${
                     index === days.length - 1 ? "border-r-0" : ""
-                  } ${day.active ? "bg-brand-50/30" : ""}`}
+                  } ${day.active ? "bg-bronze-deep/10" : ""} ${
+                    viewMode === "daily" && !day.active ? "hidden" : ""
+                  }`}
                 >
                   <p
                     className={`mb-1 text-[9px] font-bold uppercase tracking-widest sm:text-[10px] ${
                       day.active
-                        ? "text-brand-600"
-                        : "text-[#94a3b8]"
+                        ? "text-bronze-deep"
+                        : "text-graphite-soft"
                     }`}
                   >
                     {day.label}
@@ -103,8 +131,8 @@ export default function StudentTimetable() {
                   <p
                     className={`text-base font-black sm:text-lg ${
                       day.active
-                        ? "text-brand-700"
-                        : "text-[#0f172a]"
+                        ? "text-bronze-deep"
+                        : "text-charcoal"
                     }`}
                   >
                     {day.date}
@@ -117,20 +145,24 @@ export default function StudentTimetable() {
                 CALENDAR BODY
             ================================================= */}
 
-            <div className="grid grid-cols-[64px_repeat(5,minmax(0,1fr))]">
+            <div className={`grid ${
+              viewMode === "daily"
+                ? "grid-cols-[56px_minmax(0,1fr)] sm:grid-cols-[64px_minmax(0,1fr)]"
+                : "grid-cols-[56px_repeat(5,minmax(0,1fr))] sm:grid-cols-[64px_repeat(5,minmax(0,1fr))]"
+            }`}>
 
               {/* =================================================
                   TIME COLUMN
               ================================================= */}
 
-              <div className="border-r border-slate-200 bg-slate-50/30">
+              <div className="border-r border-line bg-cream/30">
 
                 {timeSlots.map((time) => (
                   <div
                     key={time}
-                    className="flex h-[88px] items-start justify-end border-b border-slate-100 px-2 pt-3 sm:h-[100px]"
+                    className="flex h-[88px] items-start justify-end border-b border-line px-2 pt-3 sm:h-[100px]"
                   >
-                    <span className="whitespace-nowrap text-[9px] font-bold uppercase text-[#94a3b8] sm:text-[10px]">
+                    <span className="whitespace-nowrap text-[9px] font-bold uppercase text-graphite-soft sm:text-[10px]">
                       {time}
                     </span>
                   </div>
@@ -142,17 +174,17 @@ export default function StudentTimetable() {
                   MONDAY
               ================================================= */}
 
-              <div className="relative min-w-0 border-r border-slate-200">
+              <div className={`relative min-w-0 border-r border-line ${viewMode === "daily" ? "hidden" : ""}`}>
 
                 {timeSlots.map((_, i) => (
                   <div
                     key={i}
-                    className="h-[88px] border-b border-slate-100 sm:h-[100px]"
+                    className="h-[88px] border-b border-line sm:h-[100px]"
                   />
                 ))}
 
                 <div className="absolute left-0 right-0 top-0 h-[200px] p-1 sm:p-1.5">
-                  <div className="h-full w-full overflow-hidden rounded-xl bg-[#0c426e] p-2.5 text-white shadow-lg shadow-navy-900/10 transition-transform hover:scale-[1.01] sm:p-3">
+                  <div className="h-full w-full overflow-hidden rounded-xl bg-charcoal p-2.5 text-cream shadow-lg shadow-charcoal/10 transition-transform hover:scale-[1.01] sm:p-3">
 
                     <p className="mb-1 truncate text-[8px] font-bold uppercase opacity-70 sm:text-[9px]">
                       MAT311 • LT-02
@@ -174,12 +206,12 @@ export default function StudentTimetable() {
                   TUESDAY
               ================================================= */}
 
-              <div className="relative min-w-0 border-r border-slate-200 bg-brand-50/10">
+              <div className="relative min-w-0 border-r border-line bg-bronze-deep/5">
 
                 {timeSlots.map((_, i) => (
                   <div
                     key={i}
-                    className="h-[88px] border-b border-slate-100 sm:h-[100px]"
+                    className="h-[88px] border-b border-line sm:h-[100px]"
                   />
                 ))}
 
@@ -191,7 +223,7 @@ export default function StudentTimetable() {
 
                 {/* Class */}
                 <div className="absolute left-0 right-0 top-[200px] h-[200px] p-1 sm:p-1.5">
-                  <div className="h-full w-full overflow-hidden rounded-xl bg-[#0274c7] p-2.5 text-white shadow-lg shadow-brand-900/20 transition-transform hover:scale-[1.01] sm:p-3">
+                  <div className="h-full w-full overflow-hidden rounded-xl bg-bronze-deep p-2.5 text-cream shadow-lg shadow-bronze-deep/20 transition-transform hover:scale-[1.01] sm:p-3">
 
                     <div className="mb-1 flex min-w-0 items-start justify-between gap-1">
                       <p className="truncate text-[8px] font-bold uppercase opacity-70 sm:text-[9px]">
@@ -219,19 +251,19 @@ export default function StudentTimetable() {
                   WEDNESDAY
               ================================================= */}
 
-              <div className="relative min-w-0 border-r border-slate-200">
+              <div className={`relative min-w-0 border-r border-line ${viewMode === "daily" ? "hidden" : ""}`}>
 
                 {timeSlots.map((_, i) => (
                   <div
                     key={i}
-                    className="h-[88px] border-b border-slate-100 sm:h-[100px]"
+                    className="h-[88px] border-b border-line sm:h-[100px]"
                   />
                 ))}
 
                 <div className="absolute left-0 right-0 top-[100px] h-[100px] p-1 sm:p-1.5">
-                  <div className="h-full w-full overflow-hidden rounded-xl border border-slate-200 bg-slate-100 p-2.5 text-[#0f172a] shadow-sm transition-transform hover:scale-[1.01] sm:p-3">
+                  <div className="h-full w-full overflow-hidden rounded-xl border border-line bg-cream p-2.5 text-charcoal shadow-sm transition-transform hover:scale-[1.01] sm:p-3">
 
-                    <p className="mb-1 truncate text-[8px] font-bold uppercase text-[#94a3b8] sm:text-[9px]">
+                    <p className="mb-1 truncate text-[8px] font-bold uppercase text-graphite-soft sm:text-[9px]">
                       GST301 • LT-01
                     </p>
 
@@ -239,7 +271,7 @@ export default function StudentTimetable() {
                       Entrepreneurship
                     </h4>
 
-                    <p className="mt-1 truncate text-[8px] font-medium text-[#64748b] sm:text-[9px]">
+                    <p className="mt-1 truncate text-[8px] font-medium text-graphite-soft sm:text-[9px]">
                       Dr. Ibrahim Musa
                     </p>
 
@@ -251,17 +283,17 @@ export default function StudentTimetable() {
                   THURSDAY
               ================================================= */}
 
-              <div className="relative min-w-0 border-r border-slate-200">
+              <div className={`relative min-w-0 border-r border-line ${viewMode === "daily" ? "hidden" : ""}`}>
 
                 {timeSlots.map((_, i) => (
                   <div
                     key={i}
-                    className="h-[88px] border-b border-slate-100 sm:h-[100px]"
+                    className="h-[88px] border-b border-line sm:h-[100px]"
                   />
                 ))}
 
                 <div className="absolute left-0 right-0 top-[300px] h-[200px] p-1 sm:p-1.5">
-                  <div className="h-full w-full overflow-hidden rounded-xl bg-[#0c426e] p-2.5 text-white shadow-lg shadow-navy-900/10 transition-transform hover:scale-[1.01] sm:p-3">
+                  <div className="h-full w-full overflow-hidden rounded-xl bg-charcoal p-2.5 text-cream shadow-lg shadow-charcoal/10 transition-transform hover:scale-[1.01] sm:p-3">
 
                     <p className="mb-1 truncate text-[8px] font-bold uppercase opacity-70 sm:text-[9px]">
                       CSC305 • LT-04
@@ -283,17 +315,17 @@ export default function StudentTimetable() {
                   FRIDAY
               ================================================= */}
 
-              <div className="relative min-w-0">
+              <div className={`relative min-w-0 ${viewMode === "daily" ? "hidden" : ""}`}>
 
                 {timeSlots.map((_, i) => (
                   <div
                     key={i}
-                    className="h-[88px] border-b border-slate-100 sm:h-[100px]"
+                    className="h-[88px] border-b border-line sm:h-[100px]"
                   />
                 ))}
 
                 <div className="absolute left-0 right-0 top-0 h-[200px] p-1 sm:p-1.5">
-                  <div className="h-full w-full overflow-hidden rounded-xl bg-orange-600 p-2.5 text-white shadow-lg shadow-orange-900/10 transition-transform hover:scale-[1.01] sm:p-3">
+                  <div className="h-full w-full overflow-hidden rounded-xl bg-moss p-2.5 text-cream shadow-lg shadow-moss/10 transition-transform hover:scale-[1.01] sm:p-3">
 
                     <p className="mb-1 truncate text-[8px] font-bold uppercase opacity-70 sm:text-[9px]">
                       CSC307 • Hall C-01
@@ -311,6 +343,7 @@ export default function StudentTimetable() {
                 </div>
               </div>
 
+            </div>
             </div>
           </div>
         </div>

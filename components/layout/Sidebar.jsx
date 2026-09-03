@@ -144,6 +144,7 @@ function NavLink({ href, icon: Icon, label, active }) {
 
 export default function Sidebar({
   sections = studentSections,
+  dashboardHref = "/dashboard",
 
   user = {
     name: "Your Name",
@@ -176,13 +177,12 @@ export default function Sidebar({
 
         <div>
           <NavLink
-            href="/dashboard"
+            href={dashboardHref}
             icon={LayoutGrid}
             label="Dashboard"
             active={
-              pathname === "/dashboard" ||
-              pathname === "/lecturer/dashboard" ||
-              pathname === "/admin/dashboard"
+              pathname === dashboardHref ||
+              pathname.startsWith(`${dashboardHref}/`)
             }
           />
         </div>

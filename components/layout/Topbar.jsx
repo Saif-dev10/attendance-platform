@@ -17,7 +17,7 @@ export default function Topbar({
         flex
         items-center
         justify-between
-        px-8
+        px-4 md:px-8
         shrink-0
         md:left-[280px]
         z-50
@@ -25,12 +25,12 @@ export default function Topbar({
       `}
     >
       {/* Title */}
-      <h1 className="text-md font-bold text-charcoal md:text-xl">
+      <h1 className="min-w-0 truncate text-sm font-bold text-charcoal md:text-xl">
         {title}
       </h1>
 
       {/* Page-specific content */}
-      <div className="flex items-center gap-3">
+      <div className="flex shrink-0 items-center gap-2 md:gap-3">
         {children}
       </div>
     </header>

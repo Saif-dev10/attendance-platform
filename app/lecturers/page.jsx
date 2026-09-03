@@ -102,6 +102,7 @@ export default function Lecturer() {
     <>
       <Sidebar
         sections={lecturerSections}
+        dashboardHref="/lecturers"
         user={{
           name: "Dr. Ibrahim",
           role: "Lecturer",
