@@ -8,6 +8,7 @@ export default function Topbar({
       className={`
         fixed
         top-0
+        left-0
         right-0
         h-[72px]
         bg-white

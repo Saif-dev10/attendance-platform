@@ -131,8 +131,8 @@ export default function Lecturer() {
         </Button>
       </Topbar>
 
-      <main className="ml-[280px] pt-[72px] h-screen overflow-y-auto">
-        <div className="max-w-[1250px] mx-auto space-y-6 px-6 py-7">
+      <main className="ml-0 md:ml-[280px] pt-[72px] h-screen overflow-y-auto">
+        <div className="max-w-[1250px] mx-auto space-y-6 px-4 sm:px-6 py-5 sm:py-7">
 
           {/* Stats Overview */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 min-w-0">
