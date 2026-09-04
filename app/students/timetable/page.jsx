@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Topbar from "@/components/layout/Topbar";
 import Sidebar from "@/components/layout/Sidebar";
+import MobileBottomNav from "@/components/layout/MobileBottomNav";
 import { PrinterIcon, DownloadIcon } from "lucide-react";
 
 const days = [
@@ -31,7 +32,11 @@ export default function StudentTimetable() {
     <main className="min-h-screen bg-paper text-charcoal overflow-x-hidden">
       <Sidebar />
 
-  {/* Weekly and daily views share the same timetable data and grid. */}
+      {/**
+       * Student timetable layout.
+       * The page uses a single weekly grid for the main schedule and swaps into a
+       * more focused daily view when the user toggles between modes.
+       */}
       <Topbar title="Academic Timetable">
         <div className="flex items-center gap-2 sm:gap-3">
           <div className="flex rounded-xl border border-line bg-cream p-1">
@@ -85,7 +90,11 @@ export default function StudentTimetable() {
       <section className="ml-0 md:ml-[280px] min-h-screen pt-[72px]">
         <div className="w-full px-3 py-4 sm:px-6 sm:py-6 lg:px-8 lg:py-7">
 
-          {/* Calendar grid: day headers, time labels, and scheduled classes. */}
+          {/**
+           * Timetable grid.
+           * This is the main scheduling surface: each column represents a day, each
+           * row maps to a time slot, and event blocks show the active lecture or lab.
+           */}
           <div className="mx-auto w-full max-w-[1500px] overflow-x-auto rounded-2xl border border-line bg-white shadow-sm">
             <div className="min-w-[720px] overflow-hidden">
 
@@ -306,6 +315,7 @@ export default function StudentTimetable() {
           </div>
         </div>
       </section>
+      <MobileBottomNav active="academic" />
     </main>
   );
 }

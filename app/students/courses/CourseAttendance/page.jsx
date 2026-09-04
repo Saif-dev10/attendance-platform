@@ -1,5 +1,6 @@
 "use client";
 
+import MobileBottomNav from "@/components/layout/MobileBottomNav";
 import StatusBadge from "../StatusBadge/page";
 import { CheckCircle2, XCircle, Clock3 } from "lucide-react";
 
@@ -104,76 +105,79 @@ function AttendanceCalendar() {
 
 export default function CourseAttendance() {
   return (
-    <div className="mx-auto max-w-[1100px] space-y-8">
-      <div>
-        <h2 className="text-lg font-bold text-charcoal">Attendance</h2>
-        <p className="mt-1 text-sm text-graphite-soft">
-          Your class attendance record for CSC301 this semester.
-        </p>
-      </div>
+    <>
+      <div className="mx-auto max-w-[1100px] space-y-8">
+        <div>
+          <h2 className="text-lg font-bold text-charcoal">Attendance</h2>
+          <p className="mt-1 text-sm text-graphite-soft">
+            Your class attendance record for CSC301 this semester.
+          </p>
+        </div>
 
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-        <div className="rounded-2xl border border-line bg-white p-6 text-center lg:col-span-1">
-          <p className="text-4xl font-bold text-bronze-deep">87%</p>
-          <p className="mt-2 text-xs text-graphite-soft">26 of 30 classes attended</p>
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+          <div className="rounded-2xl border border-line bg-white p-6 text-center lg:col-span-1">
+            <p className="text-4xl font-bold text-bronze-deep">87%</p>
+            <p className="mt-2 text-xs text-graphite-soft">26 of 30 classes attended</p>
 
-          <div className="mt-5 h-1.5 w-full overflow-hidden rounded-full bg-cream">
-            <div className="h-full rounded-full bg-bronze-deep" style={{ width: "87%" }} />
+            <div className="mt-5 h-1.5 w-full overflow-hidden rounded-full bg-cream">
+              <div className="h-full rounded-full bg-bronze-deep" style={{ width: "87%" }} />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-3 gap-3 lg:col-span-2">
+            {STATS.map((stat) => (
+              <div key={stat.label} className="flex flex-col items-center justify-center rounded-2xl border border-line bg-white p-5 text-center">
+                <stat.icon size={18} className="mb-2 text-graphite-soft" strokeWidth={2} />
+                <p className="text-xl font-bold text-charcoal">{stat.value}</p>
+                <p className="mt-1 text-[11px] font-bold uppercase tracking-wide text-graphite-soft">
+                  {stat.label}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
 
-        <div className="grid grid-cols-3 gap-3 lg:col-span-2">
-          {STATS.map((stat) => (
-            <div key={stat.label} className="flex flex-col items-center justify-center rounded-2xl border border-line bg-white p-5 text-center">
-              <stat.icon size={18} className="mb-2 text-graphite-soft" strokeWidth={2} />
-              <p className="text-xl font-bold text-charcoal">{stat.value}</p>
-              <p className="mt-1 text-[11px] font-bold uppercase tracking-wide text-graphite-soft">
-                {stat.label}
-              </p>
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+          <section className="lg:col-span-2">
+            <h3 className="mb-3 text-sm font-bold uppercase tracking-widest text-charcoal">
+              Attendance History
+            </h3>
+
+            <div className="overflow-hidden rounded-2xl border border-line bg-white">
+              <div className="hidden grid-cols-[100px_1fr_120px] gap-4 border-b border-line bg-cream px-5 py-3 text-[10px] font-bold uppercase tracking-wide text-graphite-soft sm:grid">
+                <span>Date</span>
+                <span>Topic</span>
+                <span>Status</span>
+              </div>
+
+              <div className="divide-y divide-line">
+                {HISTORY.map((row) => (
+                  <div
+                    key={`${row.date}-${row.topic}`}
+                    className="flex flex-col gap-2 px-5 py-3.5 sm:grid sm:grid-cols-[100px_1fr_120px] sm:items-center sm:gap-4"
+                  >
+                    <span className="text-xs font-bold text-charcoal">{row.date}</span>
+                    <span className="text-sm text-graphite">{row.topic}</span>
+                    <StatusBadge
+                      label={row.status}
+                      tone={STATUS_TONE[row.status]}
+                      className="w-fit"
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
-          ))}
+          </section>
+
+          <section>
+            <h3 className="mb-3 text-sm font-bold uppercase tracking-widest text-charcoal">
+              Calendar
+            </h3>
+            <AttendanceCalendar />
+          </section>
         </div>
       </div>
-
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-        <section className="lg:col-span-2">
-          <h3 className="mb-3 text-sm font-bold uppercase tracking-widest text-charcoal">
-            Attendance History
-          </h3>
-
-          <div className="overflow-hidden rounded-2xl border border-line bg-white">
-            <div className="hidden grid-cols-[100px_1fr_120px] gap-4 border-b border-line bg-cream px-5 py-3 text-[10px] font-bold uppercase tracking-wide text-graphite-soft sm:grid">
-              <span>Date</span>
-              <span>Topic</span>
-              <span>Status</span>
-            </div>
-
-            <div className="divide-y divide-line">
-              {HISTORY.map((row) => (
-                <div
-                  key={`${row.date}-${row.topic}`}
-                  className="flex flex-col gap-2 px-5 py-3.5 sm:grid sm:grid-cols-[100px_1fr_120px] sm:items-center sm:gap-4"
-                >
-                  <span className="text-xs font-bold text-charcoal">{row.date}</span>
-                  <span className="text-sm text-graphite">{row.topic}</span>
-                  <StatusBadge
-                    label={row.status}
-                    tone={STATUS_TONE[row.status]}
-                    className="w-fit"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section>
-          <h3 className="mb-3 text-sm font-bold uppercase tracking-widest text-charcoal">
-            Calendar
-          </h3>
-          <AttendanceCalendar />
-        </section>
-      </div>
-    </div>
+      <MobileBottomNav active="academic" />
+    </>
   );
 }

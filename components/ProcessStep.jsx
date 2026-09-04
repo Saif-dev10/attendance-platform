@@ -1,3 +1,7 @@
+/**
+ * Step-by-step process card for the landing-page narrative.
+ * It pairs a numbered milestone with explanatory text and optional supporting UI.
+ */
 export default function ProcessStep({ number, title, description, audience, children }) {
   return (
     <div className="relative grid gap-8 border-t border-line py-10 md:grid-cols-[auto_1fr_1fr] md:items-start md:gap-12">

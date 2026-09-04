@@ -4,6 +4,10 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Button from "./Button";
 
+/**
+ * Top-level navigation links for the marketing site.
+ * This keeps the landing-page header consistent across the public product pages.
+ */
 const links = [
   { href: "/platform", label: "Platform" },
   { href: "/how-it-works", label: "How It Works" },

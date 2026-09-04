@@ -1,3 +1,7 @@
+/**
+ * Sample attendance records used in the product mockups.
+ * This data helps demonstrate how recent session performance is surfaced to users.
+ */
 const records = [
   { course: "Structural Analysis", session: "Lecture 09", date: "12 Mar", rate: "94%" },
   { course: "Structural Analysis", session: "Lecture 08", date: "05 Mar", rate: "89%" },

@@ -5,6 +5,7 @@ import Button from "@/components/ui/Button";
 import Image from "next/image";
 import Sidebar from "@/components/layout/Sidebar";
 import Topbar from "@/components/layout/Topbar";
+import MobileBottomNav from "@/components/layout/MobileBottomNav";
 import CourseMaterials from "./CourseMaterials/page";
 import CourseAssignments from "./CourseAssignments/page";
 import CourseAttendance from "./CourseAttendance/page";
@@ -57,7 +58,11 @@ export default function CourseDetailsPage() {
       </Topbar>
 
       <main className="min-h-screen overflow-y-auto bg-paper pt-[72px] md:ml-[280px]">
-        {/* The selected tab controls which course view is rendered below. */}
+        {/**
+         * Course detail shell.
+         * The tab bar switches between overview, materials, assignments,
+         * attendance, and grades while keeping the same course header and layout.
+         */}
         <div className="border-b border-line bg-paper px-3 sm:px-6">
           <div className="flex gap-2 overflow-x-auto sm:gap-8" role="tablist" aria-label="Course sections">
             {tabs.map((tab) => {
@@ -92,7 +97,11 @@ export default function CourseDetailsPage() {
           {activeTab === "Overview" && (
           <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-3">
             <div className="space-y-8 lg:col-span-2">
-              {/* Course description, meeting details, and announcements. */}
+              {/**
+               * Overview content block.
+               * This area gives the student the course context first: what the class
+               * covers, where and when it meets, and the most recent course updates.
+               */}
               <section>
                 <h3 className="mb-4 text-sm font-bold uppercase tracking-widest text-charcoal">
                   About Course
@@ -178,7 +187,11 @@ export default function CourseDetailsPage() {
             </div>
 
             <div className="space-y-8">
-              {/* Instructor contact actions and the next submission deadline. */}
+              {/**
+               * Instructor and deadline panel.
+               * This column keeps the key contact actions and the next due assignment
+               * visible without the student losing context of the main course overview.
+               */}
               <section>
                 <h3 className="mb-4 text-sm font-bold uppercase tracking-widest text-charcoal">
                   Instructor
@@ -271,6 +284,7 @@ export default function CourseDetailsPage() {
           {activeTab === "Grades" && <CourseGrades />}
         </div>
       </main>
+      <MobileBottomNav active="academic" />
     </div>
   );
 }

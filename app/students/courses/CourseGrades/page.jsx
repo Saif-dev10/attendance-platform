@@ -1,5 +1,6 @@
 "use client";
 
+import MobileBottomNav from "@/components/layout/MobileBottomNav";
 import StatusBadge from "../StatusBadge/page";
 
 const CONTEXT = [
@@ -54,69 +55,72 @@ function PerformanceChart() {
 
 export default function CourseGrades() {
   return (
-    <div className="mx-auto max-w-[1000px] space-y-8">
-      <div>
-        <h2 className="text-lg font-bold text-charcoal">Grades</h2>
-        <p className="mt-1 text-sm text-graphite-soft">
-          Your academic performance for CSC301 this semester.
-        </p>
-      </div>
-
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-        <div className="rounded-2xl border border-line bg-white p-6 text-center lg:col-span-1">
-          <p className="text-[11px] font-bold uppercase tracking-wide text-graphite-soft">
-            Current Grade
+    <>
+      <div className="mx-auto max-w-[1000px] space-y-8">
+        <div>
+          <h2 className="text-lg font-bold text-charcoal">Grades</h2>
+          <p className="mt-1 text-sm text-graphite-soft">
+            Your academic performance for CSC301 this semester.
           </p>
-          <p className="mt-2 text-4xl font-bold text-bronze-deep">78%</p>
-          <p className="mt-1 text-sm font-bold text-charcoal">B+</p>
         </div>
 
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 lg:col-span-2">
-          {CONTEXT.map((item) => (
-            <div key={item.label} className="flex flex-col justify-center rounded-2xl border border-line bg-white p-5">
-              <p className="text-[11px] font-bold uppercase tracking-wide text-graphite-soft">
-                {item.label}
-              </p>
-              <p className="mt-2 text-xl font-bold text-charcoal">{item.value}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <section>
-        <h3 className="mb-3 text-sm font-bold uppercase tracking-widest text-charcoal">
-          Grade Breakdown
-        </h3>
-
-        <div className="overflow-hidden rounded-2xl border border-line bg-white">
-          <div className="hidden grid-cols-[1fr_120px_90px_120px] gap-4 border-b border-line bg-cream px-5 py-3 text-[10px] font-bold uppercase tracking-wide text-graphite-soft sm:grid">
-            <span>Assessment</span>
-            <span>Score</span>
-            <span>Weight</span>
-            <span>Status</span>
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+          <div className="rounded-2xl border border-line bg-white p-6 text-center lg:col-span-1">
+            <p className="text-[11px] font-bold uppercase tracking-wide text-graphite-soft">
+              Current Grade
+            </p>
+            <p className="mt-2 text-4xl font-bold text-bronze-deep">78%</p>
+            <p className="mt-1 text-sm font-bold text-charcoal">B+</p>
           </div>
 
-          <div className="divide-y divide-line">
-            {BREAKDOWN.map((row) => (
-              <div
-                key={row.assessment}
-                className="flex flex-col gap-2 px-5 py-3.5 sm:grid sm:grid-cols-[1fr_120px_90px_120px] sm:items-center sm:gap-4"
-              >
-                <span className="text-sm font-bold text-charcoal">{row.assessment}</span>
-                <span className="text-sm text-graphite">{row.score}</span>
-                <span className="text-sm text-graphite">{row.weight}</span>
-                <StatusBadge
-                  label={row.status}
-                  tone={STATUS_TONE[row.status]}
-                  className="w-fit"
-                />
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 lg:col-span-2">
+            {CONTEXT.map((item) => (
+              <div key={item.label} className="flex flex-col justify-center rounded-2xl border border-line bg-white p-5">
+                <p className="text-[11px] font-bold uppercase tracking-wide text-graphite-soft">
+                  {item.label}
+                </p>
+                <p className="mt-2 text-xl font-bold text-charcoal">{item.value}</p>
               </div>
             ))}
           </div>
         </div>
-      </section>
 
-      <PerformanceChart />
-    </div>
+        <section>
+          <h3 className="mb-3 text-sm font-bold uppercase tracking-widest text-charcoal">
+            Grade Breakdown
+          </h3>
+
+          <div className="overflow-hidden rounded-2xl border border-line bg-white">
+            <div className="hidden grid-cols-[1fr_120px_90px_120px] gap-4 border-b border-line bg-cream px-5 py-3 text-[10px] font-bold uppercase tracking-wide text-graphite-soft sm:grid">
+              <span>Assessment</span>
+              <span>Score</span>
+              <span>Weight</span>
+              <span>Status</span>
+            </div>
+
+            <div className="divide-y divide-line">
+              {BREAKDOWN.map((row) => (
+                <div
+                  key={row.assessment}
+                  className="flex flex-col gap-2 px-5 py-3.5 sm:grid sm:grid-cols-[1fr_120px_90px_120px] sm:items-center sm:gap-4"
+                >
+                  <span className="text-sm font-bold text-charcoal">{row.assessment}</span>
+                  <span className="text-sm text-graphite">{row.score}</span>
+                  <span className="text-sm text-graphite">{row.weight}</span>
+                  <StatusBadge
+                    label={row.status}
+                    tone={STATUS_TONE[row.status]}
+                    className="w-fit"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <PerformanceChart />
+      </div>
+      <MobileBottomNav active="academic" />
+    </>
   );
 }

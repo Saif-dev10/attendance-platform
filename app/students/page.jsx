@@ -1,6 +1,16 @@
+import MobileBottomNav from "@/components/layout/MobileBottomNav";
+
 export default function Student() {
-  return(
-    // Student landing content will be added as the student workspace is expanded.
-    <main></main>
+  return (
+    <>
+      <main className="min-h-screen bg-paper pb-24 md:pb-0">
+        {/**
+         * Student dashboard shell.
+         * This page serves as the landing hub for the student workspace and will
+         * eventually host quick links, upcoming deadlines, and summary widgets.
+         */}
+      </main>
+      <MobileBottomNav active="profile" />
+    </>
   );
 }

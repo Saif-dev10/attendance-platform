@@ -1,3 +1,7 @@
+/**
+ * Small status badge used for live or attention states in mockup UI.
+ * It keeps the visual language consistent across attendance and session screens.
+ */
 export default function StatusPill({ label = "Session live", tone = "live" }) {
   const dotColor = tone === "live" ? "bg-moss" : "bg-bronze";
   return (

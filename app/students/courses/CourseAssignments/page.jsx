@@ -1,6 +1,7 @@
 "use client";
 
 import Button from "@/components/ui/Button";
+import MobileBottomNav from "@/components/layout/MobileBottomNav";
 import StatusBadge from "../StatusBadge/page";
 import { CalendarClock, FileCheck2, FileClock, FileStack } from "lucide-react";
 
@@ -133,25 +134,28 @@ function AssignmentCard({ assignment }) {
 
 export default function CourseAssignments() {
   return (
-    <div className="mx-auto max-w-[900px] space-y-8">
-      <div>
-        <h2 className="text-lg font-bold text-charcoal">Assignments</h2>
-        <p className="mt-1 text-sm text-graphite-soft">
-          Track what&apos;s due, what you&apos;ve submitted, and what&apos;s been graded for CSC301.
-        </p>
-      </div>
+    <>
+      <div className="mx-auto max-w-[900px] space-y-8">
+        <div>
+          <h2 className="text-lg font-bold text-charcoal">Assignments</h2>
+          <p className="mt-1 text-sm text-graphite-soft">
+            Track what&apos;s due, what you&apos;ve submitted, and what&apos;s been graded for CSC301.
+          </p>
+        </div>
 
-      <div className="grid grid-cols-3 gap-3">
-        {SUMMARY.map((stat) => (
-          <SummaryStat key={stat.label} {...stat} />
-        ))}
-      </div>
+        <div className="grid grid-cols-3 gap-3">
+          {SUMMARY.map((stat) => (
+            <SummaryStat key={stat.label} {...stat} />
+          ))}
+        </div>
 
-      <div className="space-y-5">
-        {ASSIGNMENTS.map((assignment) => (
-          <AssignmentCard key={assignment.id} assignment={assignment} />
-        ))}
+        <div className="space-y-5">
+          {ASSIGNMENTS.map((assignment) => (
+            <AssignmentCard key={assignment.id} assignment={assignment} />
+          ))}
+        </div>
       </div>
-    </div>
+      <MobileBottomNav active="academic" />
+    </>
   );
 }

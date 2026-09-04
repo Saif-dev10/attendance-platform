@@ -1,3 +1,7 @@
+/**
+ * Sample timetable data used to present the course selection experience in a
+ * polished mockup without depending on live application data.
+ */
 const courses = [
   { code: "ENGR 214", name: "Structural Analysis", time: "10:00 – 11:00", active: true },
   { code: "ENGR 108", name: "Materials Science", time: "13:00 – 14:00", active: false },

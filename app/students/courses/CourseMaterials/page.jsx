@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Button from "@/components/ui/Button";
+import MobileBottomNav from "@/components/layout/MobileBottomNav";
 import {
   Search,
   SlidersHorizontal,
@@ -162,86 +163,89 @@ export default function CourseMaterials() {
   }, [query, type, sort]);
 
   return (
-    <div className="mx-auto max-w-[1000px] space-y-8">
-      <div>
-        <h2 className="text-lg font-bold text-charcoal">Course Materials</h2>
-        <p className="mt-1 text-sm text-graphite-soft">
-          All lecture notes, slides, readings and resources for CSC301.
-        </p>
-      </div>
-
-      <div className="flex flex-col gap-3 sm:flex-row">
-        <div className="relative flex-1">
-          <Search
-            size={16}
-            className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-graphite-soft"
-          />
-          <input
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search materials..."
-            className="w-full rounded-xl border border-line bg-white py-2.5 pl-10 pr-4 text-sm text-charcoal outline-none placeholder:text-graphite-soft focus:border-bronze-deep"
-          />
+    <>
+      <div className="mx-auto max-w-[1000px] space-y-8">
+        <div>
+          <h2 className="text-lg font-bold text-charcoal">Course Materials</h2>
+          <p className="mt-1 text-sm text-graphite-soft">
+            All lecture notes, slides, readings and resources for CSC301.
+          </p>
         </div>
 
-        <div className="relative">
-          <SlidersHorizontal
-            size={14}
-            className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-graphite-soft"
-          />
-          <select
-            value={type}
-            onChange={(e) => setType(e.target.value)}
-            className="w-full appearance-none rounded-xl border border-line bg-white py-2.5 pl-9 pr-8 text-sm font-medium text-charcoal outline-none focus:border-bronze-deep sm:w-auto"
-          >
-            {MATERIAL_TYPES.map((t) => (
-              <option key={t} value={t}>
-                {t}
-              </option>
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <div className="relative flex-1">
+            <Search
+              size={16}
+              className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-graphite-soft"
+            />
+            <input
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search materials..."
+              className="w-full rounded-xl border border-line bg-white py-2.5 pl-10 pr-4 text-sm text-charcoal outline-none placeholder:text-graphite-soft focus:border-bronze-deep"
+            />
+          </div>
+
+          <div className="relative">
+            <SlidersHorizontal
+              size={14}
+              className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-graphite-soft"
+            />
+            <select
+              value={type}
+              onChange={(e) => setType(e.target.value)}
+              className="w-full appearance-none rounded-xl border border-line bg-white py-2.5 pl-9 pr-8 text-sm font-medium text-charcoal outline-none focus:border-bronze-deep sm:w-auto"
+            >
+              {MATERIAL_TYPES.map((t) => (
+                <option key={t} value={t}>
+                  {t}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="relative">
+            <ArrowUpDown
+              size={14}
+              className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-graphite-soft"
+            />
+            <select
+              value={sort}
+              onChange={(e) => setSort(e.target.value)}
+              className="w-full appearance-none rounded-xl border border-line bg-white py-2.5 pl-9 pr-8 text-sm font-medium text-charcoal outline-none focus:border-bronze-deep sm:w-auto"
+            >
+              {SORT_OPTIONS.map((s) => (
+                <option key={s} value={s}>
+                  {s}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        {filteredWeeks.length === 0 ? (
+          <div className="rounded-2xl border border-dashed border-line bg-white py-16 text-center">
+            <p className="text-sm text-graphite-soft">No materials match your search.</p>
+          </div>
+        ) : (
+          <div className="space-y-8">
+            {filteredWeeks.map((week) => (
+              <section key={week.week}>
+                <h3 className="mb-3 text-xs font-bold uppercase tracking-widest text-graphite-soft">
+                  {week.week} — {week.topic}
+                </h3>
+                <div className="space-y-3">
+                  {week.items.map((item) => (
+                    <MaterialItem key={item.title} item={item} />
+                  ))}
+                </div>
+              </section>
             ))}
-          </select>
-        </div>
-
-        <div className="relative">
-          <ArrowUpDown
-            size={14}
-            className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-graphite-soft"
-          />
-          <select
-            value={sort}
-            onChange={(e) => setSort(e.target.value)}
-            className="w-full appearance-none rounded-xl border border-line bg-white py-2.5 pl-9 pr-8 text-sm font-medium text-charcoal outline-none focus:border-bronze-deep sm:w-auto"
-          >
-            {SORT_OPTIONS.map((s) => (
-              <option key={s} value={s}>
-                {s}
-              </option>
-            ))}
-          </select>
-        </div>
+          </div>
+        )}
       </div>
-
-      {filteredWeeks.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-line bg-white py-16 text-center">
-          <p className="text-sm text-graphite-soft">No materials match your search.</p>
-        </div>
-      ) : (
-        <div className="space-y-8">
-          {filteredWeeks.map((week) => (
-            <section key={week.week}>
-              <h3 className="mb-3 text-xs font-bold uppercase tracking-widest text-graphite-soft">
-                {week.week} — {week.topic}
-              </h3>
-              <div className="space-y-3">
-                {week.items.map((item) => (
-                  <MaterialItem key={item.title} item={item} />
-                ))}
-              </div>
-            </section>
-          ))}
-        </div>
-      )}
-    </div>
+      <MobileBottomNav active="academic" />
+    </>
   );
 }

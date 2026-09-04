@@ -1,1 +1,5 @@
-// Reporting content will be added here for attendance summaries and exports.
+/**
+ * Reports workspace.
+ * This screen is intended for attendance summaries, export actions, and
+ * aggregated academic reporting for staff and administrators.
+ */

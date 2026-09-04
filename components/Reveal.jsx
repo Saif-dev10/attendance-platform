@@ -3,9 +3,9 @@
 import { useEffect, useRef } from "react";
 
 /**
- * Wraps children in a subtle fade/rise reveal that triggers once the
- * element scrolls into view. Falls back to fully visible content if
- * IntersectionObserver is unavailable or motion is reduced.
+ * Progressive reveal wrapper.
+ * It adds a small fade and lift animation when content enters the viewport, while
+ * falling back gracefully when animation APIs are unavailable.
  */
 export default function Reveal({ children, as: Tag = "div", delay = 0, className = "" }) {
   const ref = useRef(null);

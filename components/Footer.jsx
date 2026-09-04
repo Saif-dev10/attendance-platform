@@ -1,5 +1,9 @@
 import Link from "next/link";
 
+/**
+ * Global footer links for the product marketing site.
+ * These group navigation by platform, audience, and company information.
+ */
 const columns = [
   {
     heading: "Platform",

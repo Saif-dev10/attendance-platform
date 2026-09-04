@@ -1,7 +1,11 @@
 export default function CampusRide() {
   return (
     <main>
-      {/* Ride status and route information will live in this campus services view. */}
+      {/**
+       * Campus ride service page.
+       * This view is intended for shuttle status, pickup details, and route
+       * availability information for students moving around campus.
+       */}
       <h1>Campus Ride</h1>
       <p>Welcome to the Campus Ride page!</p>
     </main>
