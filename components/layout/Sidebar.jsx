@@ -213,28 +213,31 @@ export default function Sidebar({
 
       <div className="p-4 border-t border-line bg-cream">
 
-        <div className="flex items-center gap-3 p-2 rounded-xl bg-paper border border-line shadow-sm cursor-pointer hover:bg-white transition-colors">
+        <Link href="/students/profile">
+          <div className="flex items-center gap-3 p-2 rounded-xl bg-paper border border-line shadow-sm cursor-pointer hover:bg-white hover:cursor-pointer transition-colors">
+            
 
-          <Image
-            src={user.avatar}
-            alt={user.name}
-            width={40}
-            height={40}
-            className="rounded-lg object-cover ring-2 ring-line"
-          />
+            <Image
+              src={user.avatar}
+              alt={user.name}
+              width={40}
+              height={40}
+              className="rounded-lg object-cover ring-2 ring-line"
+            />
 
-          <div className="flex-1 min-w-0">
+            <div className="flex-1 min-w-0">
 
-            <p className="text-[13px] font-bold text-charcoal truncate">
-              {user.name}
-            </p>
+              <p className="text-[13px] font-bold text-charcoal truncate">
+                {user.name}
+              </p>
 
-            <p className="text-[11px] font-semibold text-bronze-deep truncate uppercase tracking-wider">
-              {user.role}
-            </p>
+              <p className="text-[11px] font-semibold text-bronze-deep truncate uppercase tracking-wider">
+                {user.role}
+              </p>
 
+            </div>
           </div>
-        </div>
+        </Link>
 
       </div>
     </aside>

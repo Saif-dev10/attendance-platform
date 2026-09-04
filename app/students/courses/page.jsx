@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import Button from "@/components/ui/Button";
 import Image from "next/image";
 import Sidebar from "@/components/layout/Sidebar";
@@ -38,9 +39,9 @@ export default function CourseDetailsPage() {
         title="CSC301: Advanced Algorithms"
         subtitle="Semester II • 3 Credit Units"
         leading={
-          <a href="/students/courses" aria-label="Back to courses" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-line text-graphite-soft transition-all hover:bg-cream hover:text-charcoal">
+          <Link href="/dashboard" aria-label="Back to courses" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-line text-graphite-soft transition-all hover:bg-cream hover:text-charcoal">
             <ArrowLeft size={17} />
-          </a>
+          </Link>
         }
       >
         <div className="hidden items-center gap-4 sm:flex">

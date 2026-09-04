@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import Button from '@/components/ui/Button';
 import { useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
@@ -236,12 +237,12 @@ export default function LoginPage() {
                   Password
                 </label>
 
-                <a
+                <Link
                   href="/forgetPassword"
                   className="text-[13px] font-bold text-blue-600 hover:text-blue-700"
                 >
                   Forgot?
-                </a>
+                </Link>
 
               </div>
 
@@ -371,12 +372,12 @@ export default function LoginPage() {
 
               New student or staff?{' '}
 
-              <a
+              <Link
                 href="#"
                 className="font-bold text-blue-600 hover:text-blue-700"
               >
                 Activate your account
-              </a>
+              </Link>
 
             </p>
 
@@ -392,19 +393,19 @@ export default function LoginPage() {
 
           <div className="flex gap-4">
 
-            <a
+            <Link
               href="#"
               className="hover:text-slate-600 transition-colors"
             >
               Privacy
-            </a>
+            </Link>
 
-            <a
+            <Link
               href="#"
               className="hover:text-slate-600 transition-colors"
             >
               Support
-            </a>
+            </Link>
 
           </div>
 
