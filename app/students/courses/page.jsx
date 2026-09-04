@@ -5,6 +5,10 @@ import Button from "@/components/ui/Button";
 import Image from "next/image";
 import Sidebar from "@/components/layout/Sidebar";
 import Topbar from "@/components/layout/Topbar";
+import CourseMaterials from "./CourseMaterials/page";
+import CourseAssignments from "./CourseAssignments/page";
+import CourseAttendance from "./CourseAttendance/page";
+import CourseGrades from "./CourseGrades/page";
 import {
   ArrowLeft,
   Clock3,
@@ -85,7 +89,7 @@ export default function CourseDetailsPage() {
         </div>
 
         <div id="course-tab-panel" role="tabpanel" className="flex-1 overflow-y-auto px-3 py-5 sm:px-6 sm:py-7" aria-label={`${activeTab} content`}>
-          {activeTab === "Overview" ? (
+          {activeTab === "Overview" && (
           <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-3">
             <div className="space-y-8 lg:col-span-2">
               {/* Course description, meeting details, and announcements. */}
@@ -259,16 +263,12 @@ export default function CourseDetailsPage() {
               </section>
             </div>
           </div>
-          ) : (
-            <div className="mx-auto flex min-h-[420px] max-w-[720px] items-center justify-center rounded-2xl border border-dashed border-line bg-white px-6 py-16 text-center">
-              <div>
-                <h2 className="mb-2 text-lg font-bold text-charcoal">{activeTab}</h2>
-                <p className="text-sm leading-relaxed text-graphite-soft">
-                  This section is ready for content. Materials, assignments, attendance, and grades will appear here.
-                </p>
-              </div>
-            </div>
           )}
+
+          {activeTab === "Materials (12)" && <CourseMaterials />}
+          {activeTab === "Assignments (2 Due)" && <CourseAssignments />}
+          {activeTab === "Attendance (87%)" && <CourseAttendance />}
+          {activeTab === "Grades" && <CourseGrades />}
         </div>
       </main>
     </div>
