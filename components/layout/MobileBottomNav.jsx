@@ -83,7 +83,7 @@ export default function MobileBottomNav({ active = "home" }) {
         },
         {
           label: "Exam Result",
-          href: "/students/exam-result",
+          href: "/students/examinations",
           icon: ClipboardCheck,
         },
       ],

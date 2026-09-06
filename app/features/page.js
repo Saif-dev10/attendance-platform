@@ -89,7 +89,7 @@ export default function FeaturesPage() {
     <>
       {/* This page groups the product capabilities around the moments users care about. */}
       <Nav />
-      <main id="main">
+      <main id="main" className="overflow-x-hidden">
         {/* Intro: a quick orientation before the feature groups begin. */}
         <section className="border-b border-line">
           <div className="mx-auto max-w-4xl px-6 py-20 text-center lg:px-10 lg:py-28">
@@ -117,7 +117,7 @@ export default function FeaturesPage() {
             key={group.label}
             className={`border-b border-line ${gi % 2 === 1 ? "bg-paper" : ""}`}
           >
-            <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-24">
+            <div className="mx-auto min-w-0 max-w-7xl px-6 py-20 lg:px-10 lg:py-24">
               <Reveal className="max-w-xl">
                 <Eyebrow>{group.label}</Eyebrow>
                 <h2 className="mt-5 font-display text-3xl leading-snug text-charcoal sm:text-4xl">
@@ -137,7 +137,7 @@ export default function FeaturesPage() {
 
         {/* Live activity: attendance visibility while a class is in progress. */}
         <section className="border-b border-line">
-          <div className="mx-auto grid max-w-7xl items-center gap-14 px-6 py-20 lg:grid-cols-2 lg:px-10 lg:py-28">
+          <div className="mx-auto grid min-w-0 max-w-7xl items-center gap-14 px-6 py-20 lg:grid-cols-2 lg:px-10 lg:py-28">
             <Reveal>
               <Eyebrow>Watching it happen</Eyebrow>
               <h2 className="mt-5 font-display text-3xl leading-snug text-charcoal sm:text-4xl">
@@ -157,7 +157,7 @@ export default function FeaturesPage() {
 
         {/* Records: organized history for review and export. */}
         <section className="border-b border-line bg-paper">
-          <div className="mx-auto grid max-w-7xl items-center gap-14 px-6 py-20 lg:grid-cols-2 lg:px-10 lg:py-28">
+          <div className="mx-auto grid min-w-0 max-w-7xl items-center gap-14 px-6 py-20 lg:grid-cols-2 lg:px-10 lg:py-28">
             <Reveal delay={140} className="order-2 lg:order-1">
               <RecordsMockup />
             </Reveal>
@@ -180,7 +180,7 @@ export default function FeaturesPage() {
 
         {/* Additional tools that support the wider campus workflow. */}
         <section className="border-b border-line">
-          <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-24">
+          <div className="mx-auto min-w-0 max-w-7xl px-6 py-20 lg:px-10 lg:py-24">
             <Reveal className="max-w-xl">
               <Eyebrow>Also included</Eyebrow>
               <h2 className="mt-5 font-display text-3xl leading-snug text-charcoal sm:text-4xl">

@@ -175,7 +175,6 @@ export default function CampusMap() {
   }, []);
 
   function recenterMap() {
-    startOrientationTracking();
     if (isValidLocation(userLocation) && mapRef.current) {
       followUserRef.current = true;
       mapRef.current.setView([userLocation.latitude, userLocation.longitude], 16, {

@@ -10,7 +10,7 @@ export default function CampusRideLayout({ children }) {
       <div className="min-h-screen bg-paper">
         <Sidebar />
 
-        <main className="md:ml-[280px] pb-[84px] md:pb-0">{children}</main>
+        <main className="min-w-0 pb-[calc(84px+1.5rem)] md:ml-[280px] md:pb-0">{children}</main>
 
         <MobileBottomNav active="campus-ride" />
         <BookingPanel />

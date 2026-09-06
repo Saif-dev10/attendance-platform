@@ -40,7 +40,7 @@ export const studentSections = [
       },
       {
         label: "Exam Result",
-        href: "/students/exam-result",
+        href: "/students/examinations",
         icon: ClipboardCheck,
       },
     ],
