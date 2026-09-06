@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
 
 :root {
   --color-cream: #f6f3ec;
@@ -131,6 +132,46 @@ input:focus-visible,
 }
 
 ::selection {
+
   background: var(--color-bronze-soft);
   color: var(--color-charcoal);
+}
+
+.campus-user-icon {
+  background: transparent;
+  border: 0;
+  transition: transform 500ms ease-out;
+}
+
+.campus-user-marker {
+    position: relative;
+    display: block;
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    background: rgb(37 99 235 / 0.14);
+    box-shadow: 0 0 0 1px rgb(37 99 235 / 0.25);
+}
+
+.campus-user-marker__dot {
+    position: absolute;
+    inset: 8px;
+    border: 3px solid white;
+    border-radius: 999px;
+    background: #2563eb;
+    box-shadow: 0 1px 4px rgb(15 23 42 / 0.3);
+}
+
+.campus-user-marker__arrow {
+    position: absolute;
+    top: 1px;
+    left: 14px;
+    z-index: 1;
+    width: 0;
+    height: 0;
+    border-right: 3px solid transparent;
+    border-bottom: 9px solid #1d4ed8;
+    border-left: 3px solid transparent;
+    transform-origin: 3px 16px;
+    transition: transform 220ms ease-out;
 }
