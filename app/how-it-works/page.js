@@ -25,7 +25,7 @@ export default function HowItWorksPage() {
     <>
       {/* The sequence mirrors a real class session, from opening attendance to reviewing records. */}
       <Nav />
-      <main id="main">
+      <main id="main" className="overflow-x-hidden">
         {/* Intro: set expectations for the full attendance journey. */}
         <section className="border-b border-line">
           <div className="mx-auto max-w-4xl px-6 py-20 text-center lg:px-10 lg:py-28">
@@ -49,7 +49,7 @@ export default function HowItWorksPage() {
 
         {/* Process steps: the class session from setup through record keeping. */}
         <section className="border-b border-line bg-paper">
-          <div className="mx-auto max-w-6xl px-6 py-6 lg:px-10">
+          <div className="mx-auto min-w-0 max-w-6xl px-6 py-6 lg:px-10">
             <Reveal>
               <ProcessStep
                 number={1}

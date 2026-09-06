@@ -90,10 +90,10 @@ export default function Home() {
     <>
       {/* The landing page introduces the attendance workflow before visitors enter the app. */}
       <Nav />
-      <main id="main">
+      <main id="main" className="overflow-x-hidden">
         {/* Hero: the product promise and primary entry point. */}
         <section className="relative overflow-hidden border-b border-line">
-          <div className="mx-auto grid max-w-7xl gap-16 px-6 pb-20 pt-16 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:px-10 lg:pb-28 lg:pt-24">
+          <div className="mx-auto grid min-w-0 max-w-7xl gap-16 px-6 pb-20 pt-16 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:px-10 lg:pb-28 lg:pt-24">
             <div>
               <Reveal>
               </Reveal>
@@ -153,7 +153,7 @@ export default function Home() {
 
         {/* The attendance problem this platform is designed to remove. */}
         <section className="border-b border-line bg-paper">
-          <div className="mx-auto grid max-w-7xl gap-14 px-6 py-20 lg:grid-cols-2 lg:px-10 lg:py-28">
+          <div className="mx-auto grid min-w-0 max-w-7xl gap-14 px-6 py-20 lg:grid-cols-2 lg:px-10 lg:py-28">
             <Reveal>
               <Eyebrow>The problem</Eyebrow>
               <h2 className="mt-5 font-display text-3xl leading-snug text-charcoal sm:text-4xl">
@@ -181,7 +181,7 @@ export default function Home() {
 
         {/* The core workflow, from opening a session to reviewing records. */}
         <section className="border-b border-line">
-          <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+          <div className="mx-auto min-w-0 max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
             <div className="grid gap-14 lg:grid-cols-2 lg:items-center">
               <Reveal>
                 <Eyebrow>The solution</Eyebrow>
@@ -211,7 +211,7 @@ export default function Home() {
 
         {/* Product benefits for everyday attendance work. */}
         <section className="border-b border-line bg-paper">
-          <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+          <div className="mx-auto min-w-0 max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
             <Reveal className="max-w-xl">
               <Eyebrow>Core benefits</Eyebrow>
               <h2 className="mt-5 font-display text-3xl leading-snug text-charcoal sm:text-4xl">
@@ -230,7 +230,7 @@ export default function Home() {
 
         {/* A short preview of the three-step check-in flow. */}
         <section className="border-b border-line">
-          <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+          <div className="mx-auto min-w-0 max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
             <div className="flex flex-wrap items-end justify-between gap-6">
               <Reveal className="max-w-lg">
                 <Eyebrow>How it works</Eyebrow>
@@ -291,7 +291,7 @@ export default function Home() {
 
         {/* Institutional outcomes and administration-focused messaging. */}
         <section id="institutions" className="border-b border-line">
-          <div className="mx-auto grid max-w-7xl items-center gap-14 px-6 py-20 lg:grid-cols-2 lg:px-10 lg:py-28">
+          <div className="mx-auto grid min-w-0 max-w-7xl items-center gap-14 px-6 py-20 lg:grid-cols-2 lg:px-10 lg:py-28">
             <Reveal className="relative order-2 aspect-[4/5] overflow-hidden rounded-2xl border border-line-strong lg:order-1">
               <Image
                 src={photos.campusCourtyard.src}

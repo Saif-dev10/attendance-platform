@@ -21,7 +21,7 @@ export default function PlatformPage() {
     <>
       {/* Each section speaks to one role so the platform story stays grounded in daily work. */}
       <Nav />
-      <main id="main">
+      <main id="main" className="overflow-x-hidden">
         {/* Intro: frame the platform around its three user roles. */}
         <section className="border-b border-line">
           <div className="mx-auto max-w-4xl px-6 py-20 text-center lg:px-10 lg:py-28">
@@ -45,7 +45,7 @@ export default function PlatformPage() {
 
         {/* Lecturer view: opening sessions and tracking attendance in the room. */}
         <section id="lecturers" className="scroll-mt-24 border-b border-line bg-paper">
-          <div className="mx-auto grid max-w-7xl items-center gap-14 px-6 py-20 lg:grid-cols-2 lg:px-10 lg:py-28">
+          <div className="mx-auto grid min-w-0 max-w-7xl items-center gap-14 px-6 py-20 lg:grid-cols-2 lg:px-10 lg:py-28">
             <Reveal>
               <Eyebrow>For lecturers</Eyebrow>
               <h2 className="mt-5 font-display text-3xl leading-snug text-charcoal sm:text-4xl">
@@ -77,7 +77,7 @@ export default function PlatformPage() {
 
         {/* Student view: checking in and keeping a personal attendance record. */}
         <section id="students" className="scroll-mt-24 border-b border-line">
-          <div className="mx-auto grid max-w-7xl items-center gap-14 px-6 py-20 lg:grid-cols-2 lg:px-10 lg:py-28">
+          <div className="mx-auto grid min-w-0 max-w-7xl items-center gap-14 px-6 py-20 lg:grid-cols-2 lg:px-10 lg:py-28">
             <Reveal className="relative order-2 aspect-[4/5] overflow-hidden rounded-2xl border border-line-strong lg:order-1">
               <Image
                 src={photos.studentsPhones.src}
@@ -116,7 +116,7 @@ export default function PlatformPage() {
 
         {/* Administrator view: reviewing records across courses and departments. */}
         <section id="administrators" className="scroll-mt-24 border-b border-line bg-paper">
-          <div className="mx-auto grid max-w-7xl items-center gap-14 px-6 py-20 lg:grid-cols-2 lg:px-10 lg:py-28">
+          <div className="mx-auto grid min-w-0 max-w-7xl items-center gap-14 px-6 py-20 lg:grid-cols-2 lg:px-10 lg:py-28">
             <Reveal>
               <Eyebrow>For administrators</Eyebrow>
               <h2 className="mt-5 font-display text-3xl leading-snug text-charcoal sm:text-4xl">
