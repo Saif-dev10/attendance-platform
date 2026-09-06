@@ -31,9 +31,11 @@ export default function SessionMockup() {
           <StatusPill label="Live" />
         </div>
 
-        <div className="flex items-center gap-5 px-6 py-6">
-          <QRGlyph size={132} animated />
-          <div className="flex-1">
+        <div className="flex flex-col items-start gap-5 px-5 py-6 sm:flex-row sm:items-center sm:px-6">
+          <div className="shrink-0 self-center sm:self-auto">
+            <QRGlyph size={132} animated />
+          </div>
+          <div className="min-w-0">
             <p className="text-xs uppercase tracking-[0.16em] text-graphite-soft">
               Session code
             </p>
@@ -55,10 +57,10 @@ export default function SessionMockup() {
             {checkIns.map((entry) => (
               <li
                 key={entry.name}
-                className="flex items-center justify-between rounded-lg bg-cream px-3 py-2 text-sm"
+                className="flex flex-wrap items-center justify-between gap-2 rounded-lg bg-cream px-3 py-2 text-sm"
               >
                 <span className="text-charcoal">{entry.name}</span>
-                <span className="flex items-center gap-2 text-xs text-moss">
+                <span className="flex flex-wrap items-center gap-2 text-xs text-moss">
                   <span className="h-1.5 w-1.5 rounded-full bg-moss" aria-hidden="true" />
                   {entry.status}
                   <span className="text-graphite-soft">{entry.time}</span>

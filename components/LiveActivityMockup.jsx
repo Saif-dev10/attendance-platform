@@ -30,9 +30,9 @@ export default function LiveActivityMockup() {
         {rows.map((row) => (
           <div
             key={row.id}
-            className="flex items-center justify-between gap-4 px-6 py-3 text-sm transition-colors duration-200 hover:bg-cream"
+            className="flex flex-wrap items-center justify-between gap-3 px-5 py-3 text-sm transition-colors duration-200 hover:bg-cream sm:px-6"
           >
-            <div className="flex items-center gap-3">
+            <div className="flex min-w-0 items-center gap-3">
               <span className="flex h-8 w-8 items-center justify-center rounded-full bg-charcoal font-display text-xs text-cream">
                 {row.name
                   .split(" ")
@@ -40,11 +40,11 @@ export default function LiveActivityMockup() {
                   .join("")}
               </span>
               <div>
-                <p className="text-charcoal">{row.name}</p>
+                <p className="truncate text-charcoal">{row.name}</p>
                 <p className="font-mono text-xs text-graphite-soft">{row.id}</p>
               </div>
             </div>
-            <div className="flex items-center gap-3 text-xs">
+            <div className="flex flex-wrap items-center gap-3 text-xs">
               <span className="font-mono text-graphite-soft">{row.time}</span>
               <span
                 className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 ${

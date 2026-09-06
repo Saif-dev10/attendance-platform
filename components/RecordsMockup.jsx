@@ -27,7 +27,8 @@ export default function RecordsMockup() {
         </button>
       </div>
 
-      <table className="w-full text-left text-sm">
+      <div className="overflow-x-auto">
+        <table className="w-full min-w-[600px] text-left text-sm">
         <thead>
           <tr className="border-b border-line text-xs uppercase tracking-[0.1em] text-graphite-soft">
             <th scope="col" className="px-6 py-3 font-medium">
@@ -54,7 +55,8 @@ export default function RecordsMockup() {
             </tr>
           ))}
         </tbody>
-      </table>
+        </table>
+      </div>
     </div>
   );
 }

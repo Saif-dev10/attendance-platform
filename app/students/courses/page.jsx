@@ -58,7 +58,7 @@ export default function CourseDetailsPage() {
         </Button>
       </Topbar>
 
-      <main className="min-h-screen overflow-y-auto bg-paper pt-[72px] md:ml-[280px]">
+      <main className="min-h-screen overflow-y-auto bg-paper pb-[calc(84px+1.5rem)] pt-[72px] md:ml-[280px] md:pb-0">
         {/**
          * Course detail shell.
          * The tab bar switches between overview, materials, assignments,

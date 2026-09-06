@@ -23,7 +23,7 @@ export default function ProcessStep({ number, title, description, audience, chil
         </p>
       </div>
 
-      {children && <div className="md:pl-4">{children}</div>}
+      {children && <div className="min-w-0 md:pl-4">{children}</div>}
     </div>
   );
 }
