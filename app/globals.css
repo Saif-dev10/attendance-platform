@@ -1,0 +1,177 @@
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+:root {
+  --color-cream: #f6f3ec;
+  --color-paper: #fbfaf6;
+  --color-charcoal: #201e1b;
+  --color-charcoal-soft: #2c2a26;
+  --color-graphite: #4a463f;
+  --color-graphite-soft: #6b665c;
+  --color-line: #e2ddd0;
+  --color-line-strong: #cdc6b4;
+  --color-bronze: #a67c3d;
+  --color-bronze-deep: #8a6530;
+  --color-bronze-soft: #d8bd8b;
+  --color-moss: #6f7657;
+  --color-moss-soft: #e5e6da;
+  --color-clay: #b3523f;
+}
+
+@theme inline {
+  --color-cream: var(--color-cream);
+  --color-paper: var(--color-paper);
+  --color-charcoal: var(--color-charcoal);
+  --color-charcoal-soft: var(--color-charcoal-soft);
+  --color-graphite: var(--color-graphite);
+  --color-graphite-soft: var(--color-graphite-soft);
+  --color-line: var(--color-line);
+  --color-line-strong: var(--color-line-strong);
+  --color-bronze: var(--color-bronze);
+  --color-bronze-deep: var(--color-bronze-deep);
+  --color-bronze-soft: var(--color-bronze-soft);
+  --color-moss: var(--color-moss);
+  --color-moss-soft: var(--color-moss-soft);
+  --color-clay: var(--color-clay);
+
+  --font-display: "Iowan Old Style", "Palatino Linotype", "URW Palladio L", Palatino,
+    Georgia, ui-serif, serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", "Helvetica Neue",
+    Helvetica, Arial, sans-serif;
+  --font-mono: "SF Mono", "IBM Plex Mono", "Roboto Mono", ui-monospace, Menlo, Consolas,
+    monospace;
+
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-pulse-soft: pulse-soft 2.4s ease-in-out infinite;
+  --animate-scan: scan 2.6s ease-in-out infinite;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes pulse-soft {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.55;
+      transform: scale(1.35);
+    }
+  }
+  @keyframes scan {
+    0% {
+      transform: translateY(-2%);
+    }
+    50% {
+      transform: translateY(102%);
+    }
+    100% {
+      transform: translateY(-2%);
+    }
+  }
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-charcoal);
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+}
+
+.font-display {
+  font-family: var(--font-display), ui-serif, Georgia, serif;
+}
+
+.font-mono {
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+
+/* Reveal-on-scroll utility, respects reduced motion */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Visible keyboard focus ring across the site */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-bronze);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+::selection {
+
+  background: var(--color-bronze-soft);
+  color: var(--color-charcoal);
+}
+
+.campus-user-icon {
+  background: transparent;
+  border: 0;
+  transition: transform 500ms ease-out;
+}
+
+.campus-user-marker {
+    position: relative;
+    display: block;
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    background: rgb(37 99 235 / 0.14);
+    box-shadow: 0 0 0 1px rgb(37 99 235 / 0.25);
+}
+
+.campus-user-marker__dot {
+    position: absolute;
+    inset: 8px;
+    border: 3px solid white;
+    border-radius: 999px;
+    background: #2563eb;
+    box-shadow: 0 1px 4px rgb(15 23 42 / 0.3);
+}
+
+.campus-user-marker__arrow {
+    position: absolute;
+    top: 1px;
+    left: 14px;
+    z-index: 1;
+    width: 0;
+    height: 0;
+    border-right: 3px solid transparent;
+    border-bottom: 9px solid #1d4ed8;
+    border-left: 3px solid transparent;
+    transform-origin: 3px 16px;
+    transition: transform 220ms ease-out;
+}
