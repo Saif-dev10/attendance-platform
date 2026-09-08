@@ -48,18 +48,18 @@
   --animate-scan-line: scan-line 2s ease-in-out infinite;
 
   @keyframes scan-line {
-    0% {
-      transform: translateY(-100%);
-    }
-
-    50% {
-      transform: translateY(100%);
-    }
-
-    100% {
-      transform: translateY(-100%);
-    }
+  0% {
+    transform: translateY(-96px);
   }
+
+  50% {
+    transform: translateY(98px);
+  }
+
+  100% {
+    transform: translateY(-96px);
+  }
+}
 
   @keyframes fade-up {
     from {
