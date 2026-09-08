@@ -8,7 +8,7 @@ import Card from "@/components/ui/Card";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import MobileBottomNav from "@/components/layout/MobileBottomNav";
-import { Search, Bell, Bus, Navigation } from "lucide-react";
+import { Search, Bell, Bus, Navigation, QrCode } from "lucide-react";
 import {
   GraduationCap,
   CheckCircle2,
@@ -188,6 +188,7 @@ export default function DashboardPage() {
                   >
                     View Timetable
                   </Button>
+
                   <Button
                     onClick={() => router.push("/campus-ride")}
                     className="
@@ -197,6 +198,19 @@ export default function DashboardPage() {
                     "
                   >
                     Campus Ride
+                  </Button>
+
+                  <Button
+                    onClick={() => router.push("/scan")}
+                    className="
+                      w-full sm:w-auto px-5 py-2.5 rounded-xl bg-cream/10 hover:bg-cream/20
+                      text-cream font-bold text-sm transition-all backdrop-blur-sm
+                      border border-cream/20 cursor-pointer active:opacity-75
+                      flex items-center justify-center gap-2
+                    "
+                  >
+                    <QrCode size={16} />
+                    Scan QR
                   </Button>
                 </div>
               </div>
