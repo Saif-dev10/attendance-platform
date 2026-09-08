@@ -135,7 +135,7 @@ export default function QRScanner({
 
               <Corner className="bottom-0 right-0 border-b-2 border-r-2 rounded-br-xl" />
 
-              {stage === "detecting" && (
+              {(stage === "active" || stage === "detecting") && (
                 <div className="absolute inset-x-2 top-1/2 h-0.5 bg-bronze-deep shadow-[0_0_12px_2px_rgba(180,120,60,0.6)] animate-scan-line" />
               )}
             </div>
