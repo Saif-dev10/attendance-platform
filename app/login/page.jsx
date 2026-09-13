@@ -126,32 +126,32 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen w-full flex flex-col lg:flex-row bg-slate-50 lg:bg-white">
+    <div className="min-h-screen w-full flex flex-col lg:flex-row bg-paper lg:bg-cream">
 
       {/* The form stays compact on large screens while the campus panel carries the visual weight. */}
-      <div className="w-full max-w-md lg:max-w-none lg:w-[480px] min-h-screen flex flex-col p-8 lg:p-16 shrink-0 relative z-10 bg-white shadow-xl lg:shadow-2xl rounded-2xl lg:rounded-none m-4 lg:m-0">
+      <div className="w-full max-w-md lg:max-w-none lg:w-[480px] min-h-screen flex flex-col p-8 lg:p-16 shrink-0 relative z-10 bg-cream shadow-xl lg:shadow-2xl rounded-2xl lg:rounded-none m-4 lg:m-0">
 
         <div className="mb-auto">
 
           <div className="flex items-center gap-2.5 mb-12">
 
-            <div className="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center text-white shadow-lg shadow-slate-900/20">
+            <div className="w-10 h-10 rounded-xl bg-charcoal flex items-center justify-center text-cream shadow-lg shadow-charcoal/20">
               <PiGraduationCapFill className="text-xl" />
             </div>
 
             <span className="font-bold text-2xl tracking-tight text-slate-900">
-              SKUL
+              UniFlow
             </span>
 
           </div>
 
           <div className="mb-10">
 
-            <h1 className="text-3xl font-bold text-slate-900 mb-2">
+            <h1 className="font-display text-3xl font-bold text-charcoal mb-2">
               Welcome back
             </h1>
 
-            <p className="text-slate-500">
+            <p className="text-graphite">
               Please enter your institutional credentials to
               access your workspace.
             </p>
@@ -179,7 +179,7 @@ export default function LoginPage() {
 
               <label
                 htmlFor="regNumber"
-                className="block text-[13px] font-bold text-slate-900 uppercase tracking-wider mb-2"
+                className="block text-[13px] font-bold text-charcoal uppercase tracking-wider mb-2"
               >
                 Institutional ID
               </label>
@@ -187,14 +187,14 @@ export default function LoginPage() {
               <div className="relative">
 
                 <PiIdentificationCard
-                  className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-lg"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-graphite-soft text-lg"
                 />
 
                 <input
                   type="text"
                   id="regNumber"
                   name="regNumber"
-                  autoComplete="username"
+                  autoComplete="off"
                   placeholder="e.g. CST/23/IFT/00001"
                   value={regNumber}
                   onChange={handleRegNumberChange}
@@ -204,10 +204,10 @@ export default function LoginPage() {
                       ? 'regNumber-error'
                       : undefined
                   }
-                  className={`w-full pl-12 pr-4 py-3.5 bg-slate-50 border rounded-xl text-sm focus:outline-none focus:ring-4 transition-all placeholder:text-slate-400 font-medium ${
+                  className={`w-full pl-12 pr-4 py-3.5 bg-paper border rounded-xl text-sm focus:outline-none focus:ring-4 transition-all placeholder:text-graphite-soft font-medium ${
                     errors.regNumber
                       ? 'border-red-400 focus:ring-red-500/10 focus:border-red-400'
-                      : 'border-slate-200 focus:ring-blue-500/10 focus:border-blue-400'
+                      : 'border-line focus:ring-bronze-deep/10 focus:border-bronze-soft'
                   }`}
                 />
 
@@ -232,14 +232,14 @@ export default function LoginPage() {
 
                 <label
                   htmlFor="password"
-                  className="block text-[13px] font-bold text-slate-900 uppercase tracking-wider"
+                  className="block text-[13px] font-bold text-charcoal uppercase tracking-wider"
                 >
                   Password
                 </label>
 
                 <Link
                   href="/forgetPassword"
-                  className="text-[13px] font-bold text-blue-600 hover:text-blue-700"
+                  className="text-[13px] font-bold text-bronze-deep hover:text-bronze-soft"
                 >
                   Forgot?
                 </Link>
@@ -249,7 +249,7 @@ export default function LoginPage() {
               <div className="relative">
 
                 <PiLock
-                  className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-lg"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-graphite-soft text-lg"
                 />
 
                 <input
@@ -266,10 +266,10 @@ export default function LoginPage() {
                       ? 'password-error'
                       : undefined
                   }
-                  className={`w-full pl-12 pr-12 py-3.5 bg-slate-50 border rounded-xl text-sm focus:outline-none focus:ring-4 transition-all placeholder:text-slate-400 font-medium ${
+                  className={`w-full pl-12 pr-12 py-3.5 bg-paper border rounded-xl text-sm focus:outline-none focus:ring-4 transition-all placeholder:text-graphite-soft font-medium ${
                     errors.password
                       ? 'border-red-400 focus:ring-red-500/10 focus:border-red-400'
-                      : 'border-slate-200 focus:ring-blue-500/10 focus:border-blue-400'
+                      : 'border-line focus:ring-bronze-deep/10 focus:border-bronze-soft'
                   }`}
                 />
 
@@ -278,7 +278,7 @@ export default function LoginPage() {
                   onClick={() =>
                     setShowPassword((prev) => !prev)
                   }
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-graphite-soft hover:text-graphite transition-colors"
                   aria-label={
                     showPassword
                       ? 'Hide password'
@@ -326,12 +326,12 @@ export default function LoginPage() {
                 onChange={(e) =>
                   setRemember(e.target.checked)
                 }
-                className="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500/20"
+                className="w-4 h-4 rounded border-line-strong text-bronze-deep focus:ring-bronze-deep/20"
               />
 
               <label
                 htmlFor="remember"
-                className="text-sm font-medium text-slate-500 cursor-pointer"
+                className="text-sm font-medium text-graphite cursor-pointer"
               >
                 Remember this device for 30 days
               </label>
@@ -343,10 +343,10 @@ export default function LoginPage() {
               type="submit"
               disabled={isSubmitting}
               aria-busy={isSubmitting}
-              className={`w-full py-4 rounded-xl text-white font-bold text-sm transition-all shadow-xl shadow-slate-900/20 mt-4 flex items-center justify-center gap-2 ${
+              className={`w-full py-4 rounded-xl text-cream font-bold text-sm transition-all shadow-xl shadow-charcoal/20 mt-4 flex items-center justify-center gap-2 ${
                 isSubmitting
-                  ? 'bg-slate-500 cursor-not-allowed'
-                  : 'bg-slate-800 hover:bg-slate-900 cursor-pointer'
+                  ? 'bg-graphite cursor-not-allowed'
+                  : 'bg-charcoal hover:bg-charcoal/90 cursor-pointer'
               }`}
             >
 
@@ -366,15 +366,15 @@ export default function LoginPage() {
 
           </form>
 
-          <div className="mt-10 pt-8 border-t border-slate-100">
+          <div className="mt-10 pt-8 border-t border-line">
 
-            <p className="text-[13px] text-slate-500 text-center">
+            <p className="text-[13px] text-graphite text-center">
 
               New student or staff?{' '}
 
               <Link
                 href="#"
-                className="font-bold text-blue-600 hover:text-blue-700"
+                className="font-bold text-bronze-deep hover:text-bronze-soft"
               >
                 Activate your account
               </Link>
@@ -385,7 +385,7 @@ export default function LoginPage() {
 
         </div>
 
-        <div className="mt-8 lg:mt-auto flex items-center justify-between text-[11px] font-medium text-slate-400 uppercase tracking-[0.1em]">
+        <div className="mt-8 lg:mt-auto flex items-center justify-between text-[11px] font-medium text-graphite-soft uppercase tracking-[0.1em]">
 
           <span>
             &copy; 2024 SKUL Platform
@@ -395,14 +395,14 @@ export default function LoginPage() {
 
             <Link
               href="#"
-              className="hover:text-slate-600 transition-colors"
+              className="hover:text-graphite transition-colors"
             >
               Privacy
             </Link>
 
             <Link
               href="#"
-              className="hover:text-slate-600 transition-colors"
+              className="hover:text-graphite transition-colors"
             >
               Support
             </Link>
@@ -413,7 +413,7 @@ export default function LoginPage() {
 
       </div>
 
-      <div className="hidden lg:block flex-1 min-h-screen sticky top-0 relative bg-slate-900 overflow-hidden">
+      <div className="hidden lg:block flex-1 min-h-screen sticky top-0 relative bg-charcoal overflow-hidden">
 
         <div className="absolute inset-0 z-0">
 
@@ -428,7 +428,7 @@ export default function LoginPage() {
 
         </div>
 
-        <div className="absolute inset-0 bg-gradient-to-tr from-slate-900 via-slate-900/60 to-blue-900/40 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-tr from-charcoal via-charcoal/60 to-bronze-deep/30 z-10" />
 
         <svg
           className="absolute inset-0 w-full h-full opacity-[0.15] z-[15]"
@@ -463,23 +463,23 @@ export default function LoginPage() {
 
         </svg>
 
-        <div className="absolute inset-0 z-20 flex flex-col justify-center p-20 text-white">
+        <div className="absolute inset-0 z-20 flex flex-col justify-center p-20 text-cream">
 
           <div className="max-w-xl">
 
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-bold uppercase tracking-widest mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cream/10 backdrop-blur-md border border-cream/20 text-xs font-bold uppercase tracking-widest mb-6">
 
-              <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
+              <span className="w-2 h-2 rounded-full bg-bronze-soft animate-pulse" />
 
               SKUL
 
             </div>
 
-            <h2 className="text-5xl font-bold leading-tight mb-6">
+            <h2 className="font-display text-5xl font-bold leading-tight mb-6">
               The complete engine for the modern university.
             </h2>
 
-            <p className="text-xl text-white/70 leading-relaxed">
+            <p className="text-xl text-cream/70 leading-relaxed">
               Experience a unified platform for academic
               excellence, administration, and campus mobility.
             </p>
@@ -492,7 +492,7 @@ export default function LoginPage() {
                   15k+
                 </p>
 
-                <p className="text-sm font-medium text-white/50 uppercase tracking-wider">
+                <p className="text-sm font-medium text-cream/50 uppercase tracking-wider">
                   Active Students
                 </p>
 
@@ -504,7 +504,7 @@ export default function LoginPage() {
                   98%
                 </p>
 
-                <p className="text-sm font-medium text-white/50 uppercase tracking-wider">
+                <p className="text-sm font-medium text-cream/50 uppercase tracking-wider">
                   Campus Efficiency
                 </p>
 
