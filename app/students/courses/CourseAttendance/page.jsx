@@ -26,7 +26,6 @@ const HISTORY = [
   { date: "Aug 12", topic: "Algorithm Analysis", status: "Present" },
 ];
 
-// Compact September calendar. Day → status, kept in sync with the history above.
 const CALENDAR_DAYS = [
   { day: 1, status: null },
   { day: 2, status: "Present" },

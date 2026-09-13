@@ -1,4 +1,3 @@
-// app/students/assignments/_components/GradedView.jsx
 import { ArrowLeft, MessageSquare, TrendingUp, Calendar, RotateCcw, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -27,7 +26,6 @@ export default function GradedView({ assignment }) {
       </header>
 
       <div className="p-5 sm:p-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left: Grade + feedback */}
         <div className="lg:col-span-2 space-y-6 min-w-0">
           <div className="bg-charcoal rounded-xl p-6 relative overflow-hidden">
             <span className="inline-block text-[10px] font-semibold bg-bronze-deep/20 text-cream/90 px-2 py-1 rounded mb-4">
@@ -98,7 +96,6 @@ export default function GradedView({ assignment }) {
           </div>
         </div>
 
-        {/* Right: Submission + next steps */}
         <div className="space-y-6 min-w-0">
           <div className="bg-white rounded-xl border border-line p-5">
             <p className="font-semibold text-charcoal text-sm mb-4">Your Submission</p>

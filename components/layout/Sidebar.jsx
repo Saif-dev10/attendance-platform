@@ -15,10 +15,7 @@ import {
   GraduationCap,
 } from "lucide-react";
 
-/**
- * Navigation groups shown for the student workspace.
- * These items keep the most relevant academic and campus tasks in one sidebar.
- */
+/** Links shown in the student workspace sidebar. */
 export const studentSections = [
   {
     title: "My Academic",
@@ -39,7 +36,7 @@ export const studentSections = [
         icon: FileText,
       },
       {
-        label: "Exam Result",
+        label: "Examaminations",
         href: "/students/examinations",
         icon: ClipboardCheck,
       },
@@ -68,11 +65,7 @@ export const studentSections = [
   },
 ];
 
-/**
- * Navigation groups shown to lecturer accounts.
- * The sidebar mirrors the teaching workflow and campus support utilities needed by
- * staff users.
- */
+/** Links shown in the lecturer workspace sidebar. */
 export const lecturerSections = [
   {
     title: "Teaching",

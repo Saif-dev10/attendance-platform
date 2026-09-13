@@ -90,14 +90,12 @@ export default function StudentProfilePage() {
       <main className="min-h-screen overflow-y-auto bg-paper px-3 pb-28 pt-[92px] sm:px-6 md:ml-[280px] md:pb-10">
         <div className="mx-auto max-w-[1400px] space-y-6">
 
-          {/* Profile Header */}
           <section className="overflow-hidden rounded-2xl border border-line bg-white">
             <div className="h-24 bg-charcoal" />
 
             <div className="px-5 pb-7 sm:px-7 lg:px-9">
               <div className="-mt-12 flex flex-col gap-6 lg:flex-row lg:items-end lg:gap-8">
                 
-                {/* Avatar */}
                 <Image
                   src="/avatar-placeholder.svg"
                   alt={student.name}
@@ -106,7 +104,6 @@ export default function StudentProfilePage() {
                   className="h-24 w-24 shrink-0 rounded-2xl border-4 border-white bg-paper object-cover shadow-md"
                 />
 
-                {/* Main Identity */}
                 <div className="min-w-0 flex-1 pb-1 lg:translate-y-2">
                   <div className="flex flex-wrap items-center gap-2.5">
                     <h1 className="text-2xl font-bold tracking-tight text-charcoal lg:text-[27px]">
@@ -125,7 +122,6 @@ export default function StudentProfilePage() {
                   </p>
                 </div>
 
-                {/* Student Record */}
                 <div className="grid shrink-0 grid-cols-2 gap-x-8 gap-y-2 border-l border-line pl-6 pb-1 lg:min-w-[330px]">
                   <div>
                     <p className="text-[9px] font-bold uppercase tracking-widest text-graphite-soft">
@@ -146,7 +142,6 @@ export default function StudentProfilePage() {
                   </div>
                 </div>
 
-                {/* Action */}
                 <div className="shrink-0 pb-1">
                   <Button
                     type="button"
@@ -161,7 +156,6 @@ export default function StudentProfilePage() {
             </div>
           </section>
 
-          {/* Academic Snapshot */}
           <section>
             <SectionHeading title="Academic Snapshot" />
 
@@ -174,7 +168,6 @@ export default function StudentProfilePage() {
           </section>
 
           <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
-            {/* Academic Information */}
             <section>
               <SectionHeading title="Academic Information" />
 
@@ -206,7 +199,6 @@ export default function StudentProfilePage() {
               </InfoCard>
             </section>
 
-            {/* Personal Information */}
             <section>
               <div className="mb-4 flex items-center justify-between gap-3">
                 <SectionHeading title="Personal Information" noMargin />
@@ -252,7 +244,6 @@ export default function StudentProfilePage() {
               </InfoCard>
             </section>
 
-            {/* Contact Information */}
             <section>
               <SectionHeading title="Contact Information" />
 
@@ -312,7 +303,6 @@ export default function StudentProfilePage() {
               </InfoCard>
             </section>
 
-            {/* Student Documents */}
             <section>
               <SectionHeading title="Student Documents" />
 
@@ -358,7 +348,6 @@ export default function StudentProfilePage() {
             </section>
           </div>
 
-          {/* Account & Security */}
           <section>
             <SectionHeading title="Account & Security" />
 
@@ -408,7 +397,6 @@ export default function StudentProfilePage() {
         </div>
       </main>
 
-      {/* Edit Profile Modal */}
       {editOpen && (
         <div
           className="fixed inset-0 z-[100] flex items-end justify-center bg-charcoal/35 p-0 backdrop-blur-[2px] sm:items-center sm:p-4"

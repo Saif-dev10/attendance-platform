@@ -1,8 +1,4 @@
-/**
- * Base button used throughout the app shell.
- * It provides the shared styling for common actions while still allowing per-use
- * overrides via the className prop.
- */
+/** Base action button for the authenticated app shell. */
 export default function Button({
   children,
   className = "",

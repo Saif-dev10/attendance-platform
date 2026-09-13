@@ -59,11 +59,6 @@ export default function CourseDetailsPage() {
       </Topbar>
 
       <main className="min-h-screen overflow-y-auto bg-paper pb-[calc(84px+1.5rem)] pt-[72px] md:ml-[280px] md:pb-0">
-        {/**
-         * Course detail shell.
-         * The tab bar switches between overview, materials, assignments,
-         * attendance, and grades while keeping the same course header and layout.
-         */}
         <div className="border-b border-line bg-paper px-3 sm:px-6">
           <div className="flex gap-2 overflow-x-auto sm:gap-8" role="tablist" aria-label="Course sections">
             {tabs.map((tab) => {
@@ -98,11 +93,6 @@ export default function CourseDetailsPage() {
           {activeTab === "Overview" && (
           <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-3">
             <div className="space-y-8 lg:col-span-2">
-              {/**
-               * Overview content block.
-               * This area gives the student the course context first: what the class
-               * covers, where and when it meets, and the most recent course updates.
-               */}
               <section>
                 <h3 className="mb-4 text-sm font-bold uppercase tracking-widest text-charcoal">
                   About Course
@@ -188,11 +178,6 @@ export default function CourseDetailsPage() {
             </div>
 
             <div className="space-y-8">
-              {/**
-               * Instructor and deadline panel.
-               * This column keeps the key contact actions and the next due assignment
-               * visible without the student losing context of the main course overview.
-               */}
               <section>
                 <h3 className="mb-4 text-sm font-bold uppercase tracking-widest text-charcoal">
                   Instructor

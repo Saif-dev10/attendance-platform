@@ -16,11 +16,6 @@ const TEXT_TONES = {
   muted: "text-graphite-soft",
 };
 
-/**
- * A small dot + label used to communicate status (Due Soon, Present, Graded, etc.)
- * without turning an entire card into a colored block. Keep `tone` limited to the
- * options above so status color stays restrained across the app.
- */
 export default function StatusBadge({ label, tone = "muted", className = "" }) {
   return (
     <span

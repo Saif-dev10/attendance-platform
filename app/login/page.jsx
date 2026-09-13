@@ -69,7 +69,6 @@ export default function LoginPage() {
 
     if (isSubmitting) return;
 
-    // Validate both fields before starting the simulated sign-in request.
     setErrors({});
     setFormError('');
 
@@ -128,7 +127,6 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen w-full flex flex-col lg:flex-row bg-paper lg:bg-cream">
 
-      {/* The form stays compact on large screens while the campus panel carries the visual weight. */}
       <div className="w-full max-w-md lg:max-w-none lg:w-[480px] min-h-screen flex flex-col p-8 lg:p-16 shrink-0 relative z-10 bg-cream shadow-xl lg:shadow-2xl rounded-2xl lg:rounded-none m-4 lg:m-0">
 
         <div className="mb-auto">
@@ -158,7 +156,6 @@ export default function LoginPage() {
 
           </div>
 
-          {/* Sign-in form: institutional ID, password, device memory, and submission. */}
           <form
             className="space-y-5"
             onSubmit={handleSubmit}
@@ -174,7 +171,6 @@ export default function LoginPage() {
               </div>
             )}
 
-            {/* Institutional ID field and inline validation message. */}
             <div>
 
               <label
@@ -225,7 +221,6 @@ export default function LoginPage() {
 
             </div>
 
-            {/* Password field, visibility toggle, and strength requirements. */}
             <div>
 
               <div className="flex items-center justify-between mb-2">
@@ -315,7 +310,6 @@ export default function LoginPage() {
 
             </div>
 
-            {/* Keep the device signed in for the next visit. */}
             <div className="flex items-center gap-3 pt-2">
 
               <input
@@ -338,7 +332,6 @@ export default function LoginPage() {
 
             </div>
 
-            {/* Submit action reflects the simulated request state. */}
             <Button
               type="submit"
               disabled={isSubmitting}

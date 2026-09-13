@@ -1,10 +1,6 @@
 import StatusPill from "./StatusPill";
 
-/**
- * Live attendance activity mockup.
- * This list simulates recent student check-ins and verification states for the
- * demonstration screens.
- */
+/** Simulated live check-in activity for the product mockup. */
 const rows = [
   { name: "Priya Shah", id: "PS-2214", time: "09:31:04", status: "Verified" },
   { name: "Daniel Cho", id: "DC-1187", time: "09:31:11", status: "Verified" },

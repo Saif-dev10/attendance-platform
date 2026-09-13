@@ -81,7 +81,6 @@ export default function DashboardPage() {
 
   return (
     <>
-      {/* The dashboard puts search, alerts, and the next few academic actions within reach. */}
       <Sidebar
         sections={studentSections}
         user={{
@@ -92,7 +91,6 @@ export default function DashboardPage() {
       />
 
       <Topbar title="Student Dashboard">
-        {/* Desktop search, mobile search trigger, and notification menu. */}
         <div className="relative w-40 sm:w-64 mr-2 sm:mr-4 hidden sm:block">
           <Search
             size={16}
@@ -159,7 +157,6 @@ export default function DashboardPage() {
       <main className="ml-0 h-screen overflow-y-auto pt-[72px] md:ml-[280px] bg-paper">
         <div className="max-w-[1250px] mx-auto space-y-5 sm:space-y-6 px-4 sm:px-6 py-5 sm:py-7 pb-28 md:pb-7 min-w-0">
 
-          {/* Welcome message, quick actions, and current CGPA. */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 min-w-0">
 
             <Card
@@ -262,7 +259,6 @@ export default function DashboardPage() {
             </Card>
           </div>
 
-          {/* At-a-glance attendance, course, credit, and campus balance metrics. */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
             {statCards.map(({ label, value, icon: Icon, iconBg, iconColor }) => (
               <Card
@@ -276,7 +272,6 @@ export default function DashboardPage() {
                   <span className="text-lg sm:text-2xl font-bold text-charcoal truncate">
                     {value}
                   </span>
-                  {/* Metric icon. */}
                   <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full ${iconBg} flex items-center justify-center ${iconColor} shrink-0`}>
                     <Icon size={18} className="sm:hidden" strokeWidth={2} />
                     <Icon size={20} className="hidden sm:block" strokeWidth={2} />
@@ -286,10 +281,8 @@ export default function DashboardPage() {
             ))}
           </div>
 
-          {/* Today&apos;s lectures and the current campus ride status. */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5 min-w-0">
 
-            {/* Lecture list with completion and upcoming-session states. */}
             <Card className="lg:col-span-2 min-w-0 rounded-2xl border border-line bg-white flex flex-col p-0">
               <div className="px-4 sm:px-6 py-4 sm:py-5 border-b border-line flex items-center justify-between gap-2">
                 <h3 className="font-bold text-charcoal">Today&apos;s Lectures</h3>
@@ -328,7 +321,6 @@ export default function DashboardPage() {
               </div>
             </Card>
 
-            {/* Campus ride card with the next shuttle estimate. */}
             <Card className="lg:col-span-1 min-w-0 rounded-2xl border border-line bg-white flex flex-col p-0">
               <div className="px-4 sm:px-6 py-4 sm:py-5 border-b border-line flex items-center justify-between">
                 <h3 className="font-bold text-charcoal">Campus Ride</h3>

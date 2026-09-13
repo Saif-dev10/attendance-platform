@@ -1,7 +1,4 @@
-/**
- * Reusable feature card for the landing pages.
- * It keeps presentation consistent while highlighting a single product benefit.
- */
+/** Reusable landing-page card for one product capability. */
 export default function FeatureCard({ icon, title, description, className = "" }) {
   return (
     <div

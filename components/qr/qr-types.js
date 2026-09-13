@@ -1,21 +1,10 @@
-/**
- * Shared QR helpers + backend boundary for the SKUL QR scanning feature.
- *
- * The scanner is intentionally generic: a raw QR payload is decoded once,
- * then routed by `type`. Attendance is the only type with a full UI today;
- * everything else falls through to a "not supported yet" result so new
- * QR types (campus_ride, event, document_verification) can be added later
- * without touching the scanner itself.
- */
+/** QR validation and attendance confirmation boundary used by the scanner UI. */
 
-/**
- * TODO: replace with real API call.
- * POST /api/qr/validate
- */
+// Replace the delay and demo responses with the QR validation endpoint when it is available.
 export async function validateQRCode(rawPayload) {
   await new Promise((r) => setTimeout(r, 1400));
 
-  // --- MOCK RESPONSES FOR UI DEMONSTRATION ONLY ---
+  // These fixed payloads make each validation state easy to exercise during development.
   if (rawPayload === "INVALID_DEMO") {
     return {
       type: "attendance",
@@ -69,10 +58,7 @@ export async function validateQRCode(rawPayload) {
   };
 }
 
-/**
- * TODO: replace with real API call.
- * POST /api/qr/attendance/confirm
- */
+// Replace this simulated confirmation with the attendance confirmation endpoint.
 export async function confirmAttendance(payload) {
   await new Promise((r) => setTimeout(r, 1100));
 

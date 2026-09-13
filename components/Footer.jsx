@@ -1,9 +1,6 @@
 import Link from "next/link";
 
-/**
- * Global footer links for the SKUL marketing site.
- * These group navigation by platform, audience, and institution needs.
- */
+/** Footer navigation for the public SKUL site. */
 const columns = [
   {
     heading: "Platform",
