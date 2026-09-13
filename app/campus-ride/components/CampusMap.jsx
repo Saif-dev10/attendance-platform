@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import "leaflet/dist/leaflet.css";
 import { LocateFixed, Minus, Navigation, Plus } from "lucide-react";
 import { useCampusRide } from "@/lib/campus-ride/CampusRideContext";
 
