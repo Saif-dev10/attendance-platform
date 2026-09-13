@@ -140,7 +140,7 @@ export default function LoginPage() {
             </div>
 
             <span className="font-bold text-2xl tracking-tight text-slate-900">
-              UniFlow
+              SKUL
             </span>
 
           </div>
@@ -388,7 +388,7 @@ export default function LoginPage() {
         <div className="mt-8 lg:mt-auto flex items-center justify-between text-[11px] font-medium text-slate-400 uppercase tracking-[0.1em]">
 
           <span>
-            &copy; 2024 UniFlow Platform
+            &copy; 2024 SKUL Platform
           </span>
 
           <div className="flex gap-4">
@@ -471,7 +471,7 @@ export default function LoginPage() {
 
               <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
 
-              Campus Mobility & Management
+              SKUL
 
             </div>
 
