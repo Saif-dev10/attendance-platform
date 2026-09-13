@@ -25,9 +25,8 @@ const timeSlots = [
   "03:00 PM",
 ];
 
-// Mock examination timetable. Each entry occupies the same 200px (2hr) block
-// used by the class timetable so the two views feel like one visual system.
-// dayIndex maps to the `days` array above (0 = Mon ... 4 = Fri).
+// Exam events use the same grid coordinates as class events so both timetable
+// modes share one visual rhythm. `dayIndex` maps to the weekday columns above.
 const EXAM_EVENTS = [
   {
     dayIndex: 1,
@@ -67,22 +66,15 @@ function getExamEventsForDay(dayIndex) {
 
 export default function StudentTimetable() {
   const [viewMode, setViewMode] = useState("weekly");
-  // New: lets the student switch between the existing class timetable and
-  // the examination timetable without leaving this page.
+  // The schedule type controls which data set is rendered without navigating away.
   const [scheduleType, setScheduleType] = useState("class");
 
   return (
     <main className="min-h-screen bg-paper text-charcoal overflow-x-hidden">
       <Sidebar />
 
-      {/**
-       * Student timetable layout.
-       * The page uses a single weekly grid for the main schedule and swaps into a
-       * more focused daily view when the user toggles between modes.
-       */}
       <Topbar title={scheduleType === "exam" ? "Examination Timetable" : "Academic Timetable"}>
         <div className="flex flex-wrap items-center justify-end gap-2 sm:gap-3">
-          {/* Class / Exam schedule toggle — the "View Exam Timetable" entry point */}
           <div className="flex rounded-xl border border-line bg-cream p-1">
             <button
               type="button"
@@ -164,7 +156,6 @@ export default function StudentTimetable() {
       <section className="ml-0 md:ml-[280px] min-h-screen pt-[72px]">
         <div className="w-full px-3 py-4 sm:px-6 sm:py-6 lg:px-8 lg:py-7">
 
-          {/* ================= CLASS TIMETABLE (unchanged) ================= */}
           {scheduleType === "class" && (
             <div className="mx-auto w-full max-w-[1500px] overflow-x-auto rounded-2xl border border-line bg-white shadow-sm">
               <div className="min-w-[720px] overflow-hidden">
@@ -386,7 +377,6 @@ export default function StudentTimetable() {
             </div>
           )}
 
-          {/* ================= EXAM TIMETABLE (new) ================= */}
           {scheduleType === "exam" && (
             <div className="mx-auto w-full max-w-[1500px] overflow-x-auto rounded-2xl border border-line bg-white shadow-sm">
               <div className="min-w-[720px] overflow-hidden">

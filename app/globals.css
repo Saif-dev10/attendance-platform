@@ -113,7 +113,7 @@ body {
   font-family: var(--font-mono), ui-monospace, monospace;
 }
 
-/* Reveal-on-scroll utility, respects reduced motion */
+/* Fade-and-lift utility used by landing-page sections. */
 .reveal {
   opacity: 0;
   transform: translateY(18px);
@@ -137,7 +137,7 @@ body {
   }
 }
 
-/* Visible keyboard focus ring across the site */
+/* Keep keyboard focus visible across interactive controls. */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,

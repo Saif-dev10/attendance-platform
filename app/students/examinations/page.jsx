@@ -34,8 +34,6 @@ const RESULTS = {
   },
 };
 
-// The student's exam hall + seat is one combined assignment per course —
-// intentionally not split into separate hall/seat features.
 const HALL_ASSIGNMENTS = [
   {
     course: 'CSC301',
@@ -138,7 +136,6 @@ export default function ExaminationsPage() {
       <section className="ml-0 md:ml-[280px] min-h-screen pt-[72px]">
         <div className="mx-auto max-w-5xl px-4 py-6 sm:px-6 sm:py-8 lg:px-10 lg:py-10">
 
-          {/* ================= A. EXAM RESULTS ================= */}
           <div className="grid gap-4 sm:grid-cols-3">
             <div className="rounded-2xl border border-line bg-white p-6">
               <p className="text-xs font-semibold uppercase tracking-wider text-graphite-soft">
@@ -240,7 +237,6 @@ export default function ExaminationsPage() {
             </Link>
           </div>
 
-          {/* ================= B. EXAM HALL & SEAT ================= */}
           <div className="mt-12">
             <div className="flex flex-wrap items-center justify-between gap-4">
               <h2 className="font-display text-lg font-semibold text-charcoal">

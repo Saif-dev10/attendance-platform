@@ -38,8 +38,7 @@ export default function QRScanner({
       return;
     }
 
-    // The requesting state is a real initialization state, so permission can
-    // be requested while the existing loading panel remains visible.
+    // Start camera setup once per stage transition; the loading panel remains visible while permission is pending.
     if (initializationStartedRef.current) return;
 
     initializationStartedRef.current = true;
@@ -101,7 +100,6 @@ export default function QRScanner({
   return (
     <div className="flex flex-col items-center">
       <div className="relative w-full max-w-sm aspect-square rounded-3xl overflow-hidden bg-charcoal">
-        {/* Live camera feed */}
         {(stage === "requesting_permission" ||
           stage === "active" ||
           stage === "detecting") && !streamError && (
@@ -118,12 +116,10 @@ export default function QRScanner({
           />
         )}
 
-        {/* Dim overlay */}
         {(stage === "active" || stage === "detecting") && (
           <div className="absolute inset-0 bg-charcoal/25" />
         )}
 
-        {/* Scan frame */}
         {(stage === "active" || stage === "detecting") && (
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="relative h-56 w-56">
@@ -142,7 +138,6 @@ export default function QRScanner({
           </div>
         )}
 
-        {/* Requesting permission */}
         {stage === "requesting_permission" && (
           <StatusPanel
             icon={<Camera className="h-7 w-7 text-cream" />}
@@ -151,7 +146,6 @@ export default function QRScanner({
           />
         )}
 
-        {/* Permission denied */}
         {stage === "permission_denied" && (
           <StatusPanel
             icon={<ShieldAlert className="h-7 w-7 text-cream" />}
@@ -178,7 +172,6 @@ export default function QRScanner({
           />
         )}
 
-        {/* Camera error */}
         {(stage === "camera_error" || streamError) && (
           <StatusPanel
             icon={<VideoOff className="h-7 w-7 text-cream" />}

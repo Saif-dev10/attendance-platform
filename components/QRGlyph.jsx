@@ -1,4 +1,4 @@
-// A fixed pseudo-random 9x9 bit pattern used purely for visual texture.
+// Decorative pattern; it is not generated from a real QR payload.
 const PATTERN = [
   1, 0, 1, 1, 0, 1, 1, 0, 1,
   0, 1, 0, 0, 1, 0, 1, 1, 0,
@@ -20,10 +20,6 @@ function Finder({ className = "" }) {
   );
 }
 
-/**
- * Decorative, stylized QR-style glyph for product mockups.
- * Not a scannable or functional code — presentational only.
- */
 export default function QRGlyph({ size = 168, animated = false, className = "" }) {
   return (
     <div

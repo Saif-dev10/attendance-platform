@@ -1,11 +1,7 @@
 import QRGlyph from "./QRGlyph";
 import StatusPill from "./StatusPill";
 
-/**
- * Mock of an active lecture check-in screen.
- * It shows the QR code, a live session status, and a list of students already
- * checked in during the current session.
- */
+/** Active lecture check-in mockup for the public product pages. */
 const checkIns = [
   { name: "A. Okafor", time: "10:02", status: "Verified" },
   { name: "M. Iqbal", time: "10:02", status: "Verified" },

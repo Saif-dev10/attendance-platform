@@ -1,8 +1,4 @@
-/**
- * Shared top app bar for dashboard and student screens.
- * It carries the page title, optional subtitle, leading action, and right-side
- * actions while sitting above the main content area.
- */
+/** Fixed page header with optional subtitle, leading action, and right-side actions. */
 export default function Topbar({
   title,
   subtitle,

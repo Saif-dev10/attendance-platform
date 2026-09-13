@@ -1,4 +1,3 @@
-// app/students/assignments/page.jsx
 import { Search, SlidersHorizontal, Clock, MessageSquare } from "lucide-react";
 import Link from "next/link";
 import Sidebar from "@/components/layout/Sidebar";
@@ -66,7 +65,6 @@ export default function AssignmentsPage() {
       <Sidebar />
 
       <main className="md:ml-[280px] pb-[84px] md:pb-0">
-        {/* Header */}
         <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between px-5 sm:px-8 py-5 bg-white border-b border-line">
           <div>
             <h1 className="text-xl font-bold text-charcoal">Assignments</h1>
@@ -88,7 +86,6 @@ export default function AssignmentsPage() {
         </header>
 
         <div className="p-5 sm:p-8 space-y-8">
-          {/* Immediate deadline banner */}
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between bg-cream border border-line rounded-xl px-5 sm:px-6 py-4">
             <div className="flex items-center gap-4">
               <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm shrink-0">
@@ -110,14 +107,12 @@ export default function AssignmentsPage() {
             </Link>
           </div>
 
-          {/* Due Today */}
           <Section label="DUE TODAY">
             {dueToday.map((item) => (
               <AssignmentCard key={item.id} item={item} />
             ))}
           </Section>
 
-          {/* Due This Week */}
           <Section label="DUE THIS WEEK">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {dueThisWeek.map((item) => (
@@ -126,7 +121,6 @@ export default function AssignmentsPage() {
             </div>
           </Section>
 
-          {/* Recently Graded */}
           <Section label="RECENTLY GRADED">
             <div className="bg-white rounded-xl border border-line divide-y divide-line">
               {gradedItems.map((item) => (

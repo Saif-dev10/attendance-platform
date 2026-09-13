@@ -1,8 +1,4 @@
-/**
- * Reports workspace.
- * This screen is intended for attendance summaries, export actions, and
- * aggregated academic reporting for staff and administrators.
- */
+/** Placeholder for attendance summaries and academic reporting. */
 import Sidebar from "@/components/layout/Sidebar";
 
 export default function ReportsPage() {

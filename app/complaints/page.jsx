@@ -397,7 +397,6 @@ function DynamicFields({ variant, fields, onChange }) {
     );
   }
 
-  // generic
   return (
     <>
       <div>
@@ -575,7 +574,6 @@ export default function ComplaintsSupportPage() {
             </div>
           ) : (
             <div className="grid gap-8 lg:grid-cols-[1fr_1.2fr] lg:items-start">
-              {/* Submission flow */}
               <div className="rounded-2xl border border-line bg-paper p-6 lg:sticky lg:top-8">
                 {!category ? (
                   <>
@@ -659,7 +657,6 @@ export default function ComplaintsSupportPage() {
                 )}
               </div>
 
-              {/* Ticket list + support contacts */}
               <div>
                 <h2 className="font-display text-lg font-semibold text-charcoal">Your complaints</h2>
 
@@ -687,7 +684,6 @@ export default function ComplaintsSupportPage() {
                   ))}
                 </div>
 
-                {/* Quick support */}
                 <div className="mt-8 grid gap-4 sm:grid-cols-2">
                   <div className="rounded-2xl border border-line bg-cream px-5 py-5">
                     <PiMailboxFill className="text-xl text-bronze-deep" />

@@ -1,7 +1,4 @@
-/**
- * Simple reusable container for grouped UI content.
- * This keeps sections consistent without tying them to a specific layout pattern.
- */
+/** Reusable container for grouped app content. */
 export default function Card({
   title,
   children,

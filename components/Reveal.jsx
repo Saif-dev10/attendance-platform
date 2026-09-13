@@ -2,11 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-/**
- * Progressive reveal wrapper.
- * It adds a small fade and lift animation when content enters the viewport, while
- * falling back gracefully when animation APIs are unavailable.
- */
+/** Adds an entrance animation when the wrapped content enters the viewport. */
 export default function Reveal({ children, as: Tag = "div", delay = 0, className = "" }) {
   const ref = useRef(null);
 

@@ -104,7 +104,6 @@ export default function DocumentsPage() {
       />
       <main className="min-h-screen bg-cream md:ml-[280px]">
         <div className="mx-auto max-w-6xl px-6 pb-28 pt-[104px] lg:px-10 md:pb-14">
-          {/* Document type grid */}
           <div className="grid gap-5 sm:grid-cols-2">
             {DOCUMENT_TYPES.map((doc) => {
               const Icon = doc.icon;
@@ -149,7 +148,6 @@ export default function DocumentsPage() {
             })}
           </div>
 
-          {/* Recent requests */}
           <div className="mt-10">
             <h2 className="font-display text-lg font-semibold text-charcoal">Recent requests</h2>
 

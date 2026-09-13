@@ -21,11 +21,7 @@ import {
 export default function MobileBottomNav({ active = "home" }) {
   const [moreOpen, setMoreOpen] = useState(false);
 
-  /**
-   * Primary quick actions that stay visible in the mobile tab bar.
-   * These are the actions students use most often, keeping the layout uncluttered
-   * while still giving quick access to key parts of the app.
-   */
+  // Keep the highest-frequency destinations visible without crowding the bar.
   const items = [
     {
       key: "home",
@@ -47,11 +43,7 @@ export default function MobileBottomNav({ active = "home" }) {
     },
   ];
 
-  /**
-   * Secondary links grouped inside the overflow menu.
-   * We keep less frequently used screens here so the main nav remains focused and
-   * easier to scan on smaller devices.
-   */
+  // Less frequent destinations live in the drawer to keep the primary bar usable.
   const moreSections = [
     {
       title: "Account",
@@ -82,7 +74,7 @@ export default function MobileBottomNav({ active = "home" }) {
           icon: FileText,
         },
         {
-          label: "Exam Result",
+          label: "Examaminations",
           href: "/students/examinations",
           icon: ClipboardCheck,
         },
@@ -107,11 +99,6 @@ export default function MobileBottomNav({ active = "home" }) {
 
   return (
     <>
-      {/*
-        * Dimmed backdrop for the overflow drawer.
-        * This keeps the menu visually separate from the content underneath and
-        * makes the mobile interaction feel deliberate and easy to dismiss.
-        */}
       {moreOpen && (
         <div
           className="fixed inset-0 z-[60] bg-charcoal/30 backdrop-blur-[2px] md:hidden"
@@ -120,11 +107,6 @@ export default function MobileBottomNav({ active = "home" }) {
         />
       )}
 
-      {/*
-        * Expanded menu of secondary actions.
-        * This drawer groups profile, timetable, documents, and support links that
-        * are useful but not essential enough to live in the main bottom tab strip.
-        */}
       <div
         className={`fixed bottom-0 left-0 right-0 z-[70] rounded-t-3xl border-t border-line bg-paper px-4 pb-6 pt-3 shadow-2xl transition-transform duration-300 md:hidden ${
           moreOpen ? "translate-y-0" : "translate-y-full"
@@ -192,11 +174,6 @@ export default function MobileBottomNav({ active = "home" }) {
         </div>
       </div>
 
-      {/*
-        * Mobile navigation bar.
-        * This is intentionally kept to a compact, touch-friendly layout on small
-        * screens so core student actions remain easy to reach with one hand.
-        */}
       <nav
         className="
           fixed bottom-0 left-0 right-0 z-50
@@ -215,7 +192,6 @@ export default function MobileBottomNav({ active = "home" }) {
           isActive={active === "academic"}
         />
 
-        {/* Campus ride is promoted as a quick action because it is a high-frequency need. */}
         <Link
           href="/campus-ride"
           className="relative -mt-8 flex flex-col items-center"
@@ -242,7 +218,6 @@ export default function MobileBottomNav({ active = "home" }) {
           isActive={active === "support"}
         />
 
-        {/* The overflow button keeps the primary nav compact without hiding less common options. */}
         <button
           type="button"
           onClick={() => setMoreOpen(true)}

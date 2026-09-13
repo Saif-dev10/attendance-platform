@@ -60,8 +60,7 @@ export default function ScanPage() {
   function handleQRDetected(rawPayload) {
     setCameraStage("detecting");
 
-    // Brief pause so the "detecting" sweep is visible
-    // before moving on.
+    // Leave the detection sweep visible briefly before validation begins.
     setTimeout(
       () => runValidation(rawPayload),
       500
@@ -221,10 +220,7 @@ function ScanIntro({
         onCameraError={onCameraError}
       />
 
-      {/* Demo trigger — simulates a QR being found
-          in the camera frame.
-          TODO: remove once real QR decoding is wired
-          to the video stream. */}
+        {/* Development-only control until the camera stream has a QR decoder. */}
 
       {cameraStage === "active" && (
         <button

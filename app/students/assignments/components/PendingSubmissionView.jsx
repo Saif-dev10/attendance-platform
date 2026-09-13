@@ -1,4 +1,3 @@
-// app/students/assignments/_components/PendingSubmissionView.jsx
 import { ArrowLeft, Info, Paperclip, FileCode, FileText, UploadCloud, MessageCircle, Send } from "lucide-react";
 import Link from "next/link";
 
@@ -26,7 +25,6 @@ export default function PendingSubmissionView({ assignment }) {
       </header>
 
       <div className="p-5 sm:p-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left: Brief */}
         <div className="lg:col-span-2 bg-white rounded-xl border border-line p-6 space-y-6 min-w-0">
           <div className="flex items-start justify-between gap-4">
             <div className="flex gap-4">
@@ -91,7 +89,6 @@ export default function PendingSubmissionView({ assignment }) {
           </div>
         </div>
 
-        {/* Right: Submission + Comments */}
         <div className="space-y-6 min-w-0">
           <div className="bg-white rounded-xl border border-line p-5">
             <div className="flex items-center justify-between mb-4">

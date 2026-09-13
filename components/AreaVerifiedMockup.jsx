@@ -1,9 +1,6 @@
 import { IconLocation, IconShield } from "./icons";
 
-/**
- * A compact verification card used in product mockups to communicate that a
- * student check-in was validated against the active session and enrollment data.
- */
+/** Verification state shown in the attendance product mockups. */
 export default function AreaVerifiedMockup() {
   return (
     <div className="overflow-hidden rounded-2xl border border-line-strong bg-paper p-8 shadow-[0_24px_50px_-28px_rgba(32,30,27,0.3)]">

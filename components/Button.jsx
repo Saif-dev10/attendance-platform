@@ -1,9 +1,6 @@
 import Link from "next/link";
 
-/**
- * Shared CTA button used across the marketing pages.
- * The component supports both internal links and regular button behavior.
- */
+/** Shared marketing CTA that renders as a link or button. */
 const variants = {
   primary:
     "bg-charcoal text-cream hover:bg-bronze-deep hover:text-cream shadow-[0_1px_0_rgba(0,0,0,0.05)]",
