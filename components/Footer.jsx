@@ -1,8 +1,8 @@
 import Link from "next/link";
 
 /**
- * Global footer links for the product marketing site.
- * These group navigation by platform, audience, and company information.
+ * Global footer links for the SKUL marketing site.
+ * These group navigation by platform, audience, and institution needs.
  */
 const columns = [
   {
@@ -11,6 +11,7 @@ const columns = [
       { href: "/platform", label: "Overview" },
       { href: "/how-it-works", label: "How It Works" },
       { href: "/features", label: "Features" },
+      { href: "/campus-ride", label: "Campus Ride" },
     ],
   },
   {
@@ -22,7 +23,7 @@ const columns = [
     ],
   },
   {
-    heading: "Company",
+    heading: "Campus",
     links: [
       { href: "/#institutions", label: "For Institutions" },
       { href: "/#contact", label: "Request a Demo" },
@@ -38,11 +39,11 @@ export default function Footer() {
         <div className="grid gap-12 md:grid-cols-[1.4fr_repeat(3,1fr)]">
           <div>
             <Link href="/" className="font-display text-2xl font-medium text-cream">
-              Presently<span className="text-bronze-soft">.</span>
+              SKUL<span className="text-bronze-soft">.</span>
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-cream/60">
-              A calmer way to run attendance — session check-in, live activity,
-              and organized records, built for university teaching.
+              A clearer way to run campus attendance — session check-in, live activity,
+              and organized records built for modern university teaching teams.
             </p>
           </div>
 
@@ -68,7 +69,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-14 flex flex-col gap-4 border-t border-cream/10 pt-8 text-xs text-cream/45 sm:flex-row sm:items-center sm:justify-between">
-          <p>&copy; {new Date().getFullYear()} Presently. Built for university teaching teams.</p>
+          <p>&copy; {new Date().getFullYear()} SKUL. Built for university teaching teams.</p>
           <div className="flex gap-6">
             <Link href="/#" className="hover:text-cream/70">
               Privacy
