@@ -169,7 +169,7 @@ export default function Sidebar({
         </div>
 
         <span className="font-bold text-xl tracking-tight text-charcoal">
-          UniFlow
+          SKUL
         </span>
       </div>
 
