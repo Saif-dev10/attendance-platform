@@ -16,6 +16,7 @@ import {
   Files,
   UserCircle,
   Settings,
+  QrCode
 } from "lucide-react";
 
 export default function MobileBottomNav({ active = "home" }) {
@@ -193,9 +194,9 @@ export default function MobileBottomNav({ active = "home" }) {
         />
 
         <Link
-          href="/campus-ride"
+          href="/scan"
           className="relative -mt-8 flex flex-col items-center"
-          aria-label="Campus Ride"
+          aria-label="QR Scanner"
         >
           <span
             className="
@@ -205,11 +206,11 @@ export default function MobileBottomNav({ active = "home" }) {
               shadow-xl shadow-charcoal/30
             "
           >
-            <Bus size={24} strokeWidth={2} />
+            <QrCode size={24} strokeWidth={2} />
           </span>
 
           <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap text-[10px] font-bold text-graphite-soft">
-            Ride
+            QR Scanner
           </span>
         </Link>
 
