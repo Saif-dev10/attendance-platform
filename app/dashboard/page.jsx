@@ -186,7 +186,7 @@ export default function DashboardPage() {
                     View Timetable
                   </Button>
 
-                  <Button
+                  {/* <Button
                     onClick={() => router.push("/campus-ride")}
                     className="
                       w-full sm:w-auto px-5 py-2.5 rounded-xl bg-cream/10 hover:bg-cream/20
@@ -195,7 +195,7 @@ export default function DashboardPage() {
                     "
                   >
                     Campus Ride
-                  </Button>
+                  </Button> */}
 
                   <Button
                     onClick={() => router.push("/scan")}
@@ -281,7 +281,7 @@ export default function DashboardPage() {
             ))}
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5 min-w-0">
+          <div className="grid grid-cols-1 gap-4 sm:gap-5 min-w-0">
 
             <Card className="lg:col-span-2 min-w-0 rounded-2xl border border-line bg-white flex flex-col p-0">
               <div className="px-4 sm:px-6 py-4 sm:py-5 border-b border-line flex items-center justify-between gap-2">
@@ -321,7 +321,7 @@ export default function DashboardPage() {
               </div>
             </Card>
 
-            <Card className="lg:col-span-1 min-w-0 rounded-2xl border border-line bg-white flex flex-col p-0">
+            {/* <Card className="lg:col-span-1 min-w-0 rounded-2xl border border-line bg-white flex flex-col p-0">
               <div className="px-4 sm:px-6 py-4 sm:py-5 border-b border-line flex items-center justify-between">
                 <h3 className="font-bold text-charcoal">Campus Ride</h3>
                 <Link href="/campus-ride" aria-label="Open campus ride" className="w-8 h-8 rounded-lg bg-paper flex items-center justify-center text-graphite">
@@ -342,7 +342,7 @@ export default function DashboardPage() {
                   Book Ride
                 </Button>
               </div>
-            </Card>
+            </Card> */}
           </div>
 
         </div>
