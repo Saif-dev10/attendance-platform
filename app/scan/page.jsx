@@ -41,51 +41,93 @@ export default function ScanPage() {
     setCameraErrorReason("unavailable");
     setValidation(null);
     setConfirmed(null);
+    setIsConfirming(false);
   }, []);
 
   const runValidation = useCallback(async (rawPayload) => {
     setFlowStage("validating");
 
-    const result = await validateQRCode(rawPayload);
+    try {
+      const result = await validateQRCode(rawPayload);
 
-    setValidation(result);
+      setValidation(result);
 
-    setFlowStage(
-      result.status === "valid"
-        ? "review"
-        : "result"
-    );
+      setFlowStage(
+        result.status === "valid"
+          ? "review"
+          : "result"
+      );
+    } catch (error) {
+      console.error("QR validation failed:", error);
+
+      setValidation({
+        status: "invalid",
+      });
+
+      setFlowStage("result");
+    }
   }, []);
 
-  function handleQRDetected(rawPayload) {
-    setCameraStage("detecting");
+  const handleQRDetected = useCallback(
+    (rawPayload) => {
+      if (!rawPayload) return;
 
-    // Leave the detection sweep visible briefly before validation begins.
-    setTimeout(
-      () => runValidation(rawPayload),
-      500
-    );
-  }
+      setCameraStage("detecting");
+
+      // Leave the detection sweep visible briefly
+      // before validation begins.
+      setTimeout(() => {
+        runValidation(rawPayload);
+      }, 500);
+    },
+    [runValidation]
+  );
 
   async function handleConfirmAttendance() {
+    if (!validation?.session) return;
+
     setIsConfirming(true);
 
-    const result = await confirmAttendance({
-      qrToken: "demo-token",
-      studentId: "demo-student",
-      attendanceSessionId: "demo-session",
-      timestamp: new Date().toISOString(),
-      location: null,
-    });
+    try {
+      const result = await confirmAttendance({
+        qrToken:
+          validation.session.qrToken ||
+          validation.session.token ||
+          "demo-token",
 
-    setConfirmed(result);
-    setIsConfirming(false);
-    setFlowStage("result");
+        studentId: "demo-student",
+
+        attendanceSessionId:
+          validation.session.id ||
+          "demo-session",
+
+        timestamp: new Date().toISOString(),
+
+        location: null,
+      });
+
+      setConfirmed(result);
+      setFlowStage("result");
+    } catch (error) {
+      console.error(
+        "Attendance confirmation failed:",
+        error
+      );
+
+      setConfirmed(null);
+
+      setValidation({
+        status: "invalid",
+      });
+
+      setFlowStage("result");
+    } finally {
+      setIsConfirming(false);
+    }
   }
 
   return (
     <div className="min-h-screen bg-paper">
-
       <main className="mx-auto flex min-h-[calc(100vh-72px)] max-w-lg flex-col items-center justify-center px-5 pb-28 pt-8 sm:pb-10">
         {flowStage === "input" &&
           mode === "camera" && (
@@ -106,6 +148,7 @@ export default function ScanPage() {
               }
               onCameraError={(reason) => {
                 setCameraErrorReason(reason);
+
                 setCameraStage(
                   reason === "permission_denied"
                     ? "permission_denied"
@@ -220,23 +263,11 @@ function ScanIntro({
         onCameraError={onCameraError}
       />
 
-        {/* Development-only control until the camera stream has a QR decoder. */}
-
-      {cameraStage === "active" && (
-        <button
-          onClick={() =>
-            onQRDetected("VALID_DEMO")
-          }
-          className="mt-4 text-xs text-graphite-soft/60 underline decoration-dotted underline-offset-4"
-        >
-          (Dev) Simulate QR detected
-        </button>
-      )}
-
       <div className="mt-6 flex items-center justify-center gap-6">
         <button
+          type="button"
           onClick={onManualEntry}
-          className="text-xs font-medium uppercase tracking-wide text-graphite-soft hover:text-bronze-deep transition-colors"
+          className="text-xs font-medium uppercase tracking-wide text-graphite-soft transition-colors hover:text-bronze-deep"
         >
           Enter Code Manually
         </button>
@@ -244,8 +275,9 @@ function ScanIntro({
         <span className="h-3 w-px bg-line" />
 
         <button
+          type="button"
           onClick={onUpload}
-          className="text-xs font-medium uppercase tracking-wide text-graphite-soft hover:text-bronze-deep transition-colors"
+          className="text-xs font-medium uppercase tracking-wide text-graphite-soft transition-colors hover:text-bronze-deep"
         >
           Upload QR Image
         </button>

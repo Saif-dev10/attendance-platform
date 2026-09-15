@@ -6,10 +6,30 @@ import Image from "next/image";
 
 const QRGeneratorPage = () => {
   const [qrCode, setQrCode] = useState(null);
+  const [isGenerating, setIsGenerating] = useState(false);
 
-  const generate = () => {
-    QRCode.toDataURL(`https://github.com/Saif-dev10`).then(setQrCode);
-  }
+  const generate = async () => {
+    setIsGenerating(true);
+
+    try {
+      // Temporary test URL.
+      // Later, this token will come from your backend.
+      const scanUrl =
+        "http://localhost:3000/scan?token=test123";
+
+      const url = await QRCode.toDataURL(scanUrl, {
+        width: 512,
+        margin: 2,
+        errorCorrectionLevel: "M",
+      });
+
+      setQrCode(url);
+    } catch (error) {
+      console.error("QR generation failed:", error);
+    } finally {
+      setIsGenerating(false);
+    }
+  };
 
   return (
     <main>
@@ -19,7 +39,6 @@ const QRGeneratorPage = () => {
         </h1>
 
         <div className="mb-4">
-          {/* QR code will be displayed here */}
           {qrCode ? (
             <Image
               src={qrCode}
@@ -39,14 +58,19 @@ const QRGeneratorPage = () => {
 
         <button
           type="button"
-          onClick={() => {
-            // QR generation will be added here
-            generate();
-          }}
-          className="rounded-lg bg-black px-6 py-3 font-medium text-white transition hover:bg-gray-800 cursor-pointer active:scale-95"
+          onClick={generate}
+          disabled={isGenerating}
+          className="cursor-pointer rounded-lg bg-black px-6 py-3 font-medium text-white transition hover:bg-gray-800 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50"
         >
-          Generate QR Code
+          {isGenerating ? "Generating..." : "Generate QR Code"}
         </button>
+
+        {qrCode && (
+          <p className="mt-4 max-w-sm text-center text-xs text-gray-500">
+            This QR currently contains a temporary test attendance
+            token.
+          </p>
+        )}
       </div>
     </main>
   );
