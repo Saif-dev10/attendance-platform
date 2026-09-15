@@ -1,0 +1,43 @@
+[33me1b6302[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mtest[m[33m, [m[1;31morigin/test[m[33m)[m Added comments to all pages
+[33m367133e[m Created and updated the complaints, examinations and timetable page
+[33m2637565[m Created and added the logo icon
+[33me44dc10[m Changed the colors of the login page
+[33m364c169[m Updated the dashboard to meet updated requirements
+[33m8a50f35[m Made the QR scanner line move more
+[33m8945829[m Made the scanner line active when QR scanner is active
+[33ma3976b1[m Updated global css to show animation line in QR scanner
+[33m2e94351[m Created and updated the QR scanner for students
+[33m62221b5[m Updated pages for responsiveness
+[33mafb91ba[m Modified the examinations, mobileNav, sidebar and other documents
+[33m54b9040[m Fix deployment route errors
+[33md3bb52b[m Made the Map interactive
+[33m6c23d3d[m Updated campus ride
+[33m5427f48[m Created the right file structure for campus ride
+[33m3dd2a3c[m Created the aissignments id, grade, pending and assignment page
+[33m7447381[m Added the Link tag on all pages and made little changes in courses and side bar page
+[33me2bd778[m Updated the student dashboard
+[33me31538e[m Updated and modified pages and commented on pages
+[33m879f5ff[m Created and modified the courses section
+[33m50e7c79[m Modified all pages with proper comments
+[33m6bd15ee[m Updated all pages
+[33m6f6a475[m Updated the Student time table, lecturers page, sidebar and topbar
+[33m8c1d80c[m Modified the dashboard, lecturers, MobileBottomNav, Sidebar, and Topbar color to suit the landing pages
+[33m615094f[m Created the MobileButton Nav, updated student and lecturer page
+[33m34278e5[m Made mobile more responsive for display
+[33maa771f9[m Updated the timetable page
+[33m58cf1b3[m Created and updated the timetable page
+[33mc1d7a22[m Completed the dashboard demo and edited the top bar
+[33m7e7adf1[m Updated the Lecturers page with proper HTML syntax
+[33me5feff7[m Updated the student and Lecturer pages
+[33m1bbd575[m Updated both validation and login page
+[33m099b908[m Updated the login page
+[33m0fdb702[m Updated the login page
+[33mc374fb7[m Updated the login page
+[33m2119c42[m Created the some cards for the page
+[33m214eaba[m Updated the sidebar by removing duplicate settings
+[33mfbbb957[m Created pages and updated the student dashboard
+[33m8cd608e[m Updated the login page and layout.js page for site title
+[33m5e00a9f[m Merge remote-tracking branch 'origin/master'
+[33m7dfd477[m Updated the wordings in all landing pages
+[33m586dd3c[m updated pages
+[33mea049bd[m First commit
