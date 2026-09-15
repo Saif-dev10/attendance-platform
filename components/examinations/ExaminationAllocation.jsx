@@ -5,7 +5,7 @@ import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 import AllocationCard from "./AllocationCard";
 import EmptyState from "./EmptyState";
-import { getExaminationAllocation } from "@/lib/mock/examinations";
+import { getExaminationAllocation } from "@/lib/services/examinations";
 
 export default function ExaminationAllocation() {
   const [status, setStatus] = useState("idle"); // idle | loading | result | empty

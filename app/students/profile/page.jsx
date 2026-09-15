@@ -7,6 +7,10 @@ import Sidebar from "@/components/layout/Sidebar";
 import Topbar from "@/components/layout/Topbar";
 import Button from "@/components/ui/Button";
 import {
+  getStudentDocuments,
+  getStudentProfile,
+} from "@/lib/services/profile";
+import {
   ArrowLeft,
   CalendarDays,
   CheckCircle2,
@@ -23,48 +27,8 @@ import {
   X,
 } from "lucide-react";
 
-const student = {
-  name: "David Okafor",
-  role: "Student • 300L",
-  studentId: "BUK/CSC/23/0142",
-  programme: "B.Sc. Computer Science",
-  department: "Computer Science",
-  faculty: "Computing",
-  level: "300 Level",
-  session: "2025/2026",
-  semester: "Second Semester",
-  admissionYear: "2023",
-
-  cgpa: "4.21",
-  attendance: "87%",
-  courses: "8",
-  credits: "54 / 120",
-
-  dateOfBirth: "12 March 2004",
-  gender: "Male",
-  email: "david.okafor@example.com",
-  phone: "+234 801 234 5678",
-  address: "Kano, Nigeria",
-
-  emergencyName: "Mary Okafor",
-  emergencyRelationship: "Mother",
-  emergencyPhone: "+234 802 987 6543",
-};
-
-const documents = [
-  {
-    name: "Admission Letter",
-    description: "University admission document",
-  },
-  {
-    name: "Student ID Card",
-    description: "Current student identification",
-  },
-  {
-    name: "Academic Transcript",
-    description: "Academic record",
-  },
-];
+const student = getStudentProfile();
+const documents = getStudentDocuments();
 
 export default function StudentProfilePage() {
   const [editOpen, setEditOpen] = useState(false);

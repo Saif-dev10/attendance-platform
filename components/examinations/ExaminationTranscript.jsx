@@ -5,7 +5,7 @@ import { ChevronDown } from "lucide-react";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 import TranscriptTable from "./TranscriptTable";
-import { getExaminationTranscript } from "@/lib/mock/examinations";
+import { getExaminationTranscript } from "@/lib/services/examinations";
 
 export default function ExaminationTranscript() {
   const [records, setRecords] = useState(null);

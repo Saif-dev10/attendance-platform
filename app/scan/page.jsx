@@ -14,7 +14,7 @@ import QRImageUpload from "@/components/qr/QRImageUpload";
 import {
   confirmAttendance,
   validateQRCode,
-} from "@/components/qr/qr-types";
+} from "@/lib/services/attendance";
 
 export default function ScanPage() {
   const [mode, setMode] = useState("camera");

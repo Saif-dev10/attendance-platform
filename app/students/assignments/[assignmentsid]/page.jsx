@@ -2,7 +2,7 @@ import Sidebar from "@/components/layout/Sidebar";
 import MobileBottomNav from "@/components/layout/MobileBottomNav";
 import PendingSubmissionView from "../components/PendingSubmissionView";
 import GradedView from "../components/GradedView";
-import { getAssignment } from "@/lib/assignments";
+import { getAssignment } from "@/lib/services/assignments";
 import { notFound } from "next/navigation";
 
 export default async function AssignmentDetailPage({ params }) {
