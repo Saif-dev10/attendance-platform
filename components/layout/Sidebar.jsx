@@ -82,17 +82,17 @@ export const lecturerSections = [
       },
       {
         label: "Attendance",
-        href: "/lecturer/attendance",
+        href: "/lecturers/attendance",
         icon: ClipboardCheck,
       },
       {
         label: "Assignments",
-        href: "/lecturer/assignments",
+        href: "/lecturers/assignments",
         icon: FileText,
       },
       {
         label: "Students",
-        href: "/lecturer/students",
+        href: "/lecturers/students",
         icon: GraduationCap,
       },
     ],
