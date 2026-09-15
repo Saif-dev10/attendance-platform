@@ -44,6 +44,19 @@ export async function validateQRCode(rawPayload) {
     };
   }
 
+  const now = new Date();
+  const date = now.toLocaleDateString("en-US", {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+
+  const time = now.toLocaleTimeString("en-US", {
+    hour: 'numeric',
+    minute: '2-digit',
+    second: '2-digit',
+  });
+
   return {
     type: "attendance",
     status: "valid",
@@ -51,8 +64,8 @@ export async function validateQRCode(rawPayload) {
       courseCode: "CSC301",
       courseTitle: "Advanced Algorithms",
       lecturer: "Dr. Yusuf Muhammad",
-      date: "September 14, 2026",
-      time: "10:00 – 12:00 PM",
+      date: date,
+      time: time,
       location: "Main Lecture Hall B-04",
     },
   };
