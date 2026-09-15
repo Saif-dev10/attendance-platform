@@ -9,7 +9,7 @@ import {
   BookOpen,
   FileText,
   ClipboardCheck,
-  Bus,
+  // Bus,
   AlertTriangle,
   Files,
   GraduationCap,
@@ -46,11 +46,11 @@ export const studentSections = [
   {
     title: "Campus Life",
     links: [
-      {
-        label: "Campus Ride",
-        href: "/campus-ride",
-        icon: Bus,
-      },
+      // {
+      //   label: "Campus Ride",
+      //   href: "/campus-ride",
+      //   icon: Bus,
+      // },
       {
         label: "Complaints",
         href: "/complaints",
@@ -101,11 +101,11 @@ export const lecturerSections = [
   {
     title: "Campus Life",
     links: [
-      {
-        label: "Campus Ride",
-        href: "/lecturer/campus-ride",
-        icon: Bus,
-      },
+      // {
+      //   label: "Campus Ride",
+      //   href: "/lecturer/campus-ride",
+      //   icon: Bus,
+      // },
       {
         label: "Complaints",
         href: "/lecturer/complaints",
