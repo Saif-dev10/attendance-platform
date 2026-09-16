@@ -36,8 +36,8 @@ export default function SettingsPage() {
             <SettingsRow
               icon={MapPin}
               label="Address"
-              description="Manage your current residential address."
-              href="/students/settings/address"
+              description="View your university-provided address information."
+              href="/students/profile"
             />
             <SettingsRow
               icon={LockKeyhole}

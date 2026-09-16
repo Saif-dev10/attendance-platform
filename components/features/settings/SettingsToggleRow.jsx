@@ -30,8 +30,8 @@ export default function SettingsToggleRow({
         }`}
       >
         <span
-          className={`absolute top-1/2 h-4.5 w-4.5 -translate-y-1/2 rounded-full bg-white shadow transition-transform duration-150 ${
-            checked ? "translate-x-[22px]" : "translate-x-1"
+          className={`absolute top-1/2 h-4.5 w-4.5 -translate-y-1/2 rounded-full bg-white shadow-sm transition-[left] duration-150 ease-out ${
+            checked ? "left-[22px]" : "left-1"
           }`}
         />
       </button>
