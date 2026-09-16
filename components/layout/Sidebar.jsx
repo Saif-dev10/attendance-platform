@@ -13,6 +13,7 @@ import {
   AlertTriangle,
   Files,
   GraduationCap,
+  Settings
 } from "lucide-react";
 
 /** Links shown in the student workspace sidebar. */
@@ -60,6 +61,11 @@ export const studentSections = [
         label: "Documents",
         href: "/documents",
         icon: Files,
+      },
+      {
+        label: "Settings",
+        href: "/students/settings",
+        icon: Settings,
       },
     ],
   },
@@ -115,6 +121,11 @@ export const lecturerSections = [
         label: "Documents",
         href: "/lecturer/documents",
         icon: Files,
+      },
+      {
+        label: "Settings",
+        href: "/students/settings",
+        icon: Settings,
       },
     ],
   },
