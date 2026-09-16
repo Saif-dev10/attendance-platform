@@ -6,6 +6,7 @@ import Image from "next/image";
 import Sidebar from "@/components/layout/Sidebar";
 import Topbar from "@/components/layout/Topbar";
 import Button from "@/components/ui/Button";
+import MobileBottomNav from "@/components/layout/MobileBottomNav";
 import {
   getStudentDocuments,
   getStudentProfile,
@@ -50,6 +51,7 @@ export default function StudentProfilePage() {
           </Link>
         }
       />
+      <MobileBottomNav active="academic" />
 
       <main className="min-h-screen overflow-y-auto bg-paper px-3 pb-28 pt-[92px] sm:px-6 md:ml-[280px] md:pb-10">
         <div className="mx-auto max-w-[1400px] space-y-6">
