@@ -73,7 +73,6 @@ export default function DashboardPage() {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
   const [searchOpen, setSearchOpen] = useState(false);
-  const [notificationsOpen, setNotificationsOpen] = useState(false);
 
   const filteredLectures = todaysLectures.filter(({ course, meta }) =>
     `${course} ${meta}`.toLowerCase().includes(searchQuery.toLowerCase()),
@@ -121,19 +120,14 @@ export default function DashboardPage() {
           <Search size={20} />
         </button>
 
-        <button
-          type="button"
-          aria-label="Notifications"
-          aria-expanded={notificationsOpen}
-          onClick={() => setNotificationsOpen((isOpen) => !isOpen)}
-          className="
-            w-10 h-10 flex items-center justify-center rounded-xl
-            text-graphite hover:bg-paper transition-colors relative
-          "
+        <Link
+          href="/notifications"
+          aria-label="View notifications"
+          className="relative flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl text-graphite transition-colors hover:bg-paper focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bronze"
         >
           <Bell size={20} />
-          <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white" />
-        </button>
+          <span className="absolute right-2.5 top-2.5 h-2 w-2 rounded-full border-2 border-paper bg-bronze-deep" aria-hidden="true" />
+        </Link>
 
         {searchOpen && (
           <input
@@ -147,11 +141,6 @@ export default function DashboardPage() {
           />
         )}
 
-        {notificationsOpen && (
-          <div className="absolute top-[60px] right-4 w-64 rounded-xl border border-line bg-white p-4 text-sm text-graphite shadow-lg">
-            You have no new notifications.
-          </div>
-        )}
       </Topbar>
 
       <main className="ml-0 h-screen overflow-y-auto pt-[72px] md:ml-[280px] bg-paper">

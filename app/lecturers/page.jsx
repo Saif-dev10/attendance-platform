@@ -2,6 +2,7 @@ import Sidebar, { lecturerSections } from "@/components/layout/Sidebar";
 import Topbar from "@/components/layout/Topbar";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
+import Link from "next/link";
 import Image from "next/image";
 import {
   PlusCircle,
@@ -10,6 +11,7 @@ import {
   ClipboardList,
   CheckSquare,
   ChevronRight,
+  Bell,
 } from "lucide-react";
 
 const statCards = [
@@ -110,6 +112,14 @@ export default function Lecturer() {
         }}
       />
       <Topbar title="Lecturer Console">
+        <Link
+          href="/notifications?role=lecturer"
+          aria-label="View lecturer notifications"
+          className="relative flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl text-graphite transition-colors hover:bg-paper focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bronze"
+        >
+          <Bell size={20} />
+          <span className="absolute right-2.5 top-2.5 h-2 w-2 rounded-full border-2 border-paper bg-bronze-deep" aria-hidden="true" />
+        </Link>
         <Button
           type="button"
           className="
