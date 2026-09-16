@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import Button from '@/components/ui/Button';
 import Sidebar from '@/components/layout/Sidebar';
 import MobileBottomNav from '@/components/layout/MobileBottomNav';
@@ -11,6 +12,7 @@ import {
   PiPackageFill,
   PiDownloadSimpleBold,
 } from 'react-icons/pi';
+import { ArrowLeft } from 'lucide-react';
 import {
   getDocumentTypes,
   getRecentDocumentRequests,
@@ -92,7 +94,7 @@ export default function DocumentsPage() {
   };
 
   return (
-    <div>
+    <div className="min-h-screen bg-paper text-charcoal">
       <Sidebar />
 
       <MobileBottomNav active="more" />
@@ -100,10 +102,19 @@ export default function DocumentsPage() {
       <Topbar
         title="Documents"
         subtitle="Request official documents and track them through to collection."
+        leading={
+          <Link
+            href="/dashboard"
+            aria-label="Back to dashboard"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-line text-graphite-soft transition-all hover:bg-cream hover:text-charcoal"
+          >
+            <ArrowLeft size={17} />
+          </Link>
+        }
       />
 
-      <main className="min-h-screen bg-cream md:ml-[280px]">
-        <div className="mx-auto max-w-6xl px-6 pb-28 pt-[104px] lg:px-10 md:pb-14">
+      <main className="min-h-screen overflow-y-auto bg-paper pb-[calc(84px+1.5rem)] pt-[72px] md:ml-[280px] md:pb-0">
+        <div className="mx-auto max-w-6xl px-3 py-5 sm:px-6 sm:py-6 md:px-8 md:py-8 lg:px-10">
 
           {/* Document request cards */}
           <div className="grid gap-5 sm:grid-cols-2">

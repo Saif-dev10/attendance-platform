@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
+import Link from 'next/link';
 import Button from '@/components/ui/Button';
 import Sidebar from '@/components/layout/Sidebar';
 import MobileBottomNav from '@/components/layout/MobileBottomNav';
@@ -23,6 +24,7 @@ import {
   PiClipboardTextFill,
   PiArrowLeft,
 } from 'react-icons/pi';
+import { ArrowLeft } from 'lucide-react';
 
 const CATEGORIES = getComplaintCategories();
 const { courses: COURSES, sessions: SESSIONS } = getComplaintFormOptions();
@@ -426,16 +428,25 @@ export default function ComplaintsSupportPage() {
   );
 
   return (
-    <div className="min-h-screen bg-cream">
+    <div className="min-h-screen bg-paper text-charcoal">
       <Sidebar />
       <MobileBottomNav active="support" />
       <Topbar
         title="Complaints & Support"
         subtitle="Choose the area your issue relates to, and we&apos;ll ask the right questions for it."
+        leading={
+          <Link
+            href="/dashboard"
+            aria-label="Back to dashboard"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-line text-graphite-soft transition-all hover:bg-cream hover:text-charcoal"
+          >
+            <ArrowLeft size={17} />
+          </Link>
+        }
       />
 
-      <main className="min-h-screen bg-cream md:ml-[280px]">
-        <div className="mx-auto max-w-6xl px-6 pb-28 pt-[104px] lg:px-10 md:pb-14">
+      <main className="min-h-screen overflow-y-auto bg-paper pb-[calc(84px+1.5rem)] pt-[72px] md:ml-[280px] md:pb-0">
+        <div className="mx-auto max-w-6xl px-3 py-5 sm:px-6 sm:py-6 md:px-8 md:py-8 lg:px-10">
           {selectedTicket ? (
             <div className="max-w-3xl">
               <ComplaintDetail ticket={selectedTicket} onBack={() => setSelectedRef(null)} />
@@ -460,10 +471,10 @@ export default function ComplaintsSupportPage() {
                             key={cat.id}
                             type="button"
                             onClick={() => handleSelectCategory(cat)}
-                            className="flex flex-col items-start gap-3 rounded-xl border border-line bg-cream p-4 text-left transition-colors hover:border-bronze-deep/40"
+                            className="group flex cursor-pointer flex-col items-start gap-3 rounded-xl border border-line bg-cream p-4 text-left transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-bronze-deep/50 hover:bg-paper hover:shadow-sm active:translate-y-0 active:scale-[0.99] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bronze"
                           >
-                            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-charcoal text-cream">
-                              <Icon className="text-base" />
+                            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-charcoal text-cream transition-transform duration-200 group-hover:scale-105">
+                              <Icon className="text-base transition-transform duration-200 group-hover:rotate-[-4deg]" />
                             </div>
                             <div>
                               <p className="text-sm font-bold text-charcoal">{cat.label}</p>
@@ -479,10 +490,19 @@ export default function ComplaintsSupportPage() {
                     <button
                       type="button"
                       onClick={handleChangeCategory}
-                      className="flex items-center gap-1.5 text-xs font-bold text-graphite hover:text-charcoal"
+                      className="flex w-full items-center gap-3 rounded-xl border border-line bg-cream px-4 py-3 text-left transition-colors cursor-pointer hover:border-bronze-deep/40 hover:bg-paper"
                     >
-                      <PiArrowLeft />
-                      Change category
+                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-charcoal text-cream">
+                        <PiArrowLeft className="text-base" />
+                      </span>
+                      <span>
+                        <span className="block text-sm font-bold text-charcoal">
+                          Change category
+                        </span>
+                        <span className="mt-0.5 block text-xs text-graphite-soft">
+                          Choose a different support area
+                        </span>
+                      </span>
                     </button>
 
                     <h2 className="mt-3 font-display text-lg font-semibold text-charcoal">
@@ -534,7 +554,7 @@ export default function ComplaintsSupportPage() {
                       key={ticket.ref}
                       type="button"
                       onClick={() => setSelectedRef(ticket.ref)}
-                      className="flex w-full flex-wrap items-center justify-between gap-4 rounded-2xl border border-line bg-paper px-5 py-4 text-left transition-colors hover:border-bronze-deep/40"
+                      className="group flex w-full cursor-pointer flex-wrap items-center justify-between gap-4 rounded-2xl border border-line bg-paper px-5 py-4 text-left transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-bronze-deep/50 hover:shadow-sm active:translate-y-0 active:scale-[0.995] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bronze"
                     >
                       <div className="min-w-0">
                         <div className="flex items-center gap-2 text-xs font-mono text-graphite-soft">
