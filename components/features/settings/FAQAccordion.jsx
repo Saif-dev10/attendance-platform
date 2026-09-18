@@ -12,7 +12,13 @@ export default function FAQAccordion({ items }) {
         const open = openIndex === index;
         return (
           <div key={item.question} className={index === items.length - 1 ? '' : 'border-b border-line'}>
-            <button type="button" aria-expanded={open} onClick={() => setOpenIndex(open ? null : index)} className="flex w-full cursor-pointer items-center justify-between gap-4 px-4 py-4 text-left transition-colors hover:bg-paper focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-bronze sm:px-5">
+            <button 
+              type="button" 
+              aria-expanded={open} 
+              onClick={() => setOpenIndex(open ? null : index)}
+               className="flex w-full cursor-pointer items-center justify-between gap-4 px-4 py-4 text-left transition-colors hover:bg-paper focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-bronze sm:px-5"
+              >
+                
               <span className="text-sm font-semibold text-charcoal">{item.question}</span>
               <ChevronDown size={17} className={`shrink-0 text-graphite-soft transition-transform ${open ? 'rotate-180 text-bronze-deep' : ''}`} />
             </button>

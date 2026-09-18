@@ -57,9 +57,27 @@ export default function PasswordForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-5 rounded-2xl border border-line bg-white p-5 sm:p-7">
       <div className="space-y-4">
-        <PasswordField label="Current password" value={values.current} visible={visible.current} onChange={updateValue('current')} onToggle={() => toggleVisibility('current')} />
-        <PasswordField label="New password" value={values.next} visible={visible.next} onChange={updateValue('next')} onToggle={() => toggleVisibility('next')} />
-        <PasswordField label="Confirm new password" value={values.confirm} visible={visible.confirm} onChange={updateValue('confirm')} onToggle={() => toggleVisibility('confirm')} />
+        <PasswordField 
+          label="Current password" 
+          value={values.current} 
+          visible={visible.current} 
+          onChange={updateValue('current')} 
+          onToggle={() => toggleVisibility('current')}
+        />
+        <PasswordField 
+          label="New password" 
+          value={values.next} 
+          visible={visible.next} 
+          onChange={updateValue('next')} 
+          onToggle={() => toggleVisibility('next')}
+        />
+        <PasswordField 
+          label="Confirm new password" 
+          value={values.confirm} 
+          visible={visible.confirm} 
+          onChange={updateValue('confirm')} 
+          onToggle={() => toggleVisibility('confirm')}
+        />
       </div>
 
       <div className="rounded-xl border border-line bg-cream px-4 py-4">
@@ -76,7 +94,10 @@ export default function PasswordForm() {
         </p>
       )}
 
-      <Button type="submit" disabled={isSubmitting} className="w-full sm:w-auto">
+      <Button 
+        type="submit" 
+        disabled={isSubmitting} 
+        className="w-full sm:w-auto">
         {isSubmitting ? 'Updating...' : 'Update Password'}
       </Button>
     </form>
@@ -86,8 +107,21 @@ export default function PasswordForm() {
 function PasswordField({ label, value, visible, onChange, onToggle }) {
   return (
     <div className="relative">
-      <SettingsField label={label} type={visible ? 'text' : 'password'} value={value} onChange={onChange} autoComplete="new-password" />
-      <button type="button" onClick={onToggle} aria-label={`${visible ? 'Hide' : 'Show'} ${label.toLowerCase()}`} className="absolute right-3 top-8 flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg text-graphite-soft transition-colors hover:bg-cream hover:text-charcoal focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bronze">
+      <SettingsField 
+        label={label} 
+        type={visible ? 'text' : 'password'}
+        value={value} 
+        onChange={onChange} 
+        autoComplete="new-password"
+      />
+
+      <button 
+        type="button" 
+        onClick={onToggle} 
+        aria-label={`${visible ? 'Hide' : 'Show'} ${label.toLowerCase()}`} 
+        className="
+          absolute right-3 top-8 flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg text-graphite-soft transition-colors hover:bg-cream hover:text-charcoal focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bronze"
+        >
         {visible ? <EyeOff size={17} /> : <Eye size={17} />}
       </button>
     </div>
