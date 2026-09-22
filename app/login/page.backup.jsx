@@ -17,9 +17,8 @@ import {
 
 import {
   validateRegistrationNumber,
+  validatePasswordStrength,
 } from '@/lib/validation';
-
-import { login } from '@/lib/auth/service';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -78,10 +77,7 @@ export default function LoginPage() {
       'BUK_STUDENT'
     );
 
-    const passwordResult = {
-      valid: password.length > 0,
-      unmet: password.length > 0 ? [] : ['Password is required.'],
-    };
+    const passwordResult = validatePasswordStrength(password);
 
     const nextErrors = {};
 
@@ -99,25 +95,33 @@ export default function LoginPage() {
       return;
     }
 
+    router.push('/dashboard');
+
     setIsSubmitting(true);
 
     try {
-      await login(regResult.value, password);
 
-      router.push('/dashboard');
+      console.log('Validated login:', {
+        registrationNumber: regResult.value,
+        password,
+        remember,
+      });
+
+      await new Promise((resolve) =>
+        setTimeout(resolve, 700)
+      );
+
     } catch (error) {
       console.error('Login error:', error);
 
-      if (error.status === 401) {
-        setFormError('Invalid registration number or password.');
-      } else {
-        setFormError(
-          error.message || 'Something went wrong. Please try again.'
-        );
-      }
+      setFormError(
+        'Something went wrong. Please try again.'
+      );
     } finally {
       setIsSubmitting(false);
     }
+
+    
   }
 
   return (
