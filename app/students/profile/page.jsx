@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Sidebar from "@/components/layout/Sidebar";
@@ -27,12 +27,49 @@ import {
   UserCircle,
   X,
 } from "lucide-react";
-
-const student = getStudentProfile();
-const documents = getStudentDocuments();
+import { getCurrentUser } from "@/lib/auth/service";
 
 export default function StudentProfilePage() {
   const [editOpen, setEditOpen] = useState(false);
+  const [userData, setUserData] = useState(null);
+  const [profileData, setProfileData] = useState(null);
+  const [documents, setDocuments] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadData() {
+      try {
+        const [currentUser, docs, profile] = await Promise.all([
+          getCurrentUser(),
+          getStudentDocuments(),
+          
+        ]);
+
+        setUserData(currentUser);
+        setDocuments(docs || []);
+        setProfileData(profile || {});
+      } catch (error) {
+        console.error("Failed to load profile data:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadData();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-paper text-charcoal">
+        <p className="text-sm font-semibold animate-pulse">Loading profile...</p>
+      </div>
+    );
+  }
+
+  const student = userData?.student || {};
+  const fullName = [student.first_name, student.middle_name, student.last_name]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <div className="min-h-screen bg-paper text-charcoal">
@@ -55,22 +92,26 @@ export default function StudentProfilePage() {
 
       <main className="min-h-screen overflow-y-auto bg-paper px-3 pb-28 pt-[92px] sm:px-6 md:ml-[280px] md:pb-10">
         <div className="mx-auto max-w-[1400px] space-y-6">
+          <ProfileHeader
+            student={student}
+            profile={profileData}
+            fullName={fullName}
+            onEdit={() => setEditOpen(true)}
+          />
 
-          <ProfileHeader student={student} onEdit={() => setEditOpen(true)} />
-
-          <AcademicOverview student={student} />
+          <AcademicOverview profile={profileData} />
 
           <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
             <InformationSection title="Academic Information">
               <InformationGrid
                 fields={[
-                  { label: "Programme", value: student.programme, icon: GraduationCap },
-                  { label: "Department", value: student.department },
-                  { label: "Faculty", value: student.faculty },
-                  { label: "Level", value: student.level },
-                  { label: "Academic Session", value: student.session },
-                  { label: "Current Semester", value: student.semester },
-                  { label: "Admission Year", value: student.admissionYear },
+                  { label: "Programme", value: profileData?.programme, icon: GraduationCap },
+                  { label: "Department", value: profileData?.department },
+                  { label: "Faculty", value: profileData?.faculty },
+                  { label: "Level", value: profileData?.level },
+                  { label: "Academic Session", value: profileData?.session },
+                  { label: "Current Semester", value: profileData?.semester },
+                  { label: "Admission Year", value: profileData?.admissionYear },
                 ]}
               />
             </InformationSection>
@@ -91,30 +132,30 @@ export default function StudentProfilePage() {
               >
                 <InformationGrid
                   fields={[
-                    { label: "Full Name", value: student.name, icon: UserCircle },
-                    { label: "Date of Birth", value: student.dateOfBirth, icon: CalendarDays },
-                    { label: "Gender", value: student.gender },
-                    { label: "Email Address", value: student.email, icon: Mail },
-                    { label: "Phone Number", value: student.phone, icon: Phone },
-                    { label: "Address", value: student.address, icon: MapPin },
+                    { label: "Full Name", value: fullName, icon: UserCircle },
+                    { label: "Date of Birth", value: profileData?.dateOfBirth, icon: CalendarDays },
+                    { label: "Gender", value: profileData?.gender },
+                    { label: "Email Address", value: profileData?.email, icon: Mail },
+                    { label: "Phone Number", value: profileData?.phone, icon: Phone },
+                    { label: "Address", value: profileData?.address, icon: MapPin },
                   ]}
                 />
               </InformationSection>
 
-              <EmergencyContact student={student} />
+              <EmergencyContact profile={profileData} />
             </div>
           </div>
 
           <StudentDocuments documents={documents} />
 
-          <SecuritySection student={student} />
+          <SecuritySection email={profileData?.email} />
         </div>
       </main>
 
       <EditProfileModal
         open={editOpen}
         onClose={() => setEditOpen(false)}
-        student={student}
+        profile={profileData}
       />
     </div>
   );
@@ -124,14 +165,14 @@ export default function StudentProfilePage() {
 /* Profile identity header                                                 */
 /* ---------------------------------------------------------------------- */
 
-function ProfileHeader({ student, onEdit }) {
+function ProfileHeader({ student, profile, fullName, onEdit }) {
   return (
     <section className="rounded-2xl border border-line bg-white px-5 py-6 sm:px-7 sm:py-7">
       <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
           <Image
-            src="/avatar-placeholder.svg"
-            alt={student.name}
+            src={profile?.avatarUrl || "/avatar-placeholder.svg"}
+            alt={fullName || "Student Avatar"}
             width={88}
             height={88}
             className="h-20 w-20 shrink-0 rounded-xl border border-line bg-cream object-cover sm:h-[88px] sm:w-[88px]"
@@ -140,7 +181,7 @@ function ProfileHeader({ student, onEdit }) {
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2.5">
               <h1 className="text-xl font-bold tracking-tight text-charcoal sm:text-2xl">
-                {student.name}
+                {fullName}
               </h1>
 
               <span className="inline-flex items-center gap-1.5 rounded-full bg-bronze-deep/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-bronze-deep">
@@ -150,16 +191,16 @@ function ProfileHeader({ student, onEdit }) {
             </div>
 
             <p className="mt-1.5 text-sm text-graphite">
-              {student.role}
+              {student?.matric_number}
               <span className="mx-1.5 text-line">•</span>
-              {student.programme}
+              {profile?.programme || "N/A"}
             </p>
 
             <div className="mt-3 flex flex-wrap items-center gap-x-6 gap-y-1.5">
-              <MetaItem label="Student ID" value={student.studentId} />
-              <MetaItem label="Department" value={student.department} />
-              {student.faculty && (
-                <MetaItem label="Faculty" value={student.faculty} />
+              <MetaItem label="Matric No" value={student?.matric_number} />
+              <MetaItem label="Department" value={profile?.department} />
+              {profile?.faculty && (
+                <MetaItem label="Faculty" value={profile.faculty} />
               )}
             </div>
           </div>
@@ -179,10 +220,11 @@ function ProfileHeader({ student, onEdit }) {
 }
 
 function MetaItem({ label, value }) {
+  if (!value) return null;
   return (
     <span className="flex items-baseline gap-1.5 text-xs">
       <span className="font-bold uppercase tracking-wider text-graphite-soft">
-        {label}
+        {label}:
       </span>
       <span className="font-semibold text-charcoal">{value}</span>
     </span>
@@ -193,12 +235,12 @@ function MetaItem({ label, value }) {
 /* Academic overview strip                                                 */
 /* ---------------------------------------------------------------------- */
 
-function AcademicOverview({ student }) {
+function AcademicOverview({ profile }) {
   const stats = [
-    { label: "CGPA", value: student.cgpa },
-    { label: "Attendance", value: student.attendance },
-    { label: "Current Level", value: student.level },
-    { label: "Courses", value: student.courses },
+    { label: "CGPA", value: profile?.cgpa ?? "N/A" },
+    { label: "Attendance", value: profile?.attendance ?? "N/A" },
+    { label: "Current Level", value: profile?.level ?? "N/A" },
+    { label: "Courses", value: profile?.coursesCount ?? "N/A" },
   ];
 
   return (
@@ -252,7 +294,7 @@ function InformationGrid({ fields }) {
   return (
     <div className="grid grid-cols-1 gap-x-10 gap-y-5 sm:grid-cols-2">
       {fields
-        .filter((field) => field.value)
+        .filter((field) => Boolean(field.value))
         .map((field) => (
           <InfoField key={field.label} {...field} />
         ))}
@@ -285,16 +327,16 @@ function InfoField({ label, value, icon: Icon }) {
 /* Emergency contact                                                       */
 /* ---------------------------------------------------------------------- */
 
-function EmergencyContact({ student }) {
+function EmergencyContact({ profile }) {
   return (
     <section>
       <SectionHeading title="Emergency Contact" />
 
       <div className="overflow-hidden rounded-2xl border border-line bg-white">
         <div className="grid grid-cols-1 gap-x-10 gap-y-5 px-5 py-5 sm:grid-cols-2 sm:px-7 sm:py-6">
-          <InfoField label="Contact Name" value={student.emergencyName} />
-          <InfoField label="Relationship" value={student.emergencyRelationship} />
-          <InfoField label="Emergency Phone" value={student.emergencyPhone} />
+          <InfoField label="Contact Name" value={profile?.emergencyName} />
+          <InfoField label="Relationship" value={profile?.emergencyRelationship} />
+          <InfoField label="Emergency Phone" value={profile?.emergencyPhone} />
         </div>
 
         <div className="border-t border-line bg-cream px-5 py-3 sm:px-7">
@@ -320,8 +362,8 @@ function StudentDocuments({ documents }) {
       <div className="overflow-hidden rounded-2xl border border-line bg-white">
         {documents.map((document, index) => (
           <Link
-            href="/documents"
-            key={document.name}
+            href={document.url || "/documents"}
+            key={document.id || document.name || index}
             className={`group flex items-center gap-3 px-4 py-4 transition-colors hover:bg-paper sm:px-5 ${
               index !== documents.length - 1 ? "border-b border-line" : ""
             }`}
@@ -362,7 +404,7 @@ function StudentDocuments({ documents }) {
 /* Account & security                                                      */
 /* ---------------------------------------------------------------------- */
 
-function SecuritySection({ student }) {
+function SecuritySection({ email }) {
   return (
     <section>
       <SectionHeading title="Account & Security" />
@@ -371,7 +413,7 @@ function SecuritySection({ student }) {
         <SecurityRow
           icon={Mail}
           label="Email Address"
-          description={student.email}
+          description={email || "Not specified"}
           action={
             <span className="flex items-center gap-1.5 rounded-full bg-bronze-deep/10 px-2.5 py-1 text-[10px] font-bold text-bronze-deep">
               <CheckCircle2 size={12} />
@@ -440,7 +482,7 @@ function SecurityRow({ icon: Icon, label, description, action, last = false }) {
 /* Edit profile modal                                                      */
 /* ---------------------------------------------------------------------- */
 
-function EditProfileModal({ open, onClose, student }) {
+function EditProfileModal({ open, onClose, profile }) {
   if (!open) return null;
 
   return (
@@ -472,10 +514,10 @@ function EditProfileModal({ open, onClose, student }) {
         </div>
 
         <div className="space-y-4 px-5 py-5 sm:px-6">
-          <FormField label="Phone Number" defaultValue={student.phone} />
-          <FormField label="Address" defaultValue={student.address} />
-          <FormField label="Emergency Contact" defaultValue={student.emergencyName} />
-          <FormField label="Emergency Phone" defaultValue={student.emergencyPhone} />
+          <FormField label="Phone Number" defaultValue={profile?.phone} />
+          <FormField label="Address" defaultValue={profile?.address} />
+          <FormField label="Emergency Contact" defaultValue={profile?.emergencyName} />
+          <FormField label="Emergency Phone" defaultValue={profile?.emergencyPhone} />
 
           <div className="rounded-xl border border-line bg-cream px-4 py-3">
             <p className="text-[11px] leading-relaxed text-graphite-soft">
@@ -517,7 +559,7 @@ function FormField({ label, defaultValue }) {
 
       <input
         type="text"
-        defaultValue={defaultValue}
+        defaultValue={defaultValue || ""}
         className="w-full rounded-xl border border-line bg-white px-3.5 py-3 text-sm text-charcoal outline-none transition-colors placeholder:text-graphite-soft focus:border-bronze-deep focus:ring-2 focus:ring-bronze-deep/10"
       />
     </label>

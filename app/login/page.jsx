@@ -15,10 +15,7 @@ import {
   PiArrowRight,
 } from 'react-icons/pi';
 
-import {
-  validateRegistrationNumber,
-} from '@/lib/validation';
-
+import { validateRegistrationNumber } from '@/lib/validation';
 import { login } from '@/lib/auth/service';
 
 export default function LoginPage() {
@@ -38,10 +35,8 @@ export default function LoginPage() {
 
     setErrors((prev) => {
       if (!prev.regNumber) return prev;
-
       const updated = { ...prev };
       delete updated.regNumber;
-
       return updated;
     });
 
@@ -50,15 +45,12 @@ export default function LoginPage() {
 
   const handlePasswordChange = useCallback((e) => {
     const value = e.target.value;
-
     setPassword(value);
 
     setErrors((prev) => {
       if (!prev.password) return prev;
-
       const updated = { ...prev };
       delete updated.password;
-
       return updated;
     });
 
@@ -73,10 +65,7 @@ export default function LoginPage() {
     setErrors({});
     setFormError('');
 
-    const regResult = validateRegistrationNumber(
-      regNumber,
-      'BUK_STUDENT'
-    );
+    const regResult = validateRegistrationNumber(regNumber, 'BUK_STUDENT');
 
     const passwordResult = {
       valid: password.length > 0,
@@ -102,6 +91,7 @@ export default function LoginPage() {
     setIsSubmitting(true);
 
     try {
+      // Calls updated stateful login (sets HttpOnly cookie)
       await login(regResult.value, password);
 
       router.push('/dashboard');
@@ -122,13 +112,9 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen w-full flex flex-col lg:flex-row bg-paper lg:bg-cream">
-
       <div className="w-full max-w-md lg:max-w-none lg:w-[480px] min-h-screen flex flex-col p-8 lg:p-16 shrink-0 relative z-10 bg-cream shadow-xl lg:shadow-2xl rounded-2xl lg:rounded-none m-4 lg:m-0">
-
         <div className="mb-auto">
-
           <div className="flex items-center gap-2.5 mb-12">
-
             <div className="w-10 h-10 rounded-xl bg-charcoal flex items-center justify-center text-cream shadow-lg shadow-charcoal/20">
               <PiGraduationCapFill className="text-xl" />
             </div>
@@ -136,28 +122,19 @@ export default function LoginPage() {
             <span className="font-bold text-2xl tracking-tight text-slate-900">
               SKUL
             </span>
-
           </div>
 
           <div className="mb-10">
-
             <h1 className="font-display text-3xl font-bold text-charcoal mb-2">
               Welcome back
             </h1>
 
             <p className="text-graphite">
-              Please enter your institutional credentials to
-              access your workspace.
+              Please enter your institutional credentials to access your workspace.
             </p>
-
           </div>
 
-          <form
-            className="space-y-5"
-            onSubmit={handleSubmit}
-            noValidate
-          >
-
+          <form className="space-y-5" onSubmit={handleSubmit} noValidate>
             {formError && (
               <div
                 role="alert"
@@ -168,7 +145,6 @@ export default function LoginPage() {
             )}
 
             <div>
-
               <label
                 htmlFor="regNumber"
                 className="block text-[13px] font-bold text-charcoal uppercase tracking-wider mb-2"
@@ -177,10 +153,7 @@ export default function LoginPage() {
               </label>
 
               <div className="relative">
-
-                <PiIdentificationCard
-                  className="absolute left-4 top-1/2 -translate-y-1/2 text-graphite-soft text-lg"
-                />
+                <PiIdentificationCard className="absolute left-4 top-1/2 -translate-y-1/2 text-graphite-soft text-lg" />
 
                 <input
                   type="text"
@@ -192,9 +165,7 @@ export default function LoginPage() {
                   onChange={handleRegNumberChange}
                   aria-invalid={!!errors.regNumber}
                   aria-describedby={
-                    errors.regNumber
-                      ? 'regNumber-error'
-                      : undefined
+                    errors.regNumber ? 'regNumber-error' : undefined
                   }
                   className={`w-full pl-12 pr-4 py-3.5 bg-paper border rounded-xl text-sm focus:outline-none focus:ring-4 transition-all placeholder:text-graphite-soft font-medium ${
                     errors.regNumber
@@ -202,7 +173,6 @@ export default function LoginPage() {
                       : 'border-line focus:ring-bronze-deep/10 focus:border-bronze-soft'
                   }`}
                 />
-
               </div>
 
               {errors.regNumber && (
@@ -214,13 +184,10 @@ export default function LoginPage() {
                   {errors.regNumber}
                 </p>
               )}
-
             </div>
 
             <div>
-
               <div className="flex items-center justify-between mb-2">
-
                 <label
                   htmlFor="password"
                   className="block text-[13px] font-bold text-charcoal uppercase tracking-wider"
@@ -234,14 +201,10 @@ export default function LoginPage() {
                 >
                   Forgot?
                 </Link>
-
               </div>
 
               <div className="relative">
-
-                <PiLock
-                  className="absolute left-4 top-1/2 -translate-y-1/2 text-graphite-soft text-lg"
-                />
+                <PiLock className="absolute left-4 top-1/2 -translate-y-1/2 text-graphite-soft text-lg" />
 
                 <input
                   type={showPassword ? 'text' : 'password'}
@@ -253,9 +216,7 @@ export default function LoginPage() {
                   onChange={handlePasswordChange}
                   aria-invalid={!!errors.password}
                   aria-describedby={
-                    errors.password
-                      ? 'password-error'
-                      : undefined
+                    errors.password ? 'password-error' : undefined
                   }
                   className={`w-full pl-12 pr-12 py-3.5 bg-paper border rounded-xl text-sm focus:outline-none focus:ring-4 transition-all placeholder:text-graphite-soft font-medium ${
                     errors.password
@@ -266,14 +227,10 @@ export default function LoginPage() {
 
                 <button
                   type="button"
-                  onClick={() =>
-                    setShowPassword((prev) => !prev)
-                  }
+                  onClick={() => setShowPassword((prev) => !prev)}
                   className="absolute right-4 top-1/2 -translate-y-1/2 text-graphite-soft hover:text-graphite transition-colors"
                   aria-label={
-                    showPassword
-                      ? 'Hide password'
-                      : 'Show password'
+                    showPassword ? 'Hide password' : 'Show password'
                   }
                 >
                   {showPassword ? (
@@ -282,7 +239,6 @@ export default function LoginPage() {
                     <PiEye className="text-lg cursor-pointer" />
                   )}
                 </button>
-
               </div>
 
               {errors.password && (
@@ -291,7 +247,6 @@ export default function LoginPage() {
                   role="alert"
                   className="mt-2 space-y-1"
                 >
-
                   {errors.password.map((error) => (
                     <p
                       key={error}
@@ -300,22 +255,17 @@ export default function LoginPage() {
                       • {error}
                     </p>
                   ))}
-
                 </div>
               )}
-
             </div>
 
             <div className="flex items-center gap-3 pt-2">
-
               <input
                 type="checkbox"
                 id="remember"
                 name="remember"
                 checked={remember}
-                onChange={(e) =>
-                  setRemember(e.target.checked)
-                }
+                onChange={(e) => setRemember(e.target.checked)}
                 className="w-4 h-4 rounded border-line-strong text-bronze-deep focus:ring-bronze-deep/20"
               />
 
@@ -325,7 +275,6 @@ export default function LoginPage() {
               >
                 Remember this device for 30 days
               </label>
-
             </div>
 
             <Button
@@ -338,50 +287,31 @@ export default function LoginPage() {
                   : 'bg-charcoal hover:bg-charcoal/90 cursor-pointer'
               }`}
             >
-
               <span>
-                {isSubmitting
-                  ? 'Signing In…'
-                  : 'Sign In to Workspace'}
+                {isSubmitting ? 'Signing In…' : 'Sign In to Workspace'}
               </span>
 
-              {!isSubmitting && (
-                <PiArrowRight className="font-bold" />
-              )}
-
-              
-
+              {!isSubmitting && <PiArrowRight className="font-bold" />}
             </Button>
-
           </form>
 
           <div className="mt-10 pt-8 border-t border-line">
-
             <p className="text-[13px] text-graphite text-center">
-
               New student or staff?{' '}
-
               <Link
                 href="#"
                 className="font-bold text-bronze-deep hover:text-bronze-soft"
               >
                 Activate your account
               </Link>
-
             </p>
-
           </div>
-
         </div>
 
         <div className="mt-8 lg:mt-auto flex items-center justify-between text-[11px] font-medium text-graphite-soft uppercase tracking-[0.1em]">
-
-          <span>
-            &copy; 2024 SKUL Platform
-          </span>
+          <span>&copy; 2024 SKUL Platform</span>
 
           <div className="flex gap-4">
-
             <Link
               href="#"
               className="hover:text-graphite transition-colors"
@@ -395,17 +325,12 @@ export default function LoginPage() {
             >
               Support
             </Link>
-
           </div>
-
         </div>
-
       </div>
 
       <div className="hidden lg:block flex-1 min-h-screen sticky top-0 relative bg-charcoal overflow-hidden">
-
         <div className="absolute inset-0 z-0">
-
           <Image
             src="https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_e42b8ed18d_3606c98ef15b48ce.png"
             alt="Modern university campus architecture with glass buildings and library"
@@ -414,7 +339,6 @@ export default function LoginPage() {
             sizes="(max-width: 1024px) 0vw, 100vw"
             className="object-cover opacity-40 mix-blend-luminosity"
           />
-
         </div>
 
         <div className="absolute inset-0 bg-gradient-to-tr from-charcoal via-charcoal/60 to-bronze-deep/30 z-10" />
@@ -423,45 +347,30 @@ export default function LoginPage() {
           className="absolute inset-0 w-full h-full opacity-[0.15] z-[15]"
           xmlns="http://www.w3.org/2000/svg"
         >
-
           <defs>
-
             <pattern
               id="grid-login"
               width="60"
               height="60"
               patternUnits="userSpaceOnUse"
             >
-
               <path
                 d="M 60 0 L 0 0 0 60"
                 fill="none"
                 stroke="#fff"
                 strokeWidth="0.5"
               />
-
             </pattern>
-
           </defs>
 
-          <rect
-            width="100%"
-            height="100%"
-            fill="url(#grid-login)"
-          />
-
+          <rect width="100%" height="100%" fill="url(#grid-login)" />
         </svg>
 
         <div className="absolute inset-0 z-20 flex flex-col justify-center p-20 text-cream">
-
           <div className="max-w-xl">
-
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cream/10 backdrop-blur-md border border-cream/20 text-xs font-bold uppercase tracking-widest mb-6">
-
               <span className="w-2 h-2 rounded-full bg-bronze-soft animate-pulse" />
-
               SKUL
-
             </div>
 
             <h2 className="font-display text-5xl font-bold leading-tight mb-6">
@@ -469,44 +378,28 @@ export default function LoginPage() {
             </h2>
 
             <p className="text-xl text-cream/70 leading-relaxed">
-              Experience a unified platform for academic
-              excellence, administration, and campus mobility.
+              Experience a unified platform for academic excellence,
+              administration, and campus mobility.
             </p>
 
             <div className="grid grid-cols-2 gap-10 mt-16">
-
               <div>
-
-                <p className="text-4xl font-bold mb-1">
-                  15k+
-                </p>
-
+                <p className="text-4xl font-bold mb-1">15k+</p>
                 <p className="text-sm font-medium text-cream/50 uppercase tracking-wider">
                   Active Students
                 </p>
-
               </div>
 
               <div>
-
-                <p className="text-4xl font-bold mb-1">
-                  98%
-                </p>
-
+                <p className="text-4xl font-bold mb-1">98%</p>
                 <p className="text-sm font-medium text-cream/50 uppercase tracking-wider">
                   Campus Efficiency
                 </p>
-
               </div>
-
             </div>
-
           </div>
-
         </div>
-
       </div>
-
     </div>
   );
 }
