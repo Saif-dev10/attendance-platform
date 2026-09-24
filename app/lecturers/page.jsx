@@ -111,6 +111,7 @@ export default function Lecturer() {
           avatar: "/avatar-placeholder.svg",
         }}
       />
+      
       <Topbar title="Lecturer Console">
         <Link
           href="/notifications?role=lecturer"
@@ -297,6 +298,7 @@ export default function Lecturer() {
 
         </div>
       </main>
+      
     </>
   );
 }

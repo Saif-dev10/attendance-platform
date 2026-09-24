@@ -190,3 +190,8 @@ input:focus-visible,
     transform-origin: 3px 16px;
     transition: transform 220ms ease-out;
 }
+
+@theme {
+  --color-moss: #3F6B4A;
+  --color-clay: #A5422F;
+}
