@@ -1,6 +1,17 @@
 "use client";
 
-import { AlertCircle, Clock, TrendingDown, TrendingUp, UserCheck, UserX, Users } from "lucide-react";
+import Link from "next/link";
+import {
+  AlertCircle,
+  ArrowLeft,
+  Clock,
+  TrendingDown,
+  TrendingUp,
+  UserCheck,
+  UserX,
+  Users,
+} from "lucide-react";
+
 import AttendanceFilters from "./components/shared/AttendanceFilters";
 import { ProgressRing } from "./components/shared/AttendanceProgress";
 import AttendanceStatCard from "./components/shared/AttendanceStatCard";
@@ -32,20 +43,39 @@ export default function AttendanceOverviewPage() {
 
   // Show a dash instead of zero when there is no session to count.
   const stat = (value) => (summary ? value : "—");
-  const share = (value) => (summary ? `${percentage(value, summary.total)}%` : undefined);
+  const share = (value) =>
+    summary ? `${percentage(value, summary.total)}%` : undefined;
 
   const getRowActions = (row) => [
-    { label: "View student profile", href: attendanceRoutes.student(row.studentId) },
-    { label: "Open session record", href: attendanceRoutes.session(session.id) },
+    {
+      label: "View student profile",
+      href: attendanceRoutes.student(row.studentId),
+    },
+    {
+      label: "Open session record",
+      href: attendanceRoutes.session(session.id),
+    },
   ];
 
   return (
     <div className="min-h-screen">
-      <Topbar title="Attendance">
-        <p className="text-sm text-graphite-soft">
-          Monitor attendance, manage sessions and view student records.
-        </p>
-      </Topbar>
+      <Topbar
+        title="Attendance Management"
+        subtitle="Track sessions, participation and student records."
+        leading={
+          <Link
+            href="/lecturers"
+            aria-label="Back to lecturer dashboard"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-line bg-paper text-graphite transition-colors hover:bg-cream hover:text-charcoal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bronze-deep/40 sm:h-10 sm:w-10"
+          >
+            <ArrowLeft
+              size={18}
+              strokeWidth={2}
+              aria-hidden="true"
+            />
+          </Link>
+        }
+      />
 
       <Sidebar
         sections={lecturerSections}
@@ -57,21 +87,34 @@ export default function AttendanceOverviewPage() {
         }}
       />
 
-      <main className="ml-0 pt-20 pb-18 lg:ml-64">
-        <div className="mx-auto w-full max-x-7xl px-4 py-6 sm:px-6 lg:px-8">
-
+      <main className="ml-0 pt-20 pb-18 md:ml-[280px]">
+        <div className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
           <div className="space-y-4">
+            <section
+              aria-label="Attendance filters"
+              className="rounded-xl border border-line bg-paper p-4 shadow-sm"
+            >
+              <div className="mb-3">
+                <p className="text-sm font-semibold text-charcoal">
+                  Attendance scope
+                </p>
 
-            <OverviewSelectors
-              courses={overview.courses}
-              courseId={overview.courseId}
-              level={overview.level}
-              semester={overview.semester}
-              onCourseChange={overview.selectCourse}
-              onLevelChange={overview.changeLevel}
-              onSemesterChange={overview.changeSemester}
-              historyHref={HISTORY_HREF}
-            />
+                <p className="mt-0.5 text-xs text-graphite-soft">
+                  Select the course and academic period you want to review.
+                </p>
+              </div>
+
+              <OverviewSelectors
+                courses={overview.courses}
+                courseId={overview.courseId}
+                level={overview.level}
+                semester={overview.semester}
+                onCourseChange={overview.selectCourse}
+                onLevelChange={overview.changeLevel}
+                onSemesterChange={overview.changeSemester}
+                historyHref={HISTORY_HREF}
+              />
+            </section>
 
             {overview.error && (
               <div
@@ -79,9 +122,14 @@ export default function AttendanceOverviewPage() {
                 className="flex flex-wrap items-center justify-between gap-2 rounded-md border border-clay/30 bg-clay/10 px-3 py-2 text-sm text-clay"
               >
                 <span className="flex items-center gap-2">
-                  <AlertCircle aria-hidden="true" className="h-4 w-4 shrink-0" />
+                  <AlertCircle
+                    aria-hidden="true"
+                    className="h-4 w-4 shrink-0"
+                  />
+
                   {overview.error}
                 </span>
+
                 <button
                   type="button"
                   onClick={overview.retry}
@@ -98,7 +146,10 @@ export default function AttendanceOverviewPage() {
               </p>
             ) : (
               <>
-                <section aria-label="Attendance summary" className="grid grid-cols-2 gap-3 lg:grid-cols-5">
+                <section
+                  aria-label="Attendance summary"
+                  className="grid grid-cols-2 gap-3 lg:grid-cols-5"
+                >
                   <AttendanceStatCard
                     icon={Users}
                     label="Total Students"
@@ -106,6 +157,7 @@ export default function AttendanceOverviewPage() {
                     subtext="Enrolled"
                     loading={loading}
                   />
+
                   <AttendanceStatCard
                     icon={UserCheck}
                     label="Present"
@@ -114,6 +166,7 @@ export default function AttendanceOverviewPage() {
                     tone="present"
                     loading={loading}
                   />
+
                   <AttendanceStatCard
                     icon={Clock}
                     label="Late"
@@ -122,6 +175,7 @@ export default function AttendanceOverviewPage() {
                     tone="late"
                     loading={loading}
                   />
+
                   <AttendanceStatCard
                     icon={UserX}
                     label="Absent"
@@ -130,8 +184,12 @@ export default function AttendanceOverviewPage() {
                     tone="absent"
                     loading={loading}
                   />
+
                   <div className="col-span-2 lg:col-span-1">
-                    <RateCard summary={summary} loading={loading} />
+                    <RateCard
+                      summary={summary}
+                      loading={loading}
+                    />
                   </div>
                 </section>
 
@@ -146,7 +204,12 @@ export default function AttendanceOverviewPage() {
                       onEnd={overview.endCurrentSession}
                     />
                   </div>
-                  <AttendanceTrendLine data={overview.trend} loading={loading} />
+
+                  <AttendanceTrendLine
+                    data={overview.trend}
+                    loading={loading}
+                  />
+
                   <TeachingSummary
                     teaching={overview.teaching}
                     loading={loading}
@@ -159,9 +222,15 @@ export default function AttendanceOverviewPage() {
                   className="rounded-md border border-line bg-paper"
                 >
                   <div className="space-y-3 p-4">
-                    <h2 id="live-attendance-heading" className="text-sm font-semibold text-charcoal">
-                      {isActive ? "Live Attendance" : "Attendance Records"}
+                    <h2
+                      id="live-attendance-heading"
+                      className="text-sm font-semibold text-charcoal"
+                    >
+                      {isActive
+                        ? "Live Attendance"
+                        : "Attendance Records"}
                     </h2>
+
                     <AttendanceFilters
                       search={table.search}
                       onSearchChange={table.setSearch}
@@ -176,7 +245,9 @@ export default function AttendanceOverviewPage() {
                     loading={loading}
                     showIndex
                     startIndex={table.startIndex}
-                    getRowActions={session ? getRowActions : undefined}
+                    getRowActions={
+                      session ? getRowActions : undefined
+                    }
                     pagination={table.pagination}
                     caption="Students in the current session"
                     emptyMessage={
@@ -191,6 +262,7 @@ export default function AttendanceOverviewPage() {
           </div>
         </div>
       </main>
+
       <MobileBottomNav active="academic" />
     </div>
   );
@@ -213,7 +285,10 @@ function RateCard({ summary, loading }) {
   return (
     <div className="flex items-center justify-between gap-3 rounded-md border border-line bg-paper p-3">
       <div className="min-w-0">
-        <p className="text-xs text-graphite-soft">Attendance Rate</p>
+        <p className="text-xs text-graphite-soft">
+          Attendance Rate
+        </p>
+
         {change != null && (
           <p
             className={`mt-1 flex flex-wrap items-center gap-1 text-xs font-medium ${
@@ -221,22 +296,39 @@ function RateCard({ summary, loading }) {
             }`}
           >
             {change >= 0 ? (
-              <TrendingUp aria-hidden="true" className="h-3.5 w-3.5" />
+              <TrendingUp
+                aria-hidden="true"
+                className="h-3.5 w-3.5"
+              />
             ) : (
-              <TrendingDown aria-hidden="true" className="h-3.5 w-3.5" />
+              <TrendingDown
+                aria-hidden="true"
+                className="h-3.5 w-3.5"
+              />
             )}
+
             {Math.abs(change)}%
-            <span className="font-normal text-graphite-soft">vs last session</span>
+
+            <span className="font-normal text-graphite-soft">
+              vs last session
+            </span>
           </p>
         )}
       </div>
 
       {rate != null ? (
-        <ProgressRing value={rate} size={64} strokeWidth={6} label={`Attendance rate ${rate}%`}>
+        <ProgressRing
+          value={rate}
+          size={64}
+          strokeWidth={6}
+          label={`Attendance rate ${rate}%`}
+        >
           {rate}%
         </ProgressRing>
       ) : (
-        <span className="text-xl font-semibold text-charcoal">—</span>
+        <span className="text-xl font-semibold text-charcoal">
+          —
+        </span>
       )}
     </div>
   );

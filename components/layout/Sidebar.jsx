@@ -9,11 +9,10 @@ import {
   BookOpen,
   FileText,
   ClipboardCheck,
-  // Bus,
   AlertTriangle,
   Files,
   GraduationCap,
-  Settings
+  Settings,
 } from "lucide-react";
 
 /** Links shown in the student workspace sidebar. */
@@ -166,7 +165,6 @@ export default function Sidebar({
 
   return (
     <aside className="hidden md:fixed md:left-0 md:top-0 md:w-[280px] md:bg-paper md:border-r md:border-line md:flex-shrink-0 md:flex md:flex-col md:h-screen md:z-20">
-      
       <div className="h-[72px] px-6 flex items-center gap-2.5 border-b border-line shrink-0">
         <div className="w-8 h-8 rounded-lg bg-charcoal flex items-center justify-center text-cream shadow-lg shadow-charcoal/20">
           <GraduationCap size={18} />
@@ -183,16 +181,12 @@ export default function Sidebar({
             href={dashboardHref}
             icon={LayoutGrid}
             label="Dashboard"
-            active={
-              pathname === dashboardHref ||
-              pathname.startsWith(`${dashboardHref}/`)
-            }
+            active={pathname === dashboardHref}
           />
         </div>
 
         {sections.map((section) => (
           <div key={section.title}>
-
             <h3 className="px-3 text-[11px] font-bold text-graphite-soft uppercase tracking-[0.05em] mb-3">
               {section.title}
             </h3>
@@ -210,17 +204,13 @@ export default function Sidebar({
                 </li>
               ))}
             </ul>
-
           </div>
         ))}
       </div>
 
       <div className="p-4 border-t border-line bg-cream">
-
         <Link href="/students/profile">
           <div className="flex items-center gap-3 p-2 rounded-xl bg-paper border border-line shadow-sm cursor-pointer hover:bg-white hover:cursor-pointer transition-colors">
-            
-
             <Image
               src={user.avatar}
               alt={user.name}
@@ -230,7 +220,6 @@ export default function Sidebar({
             />
 
             <div className="flex-1 min-w-0">
-
               <p className="text-[13px] font-bold text-charcoal truncate">
                 {user.name}
               </p>
@@ -238,11 +227,9 @@ export default function Sidebar({
               <p className="text-[11px] font-semibold text-bronze-deep truncate uppercase tracking-wider">
                 {user.role}
               </p>
-
             </div>
           </div>
         </Link>
-
       </div>
     </aside>
   );
