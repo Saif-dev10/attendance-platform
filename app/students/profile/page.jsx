@@ -27,52 +27,49 @@ import {
   UserCircle,
   X,
 } from "lucide-react";
+import { getCurrentUser } from "@/lib/auth/service";
 
 export default function StudentProfilePage() {
   const [editOpen, setEditOpen] = useState(false);
-  const [student, setStudent] = useState(null);
-  const [documents] = useState(getStudentDocuments());
-  const [profileLoading, setProfileLoading] = useState(true);
-  const [profileError, setProfileError] = useState(null);
+  const [userData, setUserData] = useState(null);
+  const [profileData, setProfileData] = useState(null);
+  const [documents, setDocuments] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function loadProfile() {
+    async function loadData() {
       try {
-        const profile = await getStudentProfile();
-        setStudent(profile);
+        const [currentUser, docs, profile] = await Promise.all([
+          getCurrentUser(),
+          getStudentDocuments(),
+          getStudentProfile(),
+        ]);
+
+        setUserData(currentUser);
+        setDocuments(docs || []);
+        setProfileData(profile || {});
       } catch (error) {
         console.error("Failed to load profile data:", error);
-        setProfileError(error);
       } finally {
-        setProfileLoading(false);
+        setLoading(false);
       }
     }
 
-    loadProfile();
+    loadData();
   }, []);
 
-  if (profileLoading) {
+  if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-paper text-charcoal">
-        <p className="animate-pulse text-sm font-semibold">
-          Loading profile...
-        </p>
+        <p className="text-sm font-semibold animate-pulse">Loading profile...</p>
       </div>
     );
   }
 
-  if (profileError || !student) {
-    return (
-      <div className="flex min-h-screen items-center justify-center bg-paper text-charcoal">
-        <p className="text-sm text-red-600">
-          Unable to load your profile.
-        </p>
-      </div>
-    );
-  }
-
-  const fullName = student.name || "Student";
-  const profileData = student;
+  const student = userData?.student || {};
+  const fullName = [student.first_name, student.middle_name, student.last_name]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <div className="min-h-screen bg-paper text-charcoal">
@@ -91,7 +88,6 @@ export default function StudentProfilePage() {
           </Link>
         }
       />
-
       <MobileBottomNav active="academic" />
 
       <main className="min-h-screen overflow-y-auto bg-paper px-3 pb-28 pt-[92px] sm:px-6 md:ml-[280px] md:pb-10">
@@ -109,35 +105,13 @@ export default function StudentProfilePage() {
             <InformationSection title="Academic Information">
               <InformationGrid
                 fields={[
-                  {
-                    label: "Programme",
-                    value: profileData?.programme,
-                    icon: GraduationCap,
-                  },
-                  {
-                    label: "Department",
-                    value: profileData?.department,
-                  },
-                  {
-                    label: "Faculty",
-                    value: profileData?.faculty,
-                  },
-                  {
-                    label: "Level",
-                    value: profileData?.level,
-                  },
-                  {
-                    label: "Academic Session",
-                    value: profileData?.session,
-                  },
-                  {
-                    label: "Current Semester",
-                    value: profileData?.semester,
-                  },
-                  {
-                    label: "Admission Year",
-                    value: profileData?.admissionYear,
-                  },
+                  { label: "Programme", value: profileData?.programme, icon: GraduationCap },
+                  { label: "Department", value: profileData?.department },
+                  { label: "Faculty", value: profileData?.faculty },
+                  { label: "Level", value: profileData?.level },
+                  { label: "Academic Session", value: profileData?.session },
+                  { label: "Current Semester", value: profileData?.semester },
+                  { label: "Admission Year", value: profileData?.admissionYear },
                 ]}
               />
             </InformationSection>
@@ -158,35 +132,12 @@ export default function StudentProfilePage() {
               >
                 <InformationGrid
                   fields={[
-                    {
-                      label: "Full Name",
-                      value: fullName,
-                      icon: UserCircle,
-                    },
-                    {
-                      label: "Date of Birth",
-                      value: profileData?.dateOfBirth,
-                      icon: CalendarDays,
-                    },
-                    {
-                      label: "Gender",
-                      value: profileData?.gender,
-                    },
-                    {
-                      label: "Email Address",
-                      value: profileData?.email,
-                      icon: Mail,
-                    },
-                    {
-                      label: "Phone Number",
-                      value: profileData?.phone,
-                      icon: Phone,
-                    },
-                    {
-                      label: "Address",
-                      value: profileData?.address,
-                      icon: MapPin,
-                    },
+                    { label: "Full Name", value: fullName, icon: UserCircle },
+                    { label: "Date of Birth", value: profileData?.dateOfBirth, icon: CalendarDays },
+                    { label: "Gender", value: profileData?.gender },
+                    { label: "Email Address", value: profileData?.email, icon: Mail },
+                    { label: "Phone Number", value: profileData?.phone, icon: Phone },
+                    { label: "Address", value: profileData?.address, icon: MapPin },
                   ]}
                 />
               </InformationSection>
@@ -211,7 +162,7 @@ export default function StudentProfilePage() {
 }
 
 /* ---------------------------------------------------------------------- */
-/* Profile identity header                                                */
+/* Profile identity header                                                 */
 /* ---------------------------------------------------------------------- */
 
 function ProfileHeader({ student, profile, fullName, onEdit }) {
@@ -246,19 +197,10 @@ function ProfileHeader({ student, profile, fullName, onEdit }) {
             </p>
 
             <div className="mt-3 flex flex-wrap items-center gap-x-6 gap-y-1.5">
-              <MetaItem
-                label="Matric No"
-                value={student?.matric_number}
-              />
-              <MetaItem
-                label="Department"
-                value={profile?.department}
-              />
+              <MetaItem label="Matric No" value={student?.matric_number} />
+              <MetaItem label="Department" value={profile?.department} />
               {profile?.faculty && (
-                <MetaItem
-                  label="Faculty"
-                  value={profile.faculty}
-                />
+                <MetaItem label="Faculty" value={profile.faculty} />
               )}
             </div>
           </div>
@@ -279,22 +221,18 @@ function ProfileHeader({ student, profile, fullName, onEdit }) {
 
 function MetaItem({ label, value }) {
   if (!value) return null;
-
   return (
     <span className="flex items-baseline gap-1.5 text-xs">
       <span className="font-bold uppercase tracking-wider text-graphite-soft">
         {label}:
       </span>
-
-      <span className="font-semibold text-charcoal">
-        {value}
-      </span>
+      <span className="font-semibold text-charcoal">{value}</span>
     </span>
   );
 }
 
 /* ---------------------------------------------------------------------- */
-/* Academic overview strip                                                */
+/* Academic overview strip                                                 */
 /* ---------------------------------------------------------------------- */
 
 function AcademicOverview({ profile }) {
@@ -307,16 +245,12 @@ function AcademicOverview({ profile }) {
 
   return (
     <section className="overflow-hidden rounded-2xl border border-line bg-white">
-      <div className="grid grid-cols-2 divide-y divide-line sm:grid-cols-4 sm:divide-x sm:divide-y-0">
+      <div className="grid grid-cols-2 divide-y divide-line sm:grid-cols-4 sm:divide-y-0 sm:divide-x">
         {stats.map((stat) => (
-          <div
-            key={stat.label}
-            className="px-5 py-4 text-center sm:text-left"
-          >
+          <div key={stat.label} className="px-5 py-4 text-center sm:text-left">
             <p className="text-[10px] font-bold uppercase tracking-widest text-graphite-soft">
               {stat.label}
             </p>
-
             <p className="mt-1.5 text-lg font-bold tracking-tight text-charcoal sm:text-xl">
               {stat.value}
             </p>
@@ -328,15 +262,13 @@ function AcademicOverview({ profile }) {
 }
 
 /* ---------------------------------------------------------------------- */
-/* Shared information section / grid / field                              */
+/* Shared information section / grid / field                               */
 /* ---------------------------------------------------------------------- */
 
 function SectionHeading({ title, noMargin = false }) {
   return (
     <h2
-      className={`${
-        noMargin ? "" : "mb-4"
-      } text-sm font-bold uppercase tracking-widest text-charcoal`}
+      className={`${noMargin ? "" : "mb-4"} text-sm font-bold uppercase tracking-widest text-charcoal`}
     >
       {title}
     </h2>
@@ -383,7 +315,6 @@ function InfoField({ label, value, icon: Icon }) {
         <p className="text-[10px] font-bold uppercase tracking-widest text-graphite-soft">
           {label}
         </p>
-
         <p className="mt-1 break-words text-sm font-semibold text-charcoal">
           {value}
         </p>
@@ -393,7 +324,7 @@ function InfoField({ label, value, icon: Icon }) {
 }
 
 /* ---------------------------------------------------------------------- */
-/* Emergency contact                                                      */
+/* Emergency contact                                                       */
 /* ---------------------------------------------------------------------- */
 
 function EmergencyContact({ profile }) {
@@ -403,20 +334,9 @@ function EmergencyContact({ profile }) {
 
       <div className="overflow-hidden rounded-2xl border border-line bg-white">
         <div className="grid grid-cols-1 gap-x-10 gap-y-5 px-5 py-5 sm:grid-cols-2 sm:px-7 sm:py-6">
-          <InfoField
-            label="Contact Name"
-            value={profile?.emergencyName}
-          />
-
-          <InfoField
-            label="Relationship"
-            value={profile?.emergencyRelationship}
-          />
-
-          <InfoField
-            label="Emergency Phone"
-            value={profile?.emergencyPhone}
-          />
+          <InfoField label="Contact Name" value={profile?.emergencyName} />
+          <InfoField label="Relationship" value={profile?.emergencyRelationship} />
+          <InfoField label="Emergency Phone" value={profile?.emergencyPhone} />
         </div>
 
         <div className="border-t border-line bg-cream px-5 py-3 sm:px-7">
@@ -431,7 +351,7 @@ function EmergencyContact({ profile }) {
 }
 
 /* ---------------------------------------------------------------------- */
-/* Student documents                                                      */
+/* Student documents                                                       */
 /* ---------------------------------------------------------------------- */
 
 function StudentDocuments({ documents }) {
@@ -445,9 +365,7 @@ function StudentDocuments({ documents }) {
             href={document.url || "/documents"}
             key={document.id || document.name || index}
             className={`group flex items-center gap-3 px-4 py-4 transition-colors hover:bg-paper sm:px-5 ${
-              index !== documents.length - 1
-                ? "border-b border-line"
-                : ""
+              index !== documents.length - 1 ? "border-b border-line" : ""
             }`}
           >
             <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-cream text-graphite-soft">
@@ -458,7 +376,6 @@ function StudentDocuments({ documents }) {
               <p className="truncate text-sm font-semibold text-charcoal">
                 {document.name}
               </p>
-
               <p className="mt-0.5 text-xs text-graphite-soft">
                 {document.description}
               </p>
@@ -484,7 +401,7 @@ function StudentDocuments({ documents }) {
 }
 
 /* ---------------------------------------------------------------------- */
-/* Account & security                                                     */
+/* Account & security                                                      */
 /* ---------------------------------------------------------------------- */
 
 function SecuritySection({ email }) {
@@ -538,13 +455,7 @@ function SecuritySection({ email }) {
   );
 }
 
-function SecurityRow({
-  icon: Icon,
-  label,
-  description,
-  action,
-  last = false,
-}) {
+function SecurityRow({ icon: Icon, label, description, action, last = false }) {
   return (
     <div
       className={`flex items-center gap-3 px-4 py-4 sm:px-5 ${
@@ -556,10 +467,7 @@ function SecurityRow({
       </span>
 
       <div className="min-w-0 flex-1">
-        <p className="text-sm font-semibold text-charcoal">
-          {label}
-        </p>
-
+        <p className="text-sm font-semibold text-charcoal">{label}</p>
         <p className="mt-0.5 truncate text-xs text-graphite-soft">
           {description}
         </p>
@@ -571,7 +479,7 @@ function SecurityRow({
 }
 
 /* ---------------------------------------------------------------------- */
-/* Edit profile modal                                                     */
+/* Edit profile modal                                                      */
 /* ---------------------------------------------------------------------- */
 
 function EditProfileModal({ open, onClose, profile }) {
@@ -589,10 +497,7 @@ function EditProfileModal({ open, onClose, profile }) {
       <div className="w-full max-w-lg rounded-t-3xl border border-line bg-paper shadow-2xl sm:rounded-2xl">
         <div className="flex items-center justify-between border-b border-line px-5 py-4 sm:px-6">
           <div>
-            <h2 className="text-base font-bold text-charcoal">
-              Edit Profile
-            </h2>
-
+            <h2 className="text-base font-bold text-charcoal">Edit Profile</h2>
             <p className="mt-0.5 text-xs text-graphite-soft">
               Update your personal contact information.
             </p>
@@ -609,31 +514,16 @@ function EditProfileModal({ open, onClose, profile }) {
         </div>
 
         <div className="space-y-4 px-5 py-5 sm:px-6">
-          <FormField
-            label="Phone Number"
-            defaultValue={profile?.phone}
-          />
-
-          <FormField
-            label="Address"
-            defaultValue={profile?.address}
-          />
-
-          <FormField
-            label="Emergency Contact"
-            defaultValue={profile?.emergencyName}
-          />
-
-          <FormField
-            label="Emergency Phone"
-            defaultValue={profile?.emergencyPhone}
-          />
+          <FormField label="Phone Number" defaultValue={profile?.phone} />
+          <FormField label="Address" defaultValue={profile?.address} />
+          <FormField label="Emergency Contact" defaultValue={profile?.emergencyName} />
+          <FormField label="Emergency Phone" defaultValue={profile?.emergencyPhone} />
 
           <div className="rounded-xl border border-line bg-cream px-4 py-3">
             <p className="text-[11px] leading-relaxed text-graphite-soft">
-              Your Student ID, programme, department, faculty, level,
-              and academic results are managed by the university and
-              cannot be edited here.
+              Your Student ID, programme, department, faculty, level, and
+              academic results are managed by the university and cannot be
+              edited here.
             </p>
           </div>
         </div>
