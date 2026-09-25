@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Sidebar from "@/components/layout/Sidebar";
 import Topbar from "@/components/layout/Topbar";
@@ -27,36 +28,38 @@ import {
   UserCircle,
   X,
 } from "lucide-react";
-import { getCurrentUser } from "@/lib/auth/service";
-
 export default function StudentProfilePage() {
+  const router = useRouter();
   const [editOpen, setEditOpen] = useState(false);
-  const [userData, setUserData] = useState(null);
   const [profileData, setProfileData] = useState(null);
   const [documents, setDocuments] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(null);
 
   useEffect(() => {
     async function loadData() {
       try {
-        const [currentUser, docs, profile] = await Promise.all([
-          getCurrentUser(),
-          getStudentDocuments(),
-          getStudentProfile(),
-        ]);
+        const profile = await getStudentProfile();
 
-        setUserData(currentUser);
-        setDocuments(docs || []);
         setProfileData(profile || {});
+        setDocuments(getStudentDocuments() || []);
       } catch (error) {
+        if (error.status === 401) {
+          router.replace("/login");
+          return;
+        }
+
         console.error("Failed to load profile data:", error);
-      } finally {
+        setLoadError(error);
         setLoading(false);
+        return;
       }
+
+      setLoading(false);
     }
 
     loadData();
-  }, []);
+  }, [router]);
 
   if (loading) {
     return (
@@ -66,10 +69,16 @@ export default function StudentProfilePage() {
     );
   }
 
-  const student = userData?.student || {};
-  const fullName = [student.first_name, student.middle_name, student.last_name]
-    .filter(Boolean)
-    .join(" ");
+  if (loadError) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-paper text-charcoal">
+        <p className="text-sm text-red-600">Unable to load your profile.</p>
+      </div>
+    );
+  }
+
+  const student = profileData || {};
+  const fullName = student.name || "";
 
   return (
     <div className="min-h-screen bg-paper text-charcoal">
