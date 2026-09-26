@@ -30,7 +30,7 @@ import MobileBottomNav from "@/components/layout/MobileBottomNav";
 
 // These two pages aren't built yet, so the buttons that would use them stay inert.
 // Put the real routes here when they exist.
-const HISTORY_HREF = null;
+const HISTORY_HREF = attendanceRoutes.history;
 const BELOW_THRESHOLD_HREF = null;
 
 export default function AttendanceOverviewPage() {

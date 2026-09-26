@@ -27,7 +27,7 @@ export default function ManualCorrectionPanel({ record, auditEntries, loading, s
   const canSave = nextStatus !== record.status && reason.trim().length > 0 && !saving;
 
   return (
-    <div className="fixed inset-0 z-30 flex items-end justify-end lg:items-stretch">
+    <div className="fixed inset-0 z-[60] flex items-end justify-end lg:items-stretch">
       <button
         type="button"
         aria-label="Close manual correction panel"

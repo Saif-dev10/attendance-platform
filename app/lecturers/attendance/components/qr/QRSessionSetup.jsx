@@ -111,7 +111,7 @@ export default function QRSessionSetup({ courses, setup, onChange, onStart, star
           />
         </Field>
 
-        <Field id="qr-window" label="Attendance Window">
+        <Field id="qr-window" label="Check-in Time">
           <Select
             id="qr-window"
             value={setup.attendanceWindow}
@@ -129,6 +129,7 @@ export default function QRSessionSetup({ courses, setup, onChange, onStart, star
           <label htmlFor="qr-geofence-toggle" className="text-xs text-graphite-soft">
             Campus Geofence (Optional)
           </label>
+
           <button
             id="qr-geofence-toggle"
             type="button"
@@ -141,8 +142,8 @@ export default function QRSessionSetup({ courses, setup, onChange, onStart, star
           >
             <span
               aria-hidden="true"
-              className={`absolute top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform ${
-                setup.geofenceEnabled ? "translate-x-5" : "translate-x-0.5"
+              className={`absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform ${
+                setup.geofenceEnabled ? "translate-x-5" : "translate-x-0"
               }`}
             />
           </button>
