@@ -1,11 +1,12 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import Sidebar from "@/components/layout/Sidebar";
 import Topbar from "@/components/layout/Topbar";
 import MobileBottomNav from "@/components/layout/MobileBottomNav";
 import Button from "@/components/ui/Button";
+import { getStudentProfile } from "@/lib/services/profile";
 import {
   ArrowRight,
   BookOpen,
@@ -122,10 +123,31 @@ const SEMESTERS = ["All Semesters", "2nd Semester", "1st Semester"];
 const LEVELS = ["All Levels", "300 Level", "200 Level", "400 Level"];
 
 export default function MyCoursesPage() {
+  const [student, setStudent] = useState(null);
+  const [loadingStudent, setLoadingStudent] = useState(true);
+
   const [searchQuery, setSearchQuery] = useState("");
+
   const [semester, setSemester] = useState("All Semesters");
+
   const [level, setLevel] = useState("All Levels");
+
   const [filtersOpen, setFiltersOpen] = useState(false);
+
+  useEffect(() => {
+    async function loadStudent() {
+      try {
+        const profile = await getStudentProfile();
+        setStudent(profile);
+      } catch (error) {
+        console.error("Failed to load student profile: ", error);
+      } finally {
+        setLoadingStudent(false);
+      }
+    }
+
+    loadStudent();
+  }, []);
 
   const filteredCourses = useMemo(() => {
     const query = searchQuery.trim().toLowerCase();
