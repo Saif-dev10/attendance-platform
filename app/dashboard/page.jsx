@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Sidebar, { studentSections } from "@/components/layout/Sidebar";
 import Topbar from "@/components/layout/Topbar";
 import Button from "@/components/ui/Button";
@@ -8,6 +8,7 @@ import Card from "@/components/ui/Card";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import MobileBottomNav from "@/components/layout/MobileBottomNav";
+import { getStudentProfile } from "@/lib/services/profile";
 
 import {
   Search,
@@ -74,8 +75,47 @@ const todaysLectures = [
 
 export default function DashboardPage() {
   const router = useRouter();
+  const [student, setStudent] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchOpen, setSearchOpen] = useState(false);
+  const [loadError, setLoadError] = useState(null);
+
+  useEffect(() => {
+    async function loadStudent() {
+      try {
+        const profile = await getStudentProfile();
+        setStudent(profile);
+      } catch (error) {
+        console.error("Failed to load student profile: ", error);
+        setLoadError(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadStudent();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-paper text-charcoal">
+        <p className="text-sm font-semibold animate-pulse">
+          Loading Dashboard....
+        </p>
+      </div>
+    );
+  }
+
+  if (loadError) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-paper text-charcoal">
+        <p className="text-sm text-red-600">
+          Unable to load your dashboard.
+        </p>
+      </div>
+    );
+  }
 
   const filteredLectures = todaysLectures.filter(({ course, meta }) =>
     `${course} ${meta}`.toLowerCase().includes(searchQuery.toLowerCase()),
@@ -86,9 +126,9 @@ export default function DashboardPage() {
       <Sidebar
         sections={studentSections}
         user={{
-          name: "David Okafor",
-          role: "Student • 300L",
-          avatar: "/avatar-placeholder.svg",
+          name: student?.name || "Student",
+          role: student?.level ? `Student • ${student.level}L` : "Student",
+          avatar: student?.avatarUrl || "/avatar-placeholder.svg",
         }}
       />
 
@@ -179,12 +219,14 @@ export default function DashboardPage() {
             >
               <div className="relative z-10 min-w-0 pr-0 sm:pr-6">
                 <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-2">
-                  Hello, David Okafor! 👋
+                  Hello, {student?.name || "Student"}!👋
                 </h2>
 
                 <p className="text-cream/70 text-sm sm:text-base lg:text-lg max-w-2xl">
-                  You have 2 assignments due this week and your next class is
-                  CSC301 at 10:00 AM.
+                  {/* You have 2 assignments due this week and your next class is
+                  CSC301 at 10:00 AM. */}
+
+                  You are currently in {student?.level ? `${student.level}L` : "your current level"}{" "} studying {student?.programme || "your programme"}.
                 </p>
 
                 <div className="mt-5 flex flex-col sm:flex-row flex-wrap gap-3">
