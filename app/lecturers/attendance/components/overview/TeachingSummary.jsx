@@ -13,9 +13,18 @@ export default function TeachingSummary({ teaching, loading = false, belowThresh
   }
 
   const rows = [
-    { label: "Today's Classes", value: `${teaching.classesToday} / ${teaching.classesScheduledToday}` },
-    { label: "Total Students (All Classes)", value: teaching.totalStudents },
-    { label: "Avg. Attendance Rate", value: `${teaching.averageRate}%` },
+    { 
+      label: "Today's Classes", 
+      value: `${teaching.classesToday} / ${teaching.classesScheduledToday}` 
+    },
+    { 
+      label: "Total Students (All Classes)", 
+      value: teaching.totalStudents 
+    },
+    { 
+      label: "Avg. Attendance Rate", 
+      value: `${teaching.averageRate}%` 
+    },
   ];
 
   return (
