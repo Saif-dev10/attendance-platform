@@ -39,7 +39,7 @@ export default function CourseDetailsPage() {
         title="CSC301: Advanced Algorithms"
         subtitle="Semester II • 3 Credit Units"
         leading={
-          <Link href="/dashboard" aria-label="Back to courses" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-line text-graphite-soft transition-all hover:bg-cream hover:text-charcoal">
+          <Link href="/students/courses" aria-label="Back to courses" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-line text-graphite-soft transition-all hover:bg-cream hover:text-charcoal">
             <ArrowLeft size={17} />
           </Link>
         }
