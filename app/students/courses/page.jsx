@@ -207,7 +207,7 @@ export default function MyCoursesPage() {
                       <span className="h-1.5 w-1.5 rounded-full bg-bronze-deep" />
 
                       <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-graphite-soft">
-                        2025/2026 · 2nd Semester
+                        {student?.session || "Current Session"}
                       </span>
                     </div>
 
@@ -279,7 +279,7 @@ export default function MyCoursesPage() {
                     </span>
 
                     <span className="text-xs font-bold text-charcoal">
-                      300 Level
+                      {student?.level ? `${student.level} Level` : "_"}
                     </span>
                   </div>
 
@@ -303,7 +303,7 @@ export default function MyCoursesPage() {
                     </span>
 
                     <span className="text-xs font-bold text-charcoal">
-                      Computer Science
+                      {student?.programme || "_"}
                     </span>
                   </div>
                 </div>
@@ -442,6 +442,7 @@ function CourseCard({ course }) {
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0">
             <div className="mb-3 flex flex-wrap items-center gap-2">
+
               <span className="rounded-lg bg-charcoal px-2.5 py-1 text-[10px] font-bold tracking-wider text-cream">
                 {course.code}
               </span>
