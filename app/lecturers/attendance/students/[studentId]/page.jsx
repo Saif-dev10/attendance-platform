@@ -215,7 +215,7 @@ export default function StudentProfilePage() {
         </div>
       </main>
 
-      <MobileBottomNav />
+      <MobileBottomNav variant="lecturer" active="teaching" />
     </div>
   );
 }

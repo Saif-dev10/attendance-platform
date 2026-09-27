@@ -497,7 +497,7 @@ export default function Lecturer() {
 
       {/* Mobile navigation stays fixed at the bottom.
           The page above has extra bottom padding so content is not hidden behind it. */}
-      <MobileBottomNav active="academic" />
+      <MobileBottomNav variant="lecturer" active="home" />
     </>
   );
 }

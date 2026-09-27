@@ -263,7 +263,7 @@ export default function AttendanceOverviewPage() {
         </div>
       </main>
 
-      <MobileBottomNav active="academic" />
+      <MobileBottomNav variant="lecturer" active="teaching" />
     </div>
   );
 }

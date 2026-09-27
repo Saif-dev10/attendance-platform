@@ -5,7 +5,6 @@ import Link from "next/link";
 import {
   LayoutGrid,
   BookOpen,
-  Bus,
   MessageCircle,
   Menu,
   X,
@@ -16,14 +15,15 @@ import {
   Files,
   UserCircle,
   Settings,
-  QrCode
+  QrCode,
+  GraduationCap,
 } from "lucide-react";
 
-export default function MobileBottomNav({ active = "home" }) {
-  const [moreOpen, setMoreOpen] = useState(false);
-
-  // Keep the highest-frequency destinations visible without crowding the bar.
-  const items = [
+/**
+ * Mobile navigation configuration for students.
+ */
+export const studentMobileNav = {
+  items: [
     {
       key: "home",
       label: "Home",
@@ -42,10 +42,16 @@ export default function MobileBottomNav({ active = "home" }) {
       icon: MessageCircle,
       href: "/complaints",
     },
-  ];
+  ],
 
-  // Less frequent destinations live in the drawer to keep the primary bar usable.
-  const moreSections = [
+  qrAction: {
+    label: "Scan QR",
+    icon: QrCode,
+    href: "/scan",
+    ariaLabel: "Scan QR",
+  },
+
+  moreSections: [
     {
       title: "Account",
       links: [
@@ -61,6 +67,7 @@ export default function MobileBottomNav({ active = "home" }) {
         },
       ],
     },
+
     {
       title: "My Academic",
       links: [
@@ -75,31 +82,145 @@ export default function MobileBottomNav({ active = "home" }) {
           icon: FileText,
         },
         {
-          label: "Examaminations",
+          label: "Examinations",
           href: "/students/examinations",
           icon: ClipboardCheck,
         },
       ],
     },
+
+    // {
+    //   title: "Campus Life",
+    //   links: [
+    //     {
+    //       label: "Complaints",
+    //       href: "/complaints",
+    //       icon: AlertTriangle,
+    //     },
+    //     {
+    //       label: "Documents",
+    //       href: "/documents",
+    //       icon: Files,
+    //     },
+    //   ],
+    // },
+  ],
+};
+
+/**
+ * Mobile navigation configuration for lecturers.
+ */
+export const lecturerMobileNav = {
+  items: [
     {
-      title: "Campus Life",
+      key: "home",
+      label: "Home",
+      icon: LayoutGrid,
+      href: "/lecturers",
+    },
+    {
+      key: "teaching",
+      label: "Teaching",
+      icon: BookOpen,
+      href: "/lecturers/classes",
+    },
+    {
+      key: "support",
+      label: "Support",
+      icon: MessageCircle,
+      href: "/lecturer/complaints",
+    },
+  ],
+
+  qrAction: {
+    label: "Generate QR",
+    icon: QrCode,
+    href: "/lecturers/attendance/qr",
+    ariaLabel: "Generate QR",
+  },
+
+  moreSections: [
+    {
+      title: "Teaching",
       links: [
         {
-          label: "Complaints",
-          href: "/complaints",
-          icon: AlertTriangle,
+          label: "My Classes",
+          href: "/lecturer/classes",
+          icon: BookOpen,
         },
         {
-          label: "Documents",
-          href: "/documents",
-          icon: Files,
+          label: "Timetable",
+          href: "/lecturers/timetable",
+          icon: CalendarClock,
+        },
+        {
+          label: "Attendance",
+          href: "/lecturers/attendance",
+          icon: ClipboardCheck,
+        },
+        {
+          label: "Assignments",
+          href: "/lecturers/assignments",
+          icon: FileText,
+        },
+        {
+          label: "Students",
+          href: "/lecturers/students",
+          icon: GraduationCap,
         },
       ],
     },
-  ];
+
+    // {
+    //   title: "Campus Life",
+    //   links: [
+    //     {
+    //       label: "Complaints",
+    //       href: "/lecturer/complaints",
+    //       icon: AlertTriangle,
+    //     },
+    //     {
+    //       label: "Documents",
+    //       href: "/lecturer/documents",
+    //       icon: Files,
+    //     },
+    //     {
+    //       label: "Settings",
+    //       href: "/students/settings",
+    //       icon: Settings,
+    //     },
+    //   ],
+    // },
+  ],
+};
+
+/**
+ * One reusable mobile navigation for both students and lecturers.
+ *
+ * Change only the `variant` prop to switch between dashboards.
+ */
+export default function MobileBottomNav({
+  variant = "student",
+  active = "home",
+}) {
+  const [moreOpen, setMoreOpen] = useState(false);
+
+  const config =
+    variant === "lecturer"
+      ? lecturerMobileNav
+      : studentMobileNav;
+
+  const {
+    items,
+    qrAction,
+    moreSections,
+  } = config;
+
+  const QRIcon = qrAction.icon;
 
   return (
     <>
+      {/* Backdrop */}
       {moreOpen && (
         <div
           className="fixed inset-0 z-[60] bg-charcoal/30 backdrop-blur-[2px] md:hidden"
@@ -108,18 +229,26 @@ export default function MobileBottomNav({ active = "home" }) {
         />
       )}
 
+      {/* More drawer */}
       <div
         className={`fixed bottom-0 left-0 right-0 z-[70] rounded-t-3xl border-t border-line bg-paper px-4 pb-6 pt-3 shadow-2xl transition-transform duration-300 md:hidden ${
-          moreOpen ? "translate-y-0" : "translate-y-full"
+          moreOpen
+            ? "translate-y-0"
+            : "translate-y-full"
         }`}
       >
         <div className="mx-auto mb-4 h-1 w-10 rounded-full bg-line" />
 
         <div className="mb-5 flex items-center justify-between px-1">
           <div>
-            <h2 className="text-base font-bold text-charcoal">More</h2>
+            <h2 className="text-base font-bold text-charcoal">
+              More
+            </h2>
+
             <p className="mt-0.5 text-xs text-graphite-soft">
-              More options and services
+              {variant === "lecturer"
+                ? "Teaching tools and account settings"
+                : "More options and services"}
             </p>
           </div>
 
@@ -156,7 +285,10 @@ export default function MobileBottomNav({ active = "home" }) {
                       }`}
                     >
                       <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-cream text-graphite-soft">
-                        <Icon size={17} strokeWidth={1.9} />
+                        <Icon
+                          size={17}
+                          strokeWidth={1.9}
+                        />
                       </span>
 
                       <span className="flex-1 text-sm font-semibold">
@@ -175,6 +307,7 @@ export default function MobileBottomNav({ active = "home" }) {
         </div>
       </div>
 
+      {/* Bottom navigation */}
       <nav
         className="
           fixed bottom-0 left-0 right-0 z-50
@@ -183,20 +316,22 @@ export default function MobileBottomNav({ active = "home" }) {
           md:hidden
         "
       >
+        {/* Left navigation items */}
         <NavItem
           item={items[0]}
-          isActive={active === "home"}
+          isActive={active === items[0].key}
         />
 
         <NavItem
           item={items[1]}
-          isActive={active === "academic"}
+          isActive={active === items[1].key}
         />
 
+        {/* Role-specific QR action */}
         <Link
-          href="/scan"
+          href={qrAction.href}
           className="relative -mt-8 flex flex-col items-center"
-          aria-label="QR Scanner"
+          aria-label={qrAction.ariaLabel}
         >
           <span
             className="
@@ -206,19 +341,24 @@ export default function MobileBottomNav({ active = "home" }) {
               shadow-xl shadow-charcoal/30
             "
           >
-            <QrCode size={24} strokeWidth={2} />
+            <QRIcon
+              size={24}
+              strokeWidth={2}
+            />
           </span>
 
           <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap text-[10px] font-bold text-graphite-soft">
-            QR Scanner
+            {qrAction.label}
           </span>
         </Link>
 
+        {/* Right navigation item */}
         <NavItem
           item={items[2]}
-          isActive={active === "support"}
+          isActive={active === items[2].key}
         />
 
+        {/* More */}
         <button
           type="button"
           onClick={() => setMoreOpen(true)}
