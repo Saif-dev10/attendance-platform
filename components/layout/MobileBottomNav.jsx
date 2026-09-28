@@ -89,21 +89,21 @@ export const studentMobileNav = {
       ],
     },
 
-    // {
-    //   title: "Campus Life",
-    //   links: [
-    //     {
-    //       label: "Complaints",
-    //       href: "/complaints",
-    //       icon: AlertTriangle,
-    //     },
-    //     {
-    //       label: "Documents",
-    //       href: "/documents",
-    //       icon: Files,
-    //     },
-    //   ],
-    // },
+    {
+      title: "Campus Life",
+      links: [
+        {
+          label: "Complaints",
+          href: "/complaints",
+          icon: AlertTriangle,
+        },
+        {
+          label: "Documents",
+          href: "/documents",
+          icon: Files,
+        },
+      ],
+    },
   ],
 };
 
@@ -171,26 +171,26 @@ export const lecturerMobileNav = {
       ],
     },
 
-    // {
-    //   title: "Campus Life",
-    //   links: [
-    //     {
-    //       label: "Complaints",
-    //       href: "/lecturer/complaints",
-    //       icon: AlertTriangle,
-    //     },
-    //     {
-    //       label: "Documents",
-    //       href: "/lecturer/documents",
-    //       icon: Files,
-    //     },
-    //     {
-    //       label: "Settings",
-    //       href: "/students/settings",
-    //       icon: Settings,
-    //     },
-    //   ],
-    // },
+    {
+      title: "Campus Life",
+      links: [
+        {
+          label: "Complaints",
+          href: "/lecturer/complaints",
+          icon: AlertTriangle,
+        },
+        {
+          label: "Documents",
+          href: "/lecturer/documents",
+          icon: Files,
+        },
+        {
+          label: "Settings",
+          href: "/students/settings",
+          icon: Settings,
+        },
+      ],
+    },
   ],
 };
 
