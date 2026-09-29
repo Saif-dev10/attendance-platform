@@ -18,8 +18,6 @@ import {
   X,
 } from "lucide-react";
 
-const SEMESTERS = ["All Semesters", "2nd Semester", "1st Semester"];
-
 export default function MyCoursesPage() {
   const [courses, setCourses] = useState([]);
   const [student, setStudent] = useState(null);
@@ -126,11 +124,17 @@ export default function MyCoursesPage() {
   }, [courses]);
 
   const currentSemester = useMemo(() => {
-    const semesterNames = courses
-      .map((course) => course.semester)
-      .filter(Boolean);
+    const semesterNames = [
+      ...new Set(
+        courses
+          .map((course) => course.semester)
+          .filter(Boolean)
+      ),
+    ];
 
-    return semesterNames[0] || "Current Semester";
+    return semesterNames.length === 1
+      ? semesterNames[0]
+      : semesterNames.join(" / ") || "Current Semester";
   }, [courses]);
 
   const currentSession = useMemo(() => {
@@ -140,6 +144,26 @@ export default function MyCoursesPage() {
 
     return sessionNames[0] || student?.session || "Current Session";
   }, [courses, student]);
+
+  const enrollmentStatus = useMemo(() => {
+    if (!courses.length) {
+      return "No Enrolment";
+    }
+
+    const activeCourses = courses.filter(
+      (courses) => course.status === "enrolled"
+    );
+
+    return activeCourses.length > 0 ? "Active" : "Inactive";
+  }, [courses]);
+
+  const semesterOPtions = useMemo(() => {
+    const semesters = courses
+    .map((course) => course.semester)
+    .filter(Boolean);
+
+    return ["All Semesters", ...new Set(semesters)];
+  }, [courses]);
 
   const hasFilters =
     searchQuery || semester !== "All Semesters";
@@ -228,10 +252,15 @@ export default function MyCoursesPage() {
                       </p>
 
                       <div className="mt-2 flex items-center gap-1.5">
-                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-600" />
+                        <span className={`h-1.5 w-1.5 rounded-full ${
+                          enrollmentStatus === "Active"
+                            ? "bg-emeraid-600"
+                            : "bg-graphite-soft"
+                          }`} 
+                        />
 
                         <span className="text-xs font-bold text-charcoal">
-                          Active
+                          {enrollmentStatus}
                         </span>
                       </div>
 
@@ -342,7 +371,7 @@ export default function MyCoursesPage() {
                 <FilterSelect
                   label="Semester"
                   value={semester}
-                  options={SEMESTERS}
+                  options={semesterOPtions}
                   onChange={setSemester}
                 />
               </div>

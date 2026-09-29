@@ -9,6 +9,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import MobileBottomNav from "@/components/layout/MobileBottomNav";
 import { getStudentProfile } from "@/lib/services/profile";
+import { getStudentCourses } from "@/lib/services/courses";
 
 import {
   Search,
@@ -31,14 +32,12 @@ const statCards = [
   },
   {
     label: "Courses",
-    value: "8 Active",
     icon: BookOpen,
     iconBg: "bg-paper",
     iconColor: "text-graphite",
   },
   {
     label: "Credits",
-    value: "22 Units",
     icon: BarChart3,
     iconBg: "bg-paper",
     iconColor: "text-graphite",
@@ -75,26 +74,41 @@ const todaysLectures = [
 
 export default function DashboardPage() {
   const router = useRouter();
+
   const [student, setStudent] = useState(null);
+  const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchOpen, setSearchOpen] = useState(false);
   const [loadError, setLoadError] = useState(null);
 
   useEffect(() => {
-    async function loadStudent() {
+    async function loadDashboard() {
       try {
-        const profile = await getStudentProfile();
+        const [profile, courseResponse] = await Promise.all([
+          getStudentProfile(),
+          getStudentCourses(),
+        ]);
+
         setStudent(profile);
+
+        const enrollments = Array.isArray(courseResponse?.data)
+          ? courseResponse.data
+          : [];
+
+        setCourses(enrollments);
       } catch (error) {
-        console.error("Failed to load student profile: ", error);
+        console.error("Failed to load student dashboard:", error);
+        console.error("Error message:", error?.message);
+        console.error("Error response:", error?.response);
+
         setLoadError(error);
       } finally {
         setLoading(false);
       }
     }
 
-    loadStudent();
+    loadDashboard();
   }, []);
 
   if (loading) {
@@ -109,13 +123,29 @@ export default function DashboardPage() {
 
   if (loadError) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-paper text-charcoal">
-        <p className="text-sm text-red-600">
-          Unable to load your dashboard.
-        </p>
+      <div className="flex min-h-screen items-center justify-center bg-paper text-charcoal px-6">
+        <div className="max-w-lg text-center">
+          <p className="text-sm font-semibold text-red-600 mb-2">
+            Unable to load your dashboard.
+          </p>
+
+          <p className="text-xs text-graphite-soft break-words">
+            {loadError?.message || "Unknown error"}
+          </p>
+        </div>
       </div>
     );
   }
+
+  const activeCourses = courses.filter(
+    (enrollment) => enrollment.status === "enrolled",
+  );
+
+  const totalCredits = activeCourses.reduce(
+    (total, enrollment) =>
+      total + Number(enrollment.course?.credit_units || 0),
+    0,
+  );
 
   const filteredLectures = todaysLectures.filter(({ course, meta }) =>
     `${course} ${meta}`.toLowerCase().includes(searchQuery.toLowerCase()),
@@ -223,10 +253,11 @@ export default function DashboardPage() {
                 </h2>
 
                 <p className="text-cream/70 text-sm sm:text-base lg:text-lg max-w-2xl">
-                  {/* You have 2 assignments due this week and your next class is
-                  CSC301 at 10:00 AM. */}
-
-                  You are currently in {student?.level ? `${student.level}L` : "your current level"}{" "} studying {student?.programme || "your programme"}.
+                  You are currently in{" "}
+                  {student?.level
+                    ? `${student.level}L`
+                    : "your current level"}{" "}
+                  studying {student?.programme || "your programme"}.
                 </p>
 
                 <div className="mt-5 flex flex-col sm:flex-row flex-wrap gap-3">
@@ -341,54 +372,63 @@ export default function DashboardPage() {
           {/* Academic Stats */}
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
             {statCards.map(
-              ({ label, value, icon: Icon, iconBg, iconColor }) => (
-                <Card
-                  key={label}
-                  className="
-                    rounded-2xl border border-line bg-white
-                    p-4 sm:p-5 min-w-0
-                  "
-                >
-                  <p
+              ({ label, value, icon: Icon, iconBg, iconColor }) => {
+                const displayValue =
+                  label === "Courses"
+                    ? `${activeCourses.length} Active`
+                    : label === "Credits"
+                      ? `${totalCredits} Units`
+                      : value;
+
+                return (
+                  <Card
+                    key={label}
                     className="
-                      text-[10px] sm:text-xs font-bold text-graphite-soft
-                      uppercase tracking-widest mb-2 sm:mb-3 truncate
+                      rounded-2xl border border-line bg-white
+                      p-4 sm:p-5 min-w-0
                     "
                   >
-                    {label}
-                  </p>
-
-                  <div className="flex items-center justify-between gap-2">
-                    <span
+                    <p
                       className="
-                        text-lg sm:text-2xl font-bold text-charcoal truncate
+                        text-[10px] sm:text-xs font-bold text-graphite-soft
+                        uppercase tracking-widest mb-2 sm:mb-3 truncate
                       "
                     >
-                      {value}
-                    </span>
+                      {label}
+                    </p>
 
-                    <div
-                      className={`
-                        w-8 h-8 sm:w-10 sm:h-10 rounded-full
-                        ${iconBg} flex items-center justify-center
-                        ${iconColor} shrink-0
-                      `}
-                    >
-                      <Icon
-                        size={18}
-                        className="sm:hidden"
-                        strokeWidth={2}
-                      />
+                    <div className="flex items-center justify-between gap-2">
+                      <span
+                        className="
+                          text-lg sm:text-2xl font-bold text-charcoal truncate
+                        "
+                      >
+                        {displayValue}
+                      </span>
 
-                      <Icon
-                        size={20}
-                        className="hidden sm:block"
-                        strokeWidth={2}
-                      />
+                      <div
+                        className={`
+                          w-8 h-8 sm:w-10 sm:h-10 rounded-full
+                          ${iconBg} flex items-center justify-center
+                          ${iconColor} shrink-0
+                        `}
+                      >
+                        <Icon
+                          size={18}
+                          className="sm:hidden"
+                          strokeWidth={2}
+                        />
+
+                        <Icon
+                          size={20}
+                          className="hidden sm:block"
+                          strokeWidth={2}
+                        />
+                      </div>
                     </div>
-                  </div>
-                </Card>
-              ),
+                  </Card>
+                );
+              },
             )}
           </div>
 

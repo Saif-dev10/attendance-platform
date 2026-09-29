@@ -1,6 +1,5 @@
 "use client";
 
-import MobileBottomNav from "@/components/layout/MobileBottomNav";
 import StatusBadge from "../StatusBadge/page";
 import { CheckCircle2, XCircle, Clock3 } from "lucide-react";
 
@@ -176,7 +175,6 @@ export default function CourseAttendance() {
           </section>
         </div>
       </div>
-      <MobileBottomNav active="academic" />
     </>
   );
 }
