@@ -195,3 +195,42 @@ input:focus-visible,
   --color-moss: #3F6B4A;
   --color-clay: #A5422F;
 }
+
+/* ============ SKUL Admin tokens (scoped; does not affect student/lecturer portals) ============ */
+.skul-admin {
+  --skul-navy: #071a33;
+  --skul-navy-2: #0e2544;
+  --skul-yellow: #f5c400;
+  --skul-bg: #f8f9fb;
+  --skul-surface: #ffffff;
+  --skul-border: #e5e8ee;
+  --skul-text: #0b1a30;
+  --skul-muted: #6b7587;
+  --skul-font-heading: "Lexend", ui-sans-serif, system-ui, sans-serif;
+  background: var(--skul-bg);
+  color: var(--skul-text);
+  min-height: 100vh;
+}
+.skul-admin .skul-heading {
+  font-family: var(--skul-font-heading);
+  letter-spacing: -0.01em;
+}
+.skul-admin .skul-eyebrow {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--skul-muted);
+}
+.skul-admin .skul-card {
+  background: var(--skul-surface);
+  border: 1px solid var(--skul-border);
+  border-radius: 16px;
+  box-shadow: 0 1px 2px rgba(7, 26, 51, 0.04);
+}
+.skul-admin :focus-visible {
+  outline: 2px solid var(--skul-yellow);
+  outline-offset: 2px;
+}
+@keyframes skul-spin { to { transform: rotate(360deg); } }
+.skul-admin .skul-spin { animation: skul-spin 1s linear infinite; }

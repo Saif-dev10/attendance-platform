@@ -16,13 +16,13 @@ import {
 } from "lucide-react";
 import { getCourseMaterials } from "@/lib/services/courses";
 
-const materialTypes = useMemo(() => {
-  const types = materials
-    .map((material) => material.type)
-    .filter(Boolean);
+// const materialTypes = useMemo(() => {
+//   const types = materials
+//     .map((material) => material.type)
+//     .filter(Boolean);
 
-  return ["All Types", ...new Set(types)];
-}, [materials]);
+//   return ["All Types", ...new Set(types)];
+// }, [materials]);
 
 const SORT_OPTIONS = ["Newest", "Oldest", "A–Z"];
 
