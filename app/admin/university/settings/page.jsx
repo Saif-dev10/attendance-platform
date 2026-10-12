@@ -1,1 +1,5 @@
-﻿export default function PlaceholderPage() { return <main><h1>Coming Soon</h1></main>; }
+﻿import UniversitySection from "@/components/admin/university/UniversitySection";
+
+export default function Page() {
+  return <UniversitySection section="settings" />;
+}

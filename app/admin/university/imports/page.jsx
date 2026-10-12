@@ -1,5 +1,5 @@
-﻿export default function PlaceholderPage() { 
-  return (
-    <main></main>
-  );
+﻿import UniversitySection from "@/components/admin/university/UniversitySection";
+
+export default function Page() {
+  return <UniversitySection section="imports" />;
 }
