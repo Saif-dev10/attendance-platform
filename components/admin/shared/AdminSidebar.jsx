@@ -1,5 +1,5 @@
 "use client";
-import Link from "next/link";
+// import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Icon from "./Icon";
 
@@ -41,10 +41,10 @@ export default function AdminSidebar({ nav, theme = "dark", brand, footer, open 
                   : active ? "bg-[#f3f5f9] font-semibold text-[#0b1a30] shadow-[inset_-3px_0_0_#071a33]" : "text-[#4b5565] hover:bg-[#f8f9fb]";
                 return (
                   <li key={item.href}>
-                    <Link href={item.href} onClick={onClose} aria-current={active ? "page" : undefined} className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-[13.5px] font-medium transition-colors ${cls}`}>
+                    <a href={item.href} onClick={onClose} aria-current={active ? "page" : undefined} className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-[13.5px] font-medium transition-colors ${cls}`}>
                       <Icon name={item.icon} size={18} />
                       {item.label}
-                    </Link>
+                    </a>
                   </li>
                 );
               })}

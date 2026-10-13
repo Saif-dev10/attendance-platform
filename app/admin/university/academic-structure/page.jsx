@@ -6,7 +6,7 @@ import Icon from "@/components/admin/shared/Icon";
 import { useShell } from "@/components/admin/shared/AdminShell";
 import useAsync from "@/lib/admin/useAsync";
 import Tag, { InferredNote } from "@/components/admin/university/Tag";
-import { getStructure } from "@/lib/services/admin/universityService";
+import { getStructure } from "@/lib/services/admin/universityServices";
 
 export default function AcademicStructurePage() {
   const { openMenu } = useShell();

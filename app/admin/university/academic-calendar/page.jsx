@@ -5,7 +5,7 @@ import LoadingState from "@/components/admin/shared/LoadingState";
 import { useShell } from "@/components/admin/shared/AdminShell";
 import useAsync from "@/lib/admin/useAsync";
 import Tag, { InferredNote } from "@/components/admin/university/Tag";
-import { getCalendar } from "@/lib/services/admin/universityService";
+import { getCalendar } from "@/lib/services/admin/universityServices";
 
 const TYPE = {
   registration: { tone: "blue", label: "Registration", icon: "file" },

@@ -1,6 +1,6 @@
 "use client";
 import DirectoryPage from "@/components/admin/university/DirectoryPage";
-import { listCourses, DEPT_OPTIONS } from "@/lib/services/admin/universityService";
+import { listCourses, DEPT_OPTIONS } from "@/lib/services/admin/universityServices";
 
 const columns = [
   { key: "code", header: "Code", render: (c) => <span className="rounded bg-[#f3f5f9] px-2 py-1 font-mono text-[11.5px] font-bold text-[#4b5565]">{c.code}</span> },

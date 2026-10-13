@@ -2,7 +2,7 @@
 import DirectoryPage from "@/components/admin/university/DirectoryPage";
 import Tag from "@/components/admin/university/Tag";
 import ProgressBar from "@/components/admin/shared/ProgressBar";
-import { listOfferings, DEPT_OPTIONS } from "@/lib/services/admin/universityService";
+import { listOfferings, DEPT_OPTIONS } from "@/lib/services/admin/universityServices";
 
 const columns = [
   {

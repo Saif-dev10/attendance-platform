@@ -1,7 +1,7 @@
 "use client";
 import DirectoryPage from "@/components/admin/university/DirectoryPage";
 import Tag from "@/components/admin/university/Tag";
-import { listLecturers, DEPT_OPTIONS } from "@/lib/services/admin/universityService";
+import { listLecturers, DEPT_OPTIONS } from "@/lib/services/admin/universityServices";
 
 const columns = [
   {

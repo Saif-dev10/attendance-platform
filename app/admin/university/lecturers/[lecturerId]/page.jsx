@@ -4,7 +4,7 @@ import { useParams } from "next/navigation";
 import RecordPage, { Fact } from "@/components/admin/university/RecordPage";
 import Tag from "@/components/admin/university/Tag";
 import EmptyState from "@/components/admin/shared/EmptyState";
-import { getLecturer } from "@/lib/services/admin/universityService";
+import { getLecturer } from "@/lib/services/admin/universityServices";
 
 export default function LecturerRecordPage() {
   const { lecturerId } = useParams();

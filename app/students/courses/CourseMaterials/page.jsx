@@ -170,6 +170,13 @@ export default function CourseMaterials() {
     };
   }, [courseId]);
 
+  const materialTypes = useMemo(() => {
+    const types = materials
+      .map((material) => material.type)
+      .filter(Boolean);
+
+    return ["All Types", ...new Set(types)];
+  }, [materials]);
   const filteredMaterials = useMemo(() => {
     const filtered = materials.filter((item) => {
       const matchesType =

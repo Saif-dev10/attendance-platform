@@ -12,7 +12,7 @@ import useAsync from "@/lib/admin/useAsync";
 import { formatDateTime } from "@/lib/admin/format";
 import Tag, { InferredNote } from "@/components/admin/university/Tag";
 import TimetableGrid from "@/components/admin/university/TimetableGrid";
-import { getTimetable, publishTimetable, TIMETABLE_DEPT_OPTIONS } from "@/lib/services/admin/universityService";
+import { getTimetable, publishTimetable, TIMETABLE_DEPT_OPTIONS } from "@/lib/services/admin/universityServices";
 
 export default function TimetableAdminPage() {
   const { openMenu } = useShell();

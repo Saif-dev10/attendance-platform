@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import RecordPage, { Fact } from "@/components/admin/university/RecordPage";
 import ProgressBar from "@/components/admin/shared/ProgressBar";
-import { getCourse } from "@/lib/services/admin/universityService";
+import { getCourse } from "@/lib/services/admin/universityServices";
 
 export default function CourseRecordPage() {
   const { courseId } = useParams();

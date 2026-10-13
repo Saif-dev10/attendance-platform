@@ -1,4 +1,4 @@
-import { DAYS, TIME_BANDS } from "@/lib/services/admin/universityService";
+import { DAYS, TIME_BANDS } from "@/lib/services/admin/universityServices";
 import EmptyState from "@/components/admin/shared/EmptyState";
 
 /** Weekly grid: rows are time bands, columns are days. Scrolls horizontally on small screens. */

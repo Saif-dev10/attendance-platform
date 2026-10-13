@@ -2,7 +2,7 @@
 import DirectoryPage from "@/components/admin/university/DirectoryPage";
 import Tag from "@/components/admin/university/Tag";
 import ProgressBar from "@/components/admin/shared/ProgressBar";
-import { listAssignments, DEPT_OPTIONS } from "@/lib/services/admin/universityService";
+import { listAssignments, DEPT_OPTIONS } from "@/lib/services/admin/universityServices";
 
 const fmt = (ts) => new Date(ts).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
 
