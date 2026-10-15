@@ -15,18 +15,24 @@ const nextConfig = {
       },
     ],
   },
-  async rewrites() {
-    return [
+  
+async rewrites() {
+  return {
+    beforeFiles: [],
+    afterFiles: [
       {
-        source: '/sanctum/:path*',
+        source: "/sanctum/:path*",
         destination: `${backendOrigin}/sanctum/:path*`,
       },
       {
-        source: '/api/:path*',
-        destination: `${backendOrigin}/api/:path*`,
+        source: "/api/v1/:path*",
+        destination: `${backendOrigin}/api/v1/:path*`,
       },
-    ];
-  },
+    ],
+    fallback: [],
+  };
+},
+
 };
 
 export default nextConfig;

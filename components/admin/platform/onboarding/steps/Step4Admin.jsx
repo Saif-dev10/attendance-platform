@@ -1,5 +1,6 @@
+
 "use client";
-// INFERRED LAYOUT: no reference screenshot for Step 4.
+
 import Input from "@/components/ui/Input";
 import Checkbox from "@/components/ui/Checkbox";
 import { ADMIN_CONFIG } from "@/lib/admin/config";
@@ -9,20 +10,75 @@ import { Section, Grid2 } from "./_parts";
 export default function Step4Admin() {
   const { values, errors, setValues } = useOnboarding();
   const a = values.admin;
-  const set = (k) => (e) => setValues("admin", { [k]: e.target.value });
+
+  const set = (key) => (e) =>
+    setValues("admin", { [key]: e.target.value });
 
   return (
-    <Section title="Initial Administrator" description="The first user who will manage this institution's dashboard.">
+    <Section
+      title="Initial Administrator"
+      description="Create the first user who will manage this institution's dashboard."
+    >
       <Grid2>
-        <Input label="Full name" value={a.fullName} onChange={set("fullName")} placeholder="e.g. Prof. Ibrahim Sani" error={errors.fullName} autoFocus />
-        <Input label="Job title" value={a.title} onChange={set("title")} placeholder="e.g. Registrar" error={errors.title} />
+        <Input
+          label="Full name"
+          value={a.fullName}
+          onChange={set("fullName")}
+          placeholder="e.g. Prof. Ibrahim Sani"
+          error={errors.fullName}
+          autoFocus
+        />
+
+        <Input
+          label="Job title"
+          value={a.title}
+          onChange={set("title")}
+          placeholder="e.g. Registrar"
+          error={errors.title}
+        />
       </Grid2>
-      <Input label="Email address" type="email" value={a.email} onChange={set("email")} placeholder={`name@${values.tenant.slug || "institution"}.edu.ng`} error={errors.email} hint="The invitation and password setup link are sent here on activation." />
+
+      <Input
+        label="Email address"
+        type="email"
+        value={a.email}
+        onChange={set("email")}
+        placeholder={`name@${values.tenant.slug || "institution"}.edu.ng`}
+        error={errors.email}
+        hint="The administrator's contact email address."
+      />
+
+      <Grid2>
+        <Input
+          label="Admin username"
+          value={a.username || ""}
+          onChange={set("username")}
+          placeholder="e.g. registry.admin"
+          error={errors.username}
+        />
+
+        <Input
+          label="Initial password"
+          type="password"
+          value={a.password || ""}
+          onChange={set("password")}
+          placeholder="At least 8 characters"
+          error={errors.password}
+          hint="This password will be used to create the administrator account."
+        />
+      </Grid2>
+
       <Checkbox
         checked={a.sendInvite}
-        onChange={(v) => setValues("admin", { sendInvite: v })}
+        onChange={(checked) =>
+          setValues("admin", { sendInvite: checked })
+        }
         title="Send invitation on activation"
-        description={ADMIN_CONFIG.useMock ? "Sample mode: no email is actually sent." : "The administrator will receive a secure sign-up link."}
+        description={
+          ADMIN_CONFIG.useMock
+            ? "Sample mode: no email is actually sent."
+            : "Email delivery must be configured on the backend."
+        }
       />
     </Section>
   );

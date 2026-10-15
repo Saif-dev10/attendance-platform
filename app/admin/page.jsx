@@ -10,6 +10,7 @@ const ENVIRONMENTS = [
     text: "Manage all universities, onboarding, global imports, audit logs and platform-wide configuration.",
     who: "Platform team",
   },
+
   {
     href: "/admin/university",
     icon: "building",
